@@ -1,0 +1,10 @@
+Bonjour {firstname} {lastname},
+
+Votre commande n°{id_order} est prête à être expédiée.
+
+Vous pouvez suivre cet envoi à tout moment sur www.chronopost.fr, en saisissant le numéro de suivi Chronopost suivant : {tracking_code}.
+
+
+{shop_name} - {shop_url}
+
+

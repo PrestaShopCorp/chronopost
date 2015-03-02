@@ -1,0 +1,1 @@
+<input type="number" name="multi[{$id_order}]" value="{$nbwb}" style="width:40px">

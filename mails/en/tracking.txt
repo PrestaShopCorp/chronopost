@@ -1,0 +1,16 @@
+Hello {firstname} {lastname},
+
+You chose to be delivered by Chronopost for your order n°{id_order} (variable field).
+
+Your order is ready to shipment. To track your parcel, please go to www.chronopost.fr and enter the following tracking number : {tracking_code}.
+
+For more informations about your shipment, please contact Chronopost Customer Service at 0825801801 * (Business line) or 0969391391 ** (Individual line), Monday to Friday from 8 am to 7pm or Saturday 9 am to 1pm.
+
+* 0,15€ TTC/min since 01/01/2011.
+**Not surcharged call.
+
+{shop_name} - {shop_url}
+
+
+
+{shop_url} created with PrestaShop™

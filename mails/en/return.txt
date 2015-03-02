@@ -1,0 +1,7 @@
+Hello {firstname} {lastname},
+
+For the return of your order n&#176;{id_order}, please find attached your Chronopost waybill.
+
+{shop_name} - {shop_url}
+
+

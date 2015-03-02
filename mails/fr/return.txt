@@ -1,0 +1,6 @@
+Bonjour {firstname} {lastname},
+
+Vous trouverez ci-joint la lettre de transport Chronopost pour le retour de votre commande n&#176;{id_order}.
+
+{shop_name} - {shop_url}
+
