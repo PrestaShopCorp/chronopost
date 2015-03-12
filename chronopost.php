@@ -149,7 +149,7 @@ class Chronopost extends CarrierModule
 	{
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
-		$this->version = '3.6.0';
+		$this->version = '3.6.1';
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
@@ -193,7 +193,6 @@ class Chronopost extends CarrierModule
 		// register hooks
 		if (!$this->registerHook('extraCarrier') || // For point relais GMap 
 			!$this->registerHook('updateCarrier') || // For update of carrier IDs
-			!$this->registerHook('top') || // 
 			!$this->registerHook('newOrder') || // Processing of selected BT, NOTE : processCarrier apparently not what we want
 			!$this->registerHook('header') || // 
 			!$this->registerHook('backOfficeHeader') || // 
@@ -379,7 +378,7 @@ class Chronopost extends CarrierModule
 		}
 
 		$tab = new Tab(Tab::getIdFromClassName('AdminExportChronopost'));
-		$tab->delete();
+		if (!$tab->delete()) return false;
 
 		$tab = new Tab(Tab::getIdFromClassName('AdminImportChronopost'));
 		if (!$tab->delete()) return false;
@@ -473,6 +472,8 @@ class Chronopost extends CarrierModule
 	public static function errorStatus($id_order)
 	{
 		/*
+		Must be kept as a placeholder for customized deployments. 
+
 		$history = new OrderHistory();
 		$history->id_order = (int)($id_order);
 		$history->changeIdOrderState(10, (int)($id_order)); // TODO with conf value
@@ -545,6 +546,8 @@ class Chronopost extends CarrierModule
 		
 		// Data
 		$cart = $params['cart'];
+		if (!Validate::isLoadedObject($cart)) return;
+
 		$current_address = new Address($cart->id_address_delivery);
 		
 		// Getting relais details
@@ -606,15 +609,9 @@ class Chronopost extends CarrierModule
 		$this->context->controller->addJS($module_uri.'/js/scrollTo.min.js');
 	}
 
-	public function hookTop($params)
+	public function hookExtraCarrier($params)
 	{
-		// if OPC, we're done
-		if (Configuration::get('PS_ORDER_PROCESS_TYPE')) return;
-
-		
-		// check step
-		if (@$this->context->controller->step != 2) return;
-
+	
 		$address = new Address($params['cart']->id_address_delivery);
 
 		$this->context->smarty->assign(
@@ -636,37 +633,6 @@ class Chronopost extends CarrierModule
 
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/hook/chronorelais.tpl');
 	}
-
-	public function hookExtraCarrier($params)
-	{ 
-		// if not OPC, do nothing
-		if (!Configuration::get('PS_ORDER_PROCESS_TYPE')) return;
-
-		$a = new Address($this->context->cart->id_address_delivery);
-		$country = new Country((int)$a->id_country);
-		if ($country->iso_code != 'FR' && $country->iso_code != 'FX')
-			return; // not in France
-
-		$this->context->smarty->assign(
-			array(
-				'module_uri' =>__PS_BASE_URI__.'modules/'.$this->name,
-				'cust_codePostal' => $params['address']->postcode,
-				'cust_firstname' => $params['address']->firstname,
-				'cust_lastname' => $params['address']->lastname,
-				'cartID' => $params['cart']->id,
-				'opc' => true,
-				'carrierID' => Configuration::get('CHRONORELAIS_CARRIER_ID'),
-				'carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONORELAIS_CARRIER_ID').','),
-				'cust_address_clean' => $params['address']->address1.' '.$params['address']->address2,
-				'cust_city' => $params['address']->city,
-				'cust_address' => $params['address']->address1.' '.$params['address']->address2.' '
-			.$params['address']->postcode.' '.$params['address']->city
-			)
-		);
-
-		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/hook/chronorelais.tpl');
-	}
-
 
 	public static function getPointRelaisAddress($orderid)
 	{
@@ -717,7 +683,8 @@ class Chronopost extends CarrierModule
 	public function hookAdminOrder($params)
 	{
 		$order = new Order((int)$params['id_order']);
-		
+		if (!Validate::isLoadedObject($order)) return '';
+
 		if (!self::isChrono($order->id_carrier)) return '';
 		$this->context->smarty->assign(
 			array(
