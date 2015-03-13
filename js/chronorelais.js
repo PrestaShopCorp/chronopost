@@ -274,8 +274,8 @@ function openBTMarker(btID) {
         }
 
         iwcontent+='</tbody></table>'
-        +'<p style="text-align:right"><input type="hidden" name="btID" value="'+data[btID].identifiantChronopostPointA2PAS
-        +'"/><a class="button_large btselect" href="javascript:;" style="float:right">Sélectionner »</a></p>'
+        +'<p class="text-right"><input type="hidden" name="btID" value="'+data[btID].identifiantChronopostPointA2PAS
+        +'"/><a class="button_large btselect" href="javascript:;" class="pull-right">Sélectionner »</a></p>'
         +'</div>';
     } else {
         iwcontent='<div class="pointRelais"><h4>'
@@ -296,8 +296,8 @@ function openBTMarker(btID) {
             +'</td></tr><tr class="last_item item"><td>Dimanche</td><td>'
             +(data[btID].horairesOuvertureDimanche=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureDimanche)
             +'</td></tr></tbody></table>'
-            +'<p style="text-align:right"><input type="hidden" name="btID" value="'+data[btID].identifiantChronopostPointA2PAS
-            +'"/><a class="button_large btselect" href="javascript:;" style="float:right">Sélectionner »</a></p>'
+            +'<p class="text-right"><input type="hidden" name="btID" value="'+data[btID].identifiantChronopostPointA2PAS
+            +'"/><a class="button_large btselect" href="javascript:;" class="pull-right">Sélectionner »</a></p>'
             +'</div>';
     }
     infowindow = new google.maps.InfoWindow({
