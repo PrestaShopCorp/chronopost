@@ -18,6 +18,6 @@ if (!Tools::getIsset('relaisID')
 
 
 Db::getInstance()->execute('INSERT INTO `'._DB_PREFIX_.'chrono_cart_relais` VALUES ('
-	.(int)Tools::getValue('cartID').', "'.Tools::getValue('relaisID').'") ON DUPLICATE KEY UPDATE id_pr="'.Tools::getValue('relaisID').'"');
+	.(int)Tools::getValue('cartID').', "'.Tools::getValue('relaisID').'") ON DUPLICATE KEY UPDATE id_pr="'.pSQL(Tools::getValue('relaisID')).'"');
 
 echo 'OK';
