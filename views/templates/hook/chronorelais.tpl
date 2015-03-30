@@ -40,7 +40,7 @@
 
 
         // move in DOM
-        $('#extra_carrier').after($('#chronorelais_container')); 
+        //$('#extra_carrier').after($('#chronorelais_container')); 
 
         // toggle on load
         toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);

@@ -16,17 +16,13 @@ String.prototype.capitalize = function() {
 
 function toggleRelaisMap(cust_address, codePostal, city)
 {
-    console.log("Called");
     if($("input.delivery_option_radio:checked").val()==carrierID+"," || $("input[name=id_carrier]:checked").val()==carrierIntID) 
     {
-        console.log("Show");
         // Show Chronorelais controls
         $('#chronorelais_container').show();
         initRelaisMap(cust_address, codePostal, city);
 
     } else {
-        console.log("Hide : "+$("input.delivery_option_radio:checked").val()+" "+$("input[name=id_carrier]:checked").val());
-        console.log("Looking for : "+carrierID+",");
         // Hide Chronorelais controls
         $('#chronorelais_container').hide();
     }
@@ -311,7 +307,7 @@ function openBTMarker(btID) {
 function btSelect(target, e) {
     var btID=$(this).parent().children('input').val();
     var mObj=$('#relais_txt input[value='+btID+']');
-    mObj.attr('checked', true);
+    mObj.click();
     associateRelais(btID);
     $.scrollTo(mObj);
 };

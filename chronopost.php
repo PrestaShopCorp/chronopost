@@ -613,7 +613,6 @@ class Chronopost extends CarrierModule
 	{
 	
 		$address = new Address($params['cart']->id_address_delivery);
-
 		$this->context->smarty->assign(
 			array(
 				'module_uri' =>__PS_BASE_URI__.'modules/'.$this->name,
