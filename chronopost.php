@@ -993,6 +993,12 @@ class Chronopost extends CarrierModule
 			'G' => '0.001'
 		);
 
+		$this->adminDisplayInformation($this->l('Offer to your customers the first Express delivery service with the offical Chronopost module for Prestashop 1.5 and 1.6.
+    With Chronopost, your customer will have the choice of the main delivery modes within 24h : at home,  at a Pickup point or at the office !').'<br/>'.$this->l('Your customers will also have the Predict service :  They are notified by email or SMS the day before the delivery and can reschedule the delivery or ask to be delivered at a pickup point among more than 17 000 points (post offices, Pickup relay or Chronopost agencies).').'<br/><br/>'.
+    $this->l('Expand your business internationally with Chronopost international delivery service which is included in this module.').'<br/>'.
+    $this->l('Find all these services in the Chronopost e-commerce pack : MyChrono.').'<br/>'.
+    $this->l('To activate the module on your site, contact us at ').'<a href="mailto:demandez-a-chronopost@chronopost.fr">demandez-a-chronopost@chronopost.fr</a>');
+
 		// smarty-chain !
 		$this->context->smarty->assign(
 			array(
