@@ -349,7 +349,7 @@ class Chronopost extends CarrierModule
 				} 
 
 				//copy logo
-				if (!copy(dirname(__FILE__).'/img/'.$config['logo_filename'].'.jpg', _PS_SHIP_IMG_DIR_.'/'.$carrier->id.'.jpg'))
+				if (!copy(dirname(__FILE__).'/views/img/'.$config['logo_filename'].'.jpg', _PS_SHIP_IMG_DIR_.'/'.$carrier->id.'.jpg'))
 					return false;
 			}
 		}
@@ -603,10 +603,10 @@ class Chronopost extends CarrierModule
 		if (!in_array($file, array('order-opc', 'order', 'orderopc'))) return;
 
 		$module_uri = _MODULE_DIR_.$this->name;
-		$this->context->controller->addCSS($module_uri.'/css/chronorelais.css', 'all');
+		$this->context->controller->addCSS($module_uri.'/view/css/chronorelais.css', 'all');
 		$this->context->controller->addJS("https://maps.google.com/maps/api/js?sensor=false");
-		$this->context->controller->addJS($module_uri.'/js/chronorelais.js');
-		$this->context->controller->addJS($module_uri.'/js/scrollTo.min.js');
+		$this->context->controller->addJS($module_uri.'/view/js/chronorelais.js');
+		$this->context->controller->addJS($module_uri.'/view/js/scrollTo.min.js');
 	}
 
 	public function hookExtraCarrier($params)

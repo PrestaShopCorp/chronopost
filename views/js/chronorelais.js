@@ -74,7 +74,7 @@ function createHomeMarker(address)
             new google.maps.Marker({
                 map: relais_map,
                 position: results[0].geometry.location,
-                icon:path+'/img/home.png'
+                icon:path+'/views/img/home.png'
             }); // end marker
         } // end status
     }); // end geocode callback
@@ -241,7 +241,7 @@ function createRelaisMarker(data)
     map_markers[data.identifiantChronopostPointA2PAS]=new google.maps.Marker({
         map: relais_map,
         position: pos,
-        icon:path+'/img/postal.png'
+        icon:path+'/views/img/postal.png'
     });
 
     // link infowindow to marker
