@@ -895,7 +895,7 @@ class Chronopost extends CarrierModule
 		$smarty = array();
 		$smarty['prefix'] = $prefix;
 		
-		foreach($vars as $var)
+		foreach ($vars as $var)
 			$smarty[$var] = Configuration::get('CHRONOPOST_'.$var_name.'_'.Tools::strtoupper($var));
 
 		$this->context->smarty->assign($smarty);
@@ -972,7 +972,7 @@ class Chronopost extends CarrierModule
 		if (Tools::isSubmit('submitchronoRelaisConfig'))
 		{
 			if ($this->_postValidation() && $this->_postProcess())
-				$html.=Module::displayConfirmation($this->l('Settings updated.'));
+				$html .= Module::displayConfirmation($this->l('Settings updated.'));
 		}
 		return $html.$this->displayForm();
 	}

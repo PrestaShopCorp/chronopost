@@ -91,14 +91,16 @@ class AdminBordereauChronopostController extends ModuleAdminController {
 	public function processBulkDocket()
 	{
 		$order_box = Tools::getValue('orderBox');
-		if (empty($order_box)) {
+		if (empty($order_box)) 
+		{
 			$this->displayWarning($this->module->l('You must select orders for the export'));
 			return;
 		}
 		Tools::redirectAdmin('../modules/chronopost/generateBordereau.php?shared_secret='.Configuration::get('CHRONOPOST_SECRET').'&orders='.implode(';', $order_box));
 	}
 
-	public function initToolbar(){
+	public function initToolbar()
+	{
 		parent::initToolbar();
   		// Remove "Add" button from toolbar
   		unset($this->toolbar_btn['new']);

@@ -22,7 +22,7 @@
 {/if}
 
 <label>{l s='Number of parcels' mod='chronopost'}</label>
-<div class="margin-form"><input type="text" name="multiOne" id = "multiOne" value="{$nbwb}"/></div>
+<div class="margin-form"><input type="text" name="multiOne" id = "multiOne" value="{$nbwb|escape:'htmlall'}"/></div>
 {if $to_insure>-1}
 	<br/><label for = "advalorem">{l s='Shipment insurance' mod='chronopost'}</label>
 	<div class="margin-form"><input type="checkbox" id = "advalorem" name="advalorem" value="yes" {if $to_insure>0} checked{/if}/>

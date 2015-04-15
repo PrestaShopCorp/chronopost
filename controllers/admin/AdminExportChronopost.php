@@ -15,7 +15,7 @@ if (defined('__PS_VERSION_'))
 
 class AdminExportChronopostController extends ModuleAdminController {
 
-	public function __construct() 
+	public function __construct()
 	{
 
 		$this->table = 'order';
@@ -146,10 +146,11 @@ class AdminExportChronopostController extends ModuleAdminController {
 							.'&multi='.addslashes(Tools::jsonEncode(Tools::getValue('multi'))));
 	}
 
-	public function initToolbar(){
+	public function initToolbar()
+	{
 		parent::initToolbar();
-  		// Remove "Add" button from toolbar
-  		unset($this->toolbar_btn['new']);
+		// Remove "Add" button from toolbar
+		unset($this->toolbar_btn['new']);
   		unset($this->toolbar_btn['export']);
 	}
 }

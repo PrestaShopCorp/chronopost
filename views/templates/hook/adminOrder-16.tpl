@@ -28,7 +28,7 @@
 {/if}
 <div class="form-group">
 	<label for = "multiOne" class="control-label col-sm-4">{l s='Number of parcels' mod='chronopost'}</label>
-	<div class="col-sm-8"><input type="number" name="multiOne" id="multiOne" value="{$nbwb}" class="form-control"/></div>
+	<div class="col-sm-8"><input type="number" name="multiOne" id="multiOne" value="{$nbwb|escape:'htmlall'}" class="form-control"/></div>
 </div>
 
 {if $to_insure>-1}
