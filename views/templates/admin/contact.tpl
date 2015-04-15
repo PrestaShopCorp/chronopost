@@ -16,7 +16,7 @@
 </option></select></div>
 <label>{l s='Company name' mod='chronopost'}</label><div class="margin-form">
 	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][name]" 
-		value="{$name}"/>
+		value="{$name|escape:'htmlall'}"/>
 </div>
 
 <label>{l s='Company name 2' mod='chronopost'}</label><div class="margin-form">

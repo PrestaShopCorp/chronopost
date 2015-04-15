@@ -11,7 +11,7 @@
 <div class="row"><div class="panel col-lg-7">
 				<div class="panel-heading">
 					<i class="icon-truck"></i> {l s='Print the Chronopost waybills' mod='chronopost'}</div>
-				<form method="POST" action="{$module_uri}/postSkybill.php" role="form" class="form-horizontal">
+				<form method="POST" action="{$module_uri|escape:'htmlall'}/postSkybill.php" role="form" class="form-horizontal">
 
 {if $bal==1}
 	<p style = "text-align:center;width:400px"><b>Option BAL activée.</b></p>
@@ -43,12 +43,12 @@
 			
 <div class="form-group">
 	<label for = "advalorem_value" class="control-label col-sm-4">{l s='Value to insure' mod='chronopost'}</label>
-	<div class="col-sm-8"><input type="text" class="form-control" name="advalorem_value" value="{$to_insure}"/></div>
+	<div class="col-sm-8"><input type="text" class="form-control" name="advalorem_value" value="{$to_insure|escape:'htmlall'}"/></div>
 </div>
 {/if}
 
-<input type="hidden" name="orderid" value="{$id_order}"/><p style = "text-align:center">
-<input type="hidden" name="shared_secret" value="{$chronopost_secret}"/>
+<input type="hidden" name="orderid" value="{$id_order|escape:'htmlall'}"/><p style = "text-align:center">
+<input type="hidden" name="shared_secret" value="{$chronopost_secret|escape:'htmlall'}"/>
 
 <input class="btn btn-primary" type="submit" value="{l s='Print waybill' mod='chronopost'}" class="button" style = "margin:10px;"/>
 

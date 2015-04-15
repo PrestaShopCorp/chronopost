@@ -11,8 +11,8 @@
 <h2>{l s="Chronopost and Chronopost Pickup" mod='chronopost'}</h2>
 <style>label { width:300px;}</style>
 <script>
-	var module_dir="{$module_dir}";
-	var chronopost_secret="{$chronopost_secret}";
+	var module_dir="{$module_dir|escape:'htmlall'}";
+	var chronopost_secret="{$chronopost_secret|escape:'htmlall'}";
 	{literal}
 		$(function() {
 			$("#testWSLogin").on("click", function(e)
@@ -27,24 +27,24 @@
 		});
 	{/literal}
 </script>
-<form action="{$post_uri}" method="post">
+<form action="{$post_uri|escape:'htmlall'}" method="post">
 
 	<!--GENERAL-->
 	<fieldset>
 	 <legend><img src="../img/admin/asterisk.gif" alt="" title="" />{l s='Common config' mod='chronopost'}</legend>
 		<label>{l s='Contract number' mod='chronopost'}</label>
 		<div class="margin-form">
-			<input id = "chrono_account" type="text" name="chronoparams[general][account]" value="{$general_account}"/>
+			<input id = "chrono_account" type="text" name="chronoparams[general][account]" value="{$general_account|escape:'htmlall'}"/>
 		</div>
 
 		<label>{l s='Subaccount' mod='chronopost'}</label>
 		<div class="margin-form">
-			<input id = "chrono_subaccount" type="text" name="chronoparams[general][subaccount]" value="{$general_subaccount}"/>
+			<input id = "chrono_subaccount" type="text" name="chronoparams[general][subaccount]" value="{$general_subaccount|escape:'htmlall'}"/>
 		</div>
 
 		<label>{l s='Chronopost password' mod='chronopost'}</label>
 		<div class="margin-form">
-			<input id = "chrono_password" type="text" name="chronoparams[general][password]" value="{$general_password}"/>
+			<input id = "chrono_password" type="text" name="chronoparams[general][password]" value="{$general_password|escape:'htmlall'}"/>
 		</div>
 		
 
@@ -121,7 +121,7 @@
 		<label>{l s='Supplement for deliveries to Corsica' mod='chronopost'}</label>
 		<div class="margin-form">
 			+ <input name="chronoparams[corsica][supplement]" type="text" style = "width:40px;text-align:right;"
-				value="{$corsica_supplement}"/> €
+				value="{$corsica_supplement|escape:'htmlall'}"/> €
 <p class="clear hint">{l s='Configurable amount according to your pricing policy. However, the amount charged by Chronopost corresponds to pricing policy specified in your contract.' mod='chronopost'}</p>
 		</div>
 	</fieldset>
@@ -156,7 +156,7 @@
 
 		<label>{l s='Minimum amount to insure' mod='chronopost'}</label>
 		<div class="margin-form">
-			<input type="text" name="chronoparams[advalorem][minvalue]" value="{$advalorem_minvalue}"/>
+			<input type="text" name="chronoparams[advalorem][minvalue]" value="{$advalorem_minvalue|escape:'htmlall'}"/>
 <p class="clear hint">{l s='By enabling this option, for each package exceeding the amount you enter, your shipment will be insured up to the amount of its the articles (maximum 20,000€ ). You can enter the amount to insure on your order detail.' mod='chronopost'}</p>
 		</div> 
 	</fieldset>
