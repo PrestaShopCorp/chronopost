@@ -25,7 +25,7 @@ $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_ec53a8c4f07baed5d8825
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_44749712dbec183e983dcd78a7736c41'] = 'Date';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_d6c5e7240fc05e93ad3f628c47299517'] = 'Edition du bordereau de fin de journée';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_7fef89706f4f42cdbe3551f05659bb67'] = 'N’oubliez pas d\'imprimer le bordereau de remise en deux exemplaires, un doit être remis lors de l\'enlèvement ou du dépôt ; l\'autre est à conserver. Les deux doivent être signés.';
-$_MODULE['<{chronopost}prestashop>adminbordereauchronopost_2f9961dce5e3360445c83ee63a2a25e2'] = 'Vous devez sélectionner des commandes pour effectuer un export.';
+$_MODULE['<{chronopost}prestashop>adminbordereauchronopost_414b941f6703b5e930e19f79c6d65815'] = 'Vous devez sélectionner des commandes à exporter';
 $_MODULE['<{chronopost}prestashop>adminexportchronopost_b718adec73e04ce3ec720dd11a06a308'] = 'ID';
 $_MODULE['<{chronopost}prestashop>adminexportchronopost_ce26601dac0dea138b7295f02b7620a7'] = 'Client';
 $_MODULE['<{chronopost}prestashop>adminexportchronopost_c453a4b8e8d98e82f35b67f433e3b4da'] = 'Paiement';

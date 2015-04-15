@@ -57,14 +57,16 @@ class AdminBordereauChronopostController extends ModuleAdminController {
 			.' OR a.id_carrier='.((int)Configuration::get('CHRONO18_CARRIER_ID'))
 			.' OR a.id_carrier='.((int)Configuration::get('CHRONOCLASSIC_CARRIER_ID'))
 			.') ';
- 		
+
+		parent::__construct();
+
  		// fields_lists *HAS* to be initiated in constructor, not later
 		$this->fields_list = array(
-			'id_order' => array('title' => $this->l('ID'), 'align' => 'center', 'width' => 25),
-			'customer' => array('title' => $this->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
-			'payment' => array('title' => $this->l('Payment'), 'width' => 100),
+			'id_order' => array('title' => $this->module->l('ID'), 'align' => 'center', 'width' => 25),
+			'customer' => array('title' => $this->module->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
+			'payment' => array('title' => $this->module->l('Payment'), 'width' => 100),
 			'osname' => array(
-				'title' => $this->l('Status'),
+				'title' => $this->module->l('Status'),
 				'type' => 'select',
 				'color' => 'color',
 				'list' => $this->statuses_array,
@@ -72,19 +74,17 @@ class AdminBordereauChronopostController extends ModuleAdminController {
 				'filter_type' => 'int',
 				'order_key' => 'osname'
 			),
-			'date_add' => array('title' => $this->l('Date'), 'width' => 35, 'align' => 'right', 'type' => 'datetime', 'filter_key' => 'a!date_add')
+			'date_add' => array('title' => $this->module->l('Date'), 'width' => 35, 'align' => 'right', 'type' => 'datetime', 'filter_key' => 'a!date_add')
 		);
 
+		
 		$this->bulk_actions = array(
 			'docket' => array(
-				'text' => $this->l('Edition of the daily docket'),
+				'text' => $this->module->l('Edition of the daily docket'),
 				'icon' => 'icon-print'
 			)
 		);
-
-		$this->displayInformation($this->l('Print the daily docket in duplicate, one for schedules pickup, the other is to be retained. Both must be signed.'));
-
-		parent::__construct();
+		$this->displayInformation($this->module->l('Print the daily docket in duplicate, one for schedules pickup, the other is to be retained. Both must be signed.'));
 	}
 
 	
@@ -92,7 +92,7 @@ class AdminBordereauChronopostController extends ModuleAdminController {
 	{
 		$order_box=Tools::getValue('orderBox');
 		if (empty($order_box)) {
-			$this->displayWarning($this->l('You must selected orders for the export'));
+			$this->displayWarning($this->module->l('You must select orders for the export'));
 			return;
 		}
 		Tools::redirectAdmin('../modules/chronopost/generateBordereau.php?shared_secret='.Configuration::get('CHRONOPOST_SECRET').'&orders='.implode(';', $order_box));

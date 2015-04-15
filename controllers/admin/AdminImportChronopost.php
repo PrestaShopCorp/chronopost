@@ -22,10 +22,12 @@ class AdminImportChronopostController extends ModuleAdminController {
 		// we're not actually using the database but apparently still need this
 		$this->className = 'Configuration';
 		$this->table = 'configuration';
-		
+
+		parent::__construct();
+
 		$fields = array(
 			'importfile' => array(
-				'title' => $this->l('Select file to import'),
+				'title' => $this->module->l('Select file to import'),
 				'visibility' => Shop::CONTEXT_ALL,
 				'type' => 'file',
 				'name' => 'import'
@@ -33,16 +35,15 @@ class AdminImportChronopostController extends ModuleAdminController {
 		);
 		$this->fields_options = array(
 			'general' => array(
-				'title' => $this->l('Management of imports using a third-party application (eg : Chronoship Office, Chronoship Station... )'),
+				'title' => $this->module->l('Management of imports using a third-party application (eg : Chronoship Office, Chronoship Station... )'),
 				'icon' => 'icon-cogs',
 				'fields' =>	$fields,
-				'submit' => array('title' => $this->l('Import file')),
+				'submit' => array('title' => $this->module->l('Import file')),
 			),
 		);
 
-		$this->displayInformation($this->l('Use this function to massively assign Chronopost parcel numbers to the desired orders. This is useful if you edit your waybills from a third-party application. (Eg ChronoShip Office ChronoShip Station ...). The expected file must be in CSV format with semicolon separator.<br/><br/>It must contain 2 columns : <ol><li>Prestashop orders reference</li><li>Chronopost tracking number</li></ol><br/>The orders status will be "Shipment in transit". An email contaning the tracking number and a link to follow the parcel will be sent to the customer.'));
+		$this->displayInformation($this->module->l('Use this function to massively assign Chronopost parcel numbers to the desired orders. This is useful if you edit your waybills from a third-party application. (Eg ChronoShip Office ChronoShip Station ...). The expected file must be in CSV format with semicolon separator.<br/><br/>It must contain 2 columns : <ol><li>Prestashop orders reference</li><li>Chronopost tracking number</li></ol><br/>The orders status will be "Shipment in transit". An email contaning the tracking number and a link to follow the parcel will be sent to the customer.'));
 
-		parent::__construct();
 	}
 
 	public function processUpdateOptions()
@@ -62,7 +63,7 @@ class AdminImportChronopostController extends ModuleAdminController {
 			//echo 'Commande n°'.$line[0].' mise à jour avec succès.<br/>';
 		}
 
-		$this->confirmations[] = $this->l('File successfully uploaded, the orders have been updated.');
+		$this->confirmations[] = $this->module->l('File successfully uploaded, the orders have been updated.');
 		fclose($fp);
 		unlink($_FILES['import']['tmp_name']); /* clean up after yourself, will ya ? */
 	}

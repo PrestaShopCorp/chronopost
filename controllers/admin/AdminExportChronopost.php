@@ -22,6 +22,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 		$this->lang = false;
 		$this->bootstrap = true;
 		$this->deleted = false;
+		$this->explicitSelect = true;
 		$this->context = Context::getContext();
 		$this->list_no_link = true; // so you can't click on rows. Ignore Prestashop docs. 
 
@@ -44,7 +45,6 @@ class AdminExportChronopostController extends ModuleAdminController {
 		$this->_orderBy = 'id_order';
 		$this->_orderWay = 'DESC';
 
-
 		$statuses = OrderState::getOrderStates((int)$this->context->language->id);
 		foreach ($statuses as $status)
 			$this->statuses_array[$status['id_order_state']] = $status['name'];
@@ -57,14 +57,16 @@ class AdminExportChronopostController extends ModuleAdminController {
 			.' OR a.id_carrier='.((int)Configuration::get('CHRONO18_CARRIER_ID'))
 			.' OR a.id_carrier='.((int)Configuration::get('CHRONOCLASSIC_CARRIER_ID'))
 			.') ';
- 		
+
+		parent::__construct();
+
  		// fields_lists *HAS* to be initiated in constructor, not later
 		$this->fields_list = array(
-			'id_order' => array('title' => $this->l('ID'), 'align' => 'center', 'width' => 25),
-			'customer' => array('title' => $this->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
-			'payment' => array('title' => $this->l('Payment'), 'width' => 100),
+			'id_order' => array('title' => $this->module->l('ID'), 'align' => 'center', 'width' => 25),
+			'customer' => array('title' => $this->module->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
+			'payment' => array('title' => $this->module->l('Payment'), 'width' => 100),
 			'osname' => array(
-				'title' => $this->l('Status'),
+				'title' => $this->module->l('Status'),
 				'type' => 'select',
 				'color' => 'color',
 				'list' => $this->statuses_array,
@@ -72,9 +74,9 @@ class AdminExportChronopostController extends ModuleAdminController {
 				'filter_type' => 'int',
 				'order_key' => 'osname'
 			),
-			'date_add' => array('title' => $this->l('Date'), 'width' => 35, 'align' => 'right', 'type' => 'datetime', 'filter_key' => 'a!date_add'),
+			'date_add' => array('title' => $this->module->l('Date'), 'width' => 35, 'align' => 'right', 'type' => 'datetime', 'filter_key' => 'a!date_add'),
 			'id_pdf' => array(
-				'title' => $this->l('Waybills'),
+				'title' => $this->module->l('Waybills'),
 				'align' => 'text-center',
 				'callback' => 'nbWaybillsInput',
 				'orderby' => false,
@@ -84,23 +86,23 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		$this->bulk_actions = array(
 			'csoexport' => array(
-				'text' => $this->l('CSO export '),
+				'text' => $this->module->l('CSO export '),
 				'icon' => 'icon-save'
 			),
 			'cssexport' => array(
-				'text' => $this->l('CSS export '),
+				'text' => $this->module->l('CSS export '),
 				'icon' => 'icon-save'
 			),
 			'waybills' => array(
-				'text' => $this->l('Print all waybills'),
+				'text' => $this->module->l('Print all waybills'),
 				'icon' => 'icon-print'
 			),
 		);
 
-		$this->displayInformation($this->l('For an export, select orders, then in the "Bulk Actions" menu, select the type of export wanted.'));
-		$this->displayWarning($this->l('Careful, Chrono Relais waybills can\'t be edited in Chronoship Office (CSO) by file importation'));
+		$this->displayInformation($this->module->l('For an export, select orders, then in the "Bulk Actions" menu, select the type of export wanted.'));
+		$this->displayWarning($this->module->l('Careful, Chrono Relais waybills can\'t be edited in Chronoship Office (CSO) by file importation'));
 
-		parent::__construct();
+
 	}
 
 	public function nbWaybillsInput($id_order, $tr)
@@ -118,7 +120,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 		$order_box=Tools::getValue('orderBox');
 
 		if (empty($order_box)) {
-			$this->displayWarning($this->l('You must selected orders for the export'));
+			$this->displayWarning($this->module->l('You must selected orders for the export'));
 			return;
 		}
 
@@ -132,7 +134,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 		$order_box=Tools::getValue('orderBox');
 
 		if (empty($order_box)) {
-			$this->displayWarning($this->l('You must selected orders for the export'));
+			$this->displayWarning($this->module->l('You must selected orders for the export'));
 			return;
 		}
 
