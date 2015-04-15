@@ -604,14 +604,13 @@ class Chronopost extends CarrierModule
 
 		$module_uri = _MODULE_DIR_.$this->name;
 		$this->context->controller->addCSS($module_uri.'/view/css/chronorelais.css', 'all');
-		$this->context->controller->addJS("https://maps.google.com/maps/api/js?sensor=false");
+		$this->context->controller->addJS('https://maps.google.com/maps/api/js?sensor=false');
 		$this->context->controller->addJS($module_uri.'/view/js/chronorelais.js');
 		$this->context->controller->addJS($module_uri.'/view/js/scrollTo.min.js');
 	}
 
 	public function hookExtraCarrier($params)
 	{
-	
 		$address = new Address($params['cart']->id_address_delivery);
 		$this->context->smarty->assign(
 			array(
@@ -892,12 +891,12 @@ class Chronopost extends CarrierModule
 	{
 		$prefix = Tools::strtolower($prefix);
 		$var_name = Tools::strtoupper($prefix);
-		$vars=array('civility', 'name', 'name2', 'address', 'address2', 'zipcode', 'city', 'contactname', 'email', 'phone', 'mobile');
-		$smarty=array();
-		$smarty['prefix']=$prefix;
+		$vars = array('civility', 'name', 'name2', 'address', 'address2', 'zipcode', 'city', 'contactname', 'email', 'phone', 'mobile');
+		$smarty = array();
+		$smarty['prefix'] = $prefix;
 		
 		foreach($vars as $var)
-			$smarty[$var]=Configuration::get('CHRONOPOST_'.$var_name.'_'.Tools::strtoupper($var));
+			$smarty[$var] = Configuration::get('CHRONOPOST_'.$var_name.'_'.Tools::strtoupper($var));
 
 		$this->context->smarty->assign($smarty);
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/contact.tpl');
@@ -969,7 +968,7 @@ class Chronopost extends CarrierModule
 	
 	public function getContent()
 	{
-		$html='';
+		$html = '';
 		if (Tools::isSubmit('submitchronoRelaisConfig'))
 		{
 			if ($this->_postValidation() && $this->_postProcess())
@@ -979,8 +978,7 @@ class Chronopost extends CarrierModule
 	}
 
 	public function displayForm()
-	{ 
-		
+	{
 		$printMode = array(
 			'PDF' => $this->l('PDF file'),
 			'THE' => $this->l('Thermal printer'),
@@ -995,9 +993,9 @@ class Chronopost extends CarrierModule
 
 		$this->adminDisplayInformation($this->l('Offer to your customers the first Express delivery service with the offical Chronopost module for Prestashop 1.5 and 1.6.
     With Chronopost, your customer will have the choice of the main delivery modes within 24h : at home,  at a Pickup point or at the office !').'<br/>'.$this->l('Your customers will also have the Predict service :  They are notified by email or SMS the day before the delivery and can reschedule the delivery or ask to be delivered at a pickup point among more than 17 000 points (post offices, Pickup relay or Chronopost agencies).').'<br/><br/>'.
-    $this->l('Expand your business internationally with Chronopost international delivery service which is included in this module.').'<br/>'.
-    $this->l('Find all these services in the Chronopost e-commerce pack : MyChrono.').'<br/>'.
-    $this->l('To activate the module on your site, contact us at ').'<a href="mailto:demandez-a-chronopost@chronopost.fr">demandez-a-chronopost@chronopost.fr</a>');
+	$this->l('Expand your business internationally with Chronopost international delivery service which is included in this module.').'<br/>'.
+	$this->l('Find all these services in the Chronopost e-commerce pack : MyChrono.').'<br/>'.
+	$this->l('To activate the module on your site, contact us at ').'<a href="mailto:demandez-a-chronopost@chronopost.fr">demandez-a-chronopost@chronopost.fr</a>');
 
 		// smarty-chain !
 		$this->context->smarty->assign(

@@ -8,4 +8,4 @@
   * @copyright 2001-2015 Oxileo SAS
   * @license   Proprietary - no redistribution without authorization
   *}
-<input type="number" name="multi[{$id_order}]" value="{$nbwb}" class="fixed-width-xs">
+<input type="number" name="multi[{$id_order|escape:'htmlall'}]" value="{$nbwb|escape:'htmlall'}" class="fixed-width-xs">

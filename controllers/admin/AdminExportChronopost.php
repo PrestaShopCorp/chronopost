@@ -15,7 +15,8 @@ if (defined('__PS_VERSION_'))
 
 class AdminExportChronopostController extends ModuleAdminController {
 
-	public function __construct() {
+	public function __construct() 
+	{
 
 		$this->table = 'order';
 		$this->className = 'Order';
@@ -49,7 +50,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 		foreach ($statuses as $status)
 			$this->statuses_array[$status['id_order_state']] = $status['name'];
 		
-		$this->_where = 
+		$this->_where =
 			' AND (a.id_carrier='.((int)Configuration::get('CHRONOPOST_CARRIER_ID'))
 			.' OR a.id_carrier='.((int)Configuration::get('CHRONORELAIS_CARRIER_ID'))
 			.' OR a.id_carrier='.((int)Configuration::get('CHRONOEXPRESS_CARRIER_ID'))
@@ -60,7 +61,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		parent::__construct();
 
- 		// fields_lists *HAS* to be initiated in constructor, not later
+		// fields_lists *HAS* to be initiated in constructor, not later
 		$this->fields_list = array(
 			'id_order' => array('title' => $this->module->l('ID'), 'align' => 'center', 'width' => 25),
 			'customer' => array('title' => $this->module->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
@@ -112,14 +113,15 @@ class AdminExportChronopostController extends ModuleAdminController {
 			'nbwb' => Chronopost::minNumberOfPackages($id_order)
 		));
 
-		return $this->context->smarty->fetch(dirname(__FILE__).'/../../views/templates/admin/nb_waybill_input.tpl');;
+		return $this->context->smarty->fetch(dirname(__FILE__).'/../../views/templates/admin/nb_waybill_input.tpl');
 	}
 
 	public function processBulkcsoexport()
 	{
-		$order_box=Tools::getValue('orderBox');
+		$order_box = Tools::getValue('orderBox');
 
-		if (empty($order_box)) {
+		if (empty($order_box)) 
+		{
 			$this->displayWarning($this->module->l('You must selected orders for the export'));
 			return;
 		}
@@ -131,9 +133,10 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 	public function processBulkcssexport()
 	{
-		$order_box=Tools::getValue('orderBox');
+		$order_box = Tools::getValue('orderBox');
 
-		if (empty($order_box)) {
+		if (empty($order_box)) 
+		{
 			$this->displayWarning($this->module->l('You must selected orders for the export'));
 			return;
 		}
