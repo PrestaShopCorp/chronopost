@@ -1,3 +1,13 @@
+{*
+  * MODULE PRESTASHOP OFFICIEL CHRONOPOST
+  * 
+  * LICENSE : All rights reserved - COPY AND REDISTRIBUTION FORBIDDEN WITHOUT PRIOR CONSENT FROM OXILEO
+  * LICENCE : Tous droits réservés, le droit d'auteur s'applique - COPIE ET REDISTRIBUTION INTERDITES SANS ACCORD EXPRES D'OXILEO
+  *
+  * @author    Oxileo SAS <contact@oxileo.eu>
+  * @copyright 2001-2015 Oxileo SAS
+  * @license   Proprietary - no redistribution without authorization
+  *}
 <h2>{l s="Chronopost and Chronopost Pickup" mod='chronopost'}</h2>
 <style>label { width:300px;}</style>
 <script>

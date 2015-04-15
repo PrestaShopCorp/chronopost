@@ -1,3 +1,13 @@
+{*
+  * MODULE PRESTASHOP OFFICIEL CHRONOPOST
+  * 
+  * LICENSE : All rights reserved - COPY AND REDISTRIBUTION FORBIDDEN WITHOUT PRIOR CONSENT FROM OXILEO
+  * LICENCE : Tous droits réservés, le droit d'auteur s'applique - COPIE ET REDISTRIBUTION INTERDITES SANS ACCORD EXPRES D'OXILEO
+  *
+  * @author    Oxileo SAS <contact@oxileo.eu>
+  * @copyright 2001-2015 Oxileo SAS
+  * @license   Proprietary - no redistribution without authorization
+  *}
 <div class="row"><div class="panel col-lg-7">
 				<div class="panel-heading">
 					<i class="icon-truck"></i> {l s='Print the Chronopost waybills' mod='chronopost'}</div>
