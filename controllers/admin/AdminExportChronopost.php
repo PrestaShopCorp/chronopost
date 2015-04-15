@@ -17,7 +17,6 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 	public function __construct()
 	{
-
 		$this->table = 'order';
 		$this->className = 'Order';
 		$this->lang = false;
@@ -102,8 +101,6 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		$this->displayInformation($this->module->l('For an export, select orders, then in the "Bulk Actions" menu, select the type of export wanted.'));
 		$this->displayWarning($this->module->l('Careful, Chrono Relais waybills can\'t be edited in Chronoship Office (CSO) by file importation'));
-
-
 	}
 
 	public function nbWaybillsInput($id_order, $tr)
@@ -151,6 +148,6 @@ class AdminExportChronopostController extends ModuleAdminController {
 		parent::initToolbar();
 		// Remove "Add" button from toolbar
 		unset($this->toolbar_btn['new']);
-  		unset($this->toolbar_btn['export']);
+		unset($this->toolbar_btn['export']);
 	}
 }

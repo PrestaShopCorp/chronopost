@@ -102,8 +102,8 @@ class AdminBordereauChronopostController extends ModuleAdminController {
 	public function initToolbar()
 	{
 		parent::initToolbar();
-  		// Remove "Add" button from toolbar
-  		unset($this->toolbar_btn['new']);
-  		unset($this->toolbar_btn['export']);
+		// Remove "Add" button from toolbar
+		unset($this->toolbar_btn['new']);
+		unset($this->toolbar_btn['export']);
 	}
 }
