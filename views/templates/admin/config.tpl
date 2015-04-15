@@ -80,7 +80,7 @@
 				<option value="yes"{if $saturday_checked!='yes'} selected{/if}>{l s="No" mod='chronopost'}</option>
 			</select>
 		</div>
-		<div class="path_bar">{l s='Display the Saturday delivery option from:'' mod='chronopost'}</div>
+		<div class="path_bar">{l s='Display the Saturday delivery option from:' mod='chronopost'}</div>
 
 		<label>{l s='Day' mod='chronopost'}</label>
 		<div class="margin-form">
@@ -112,7 +112,7 @@
 		<div class="margin-form">
 			+ <input name="chronoparams[corsica][supplement]" type="text" style = "width:40px;text-align:right;"
 				value="{$corsica_supplement}"/> €
-<p class="clear hint">{l s='Configurable amount according to your pricing policy. However, the amount charged by Chronopost corresponds to pricing policy specified in your contract.'' mod='chronopost'}</p>
+<p class="clear hint">{l s='Configurable amount according to your pricing policy. However, the amount charged by Chronopost corresponds to pricing policy specified in your contract.' mod='chronopost'}</p>
 		</div>
 	</fieldset>
 	<p class="clear">&nbsp;</p>
@@ -126,7 +126,7 @@
 				<option value="0"{if $quickcost_enabled != 1} selected{/if}>{l s='No' mod='chronopost'}</option>
 				<option value="1"{if $quickcost_enabled == 1} selected{/if}>{l s='Yes' mod='chronopost'}</option>
 			</select>
-<p class="clear hint">{l s='Quickcost will calculate the cost of an item, depending on the rates negociated with Chronopost. This option replaces the use of the fee schedule.'' mod='chronopost'}</p>
+<p class="clear hint">{l s='Quickcost will calculate the cost of an item, depending on the rates negociated with Chronopost. This option replaces the use of the fee schedule.' mod='chronopost'}</p>
 		</div>
 	</fieldset>
 	<p class="clear">&nbsp;</p>
