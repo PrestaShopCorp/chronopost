@@ -62,11 +62,11 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		// fields_lists *HAS* to be initiated in constructor, not later
 		$this->fields_list = array(
-			'id_order' => array('title' => $this->module->l('ID'), 'align' => 'center', 'width' => 25),
-			'customer' => array('title' => $this->module->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
-			'payment' => array('title' => $this->module->l('Payment'), 'width' => 100),
+			'id_order' => array('title' => $this->l('ID'), 'align' => 'center', 'width' => 25),
+			'customer' => array('title' => $this->l('Customer'), 'widthColumn' => 160, 'width' => 140, 'filter_key' => 'customer', 'tmpTableFilter' => true),
+			'payment' => array('title' => $this->l('Payment'), 'width' => 100),
 			'osname' => array(
-				'title' => $this->module->l('Status'),
+				'title' => $this->l('Status'),
 				'type' => 'select',
 				'color' => 'color',
 				'list' => $this->statuses_array,
@@ -74,9 +74,9 @@ class AdminExportChronopostController extends ModuleAdminController {
 				'filter_type' => 'int',
 				'order_key' => 'osname'
 			),
-			'date_add' => array('title' => $this->module->l('Date'), 'width' => 35, 'align' => 'right', 'type' => 'datetime', 'filter_key' => 'a!date_add'),
+			'date_add' => array('title' => $this->l('Date'), 'width' => 35, 'align' => 'right', 'type' => 'datetime', 'filter_key' => 'a!date_add'),
 			'id_pdf' => array(
-				'title' => $this->module->l('Waybills'),
+				'title' => $this->l('Waybills'),
 				'align' => 'text-center',
 				'callback' => 'nbWaybillsInput',
 				'orderby' => false,
@@ -86,21 +86,21 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		$this->bulk_actions = array(
 			'csoexport' => array(
-				'text' => $this->module->l('CSO export '),
+				'text' => $this->l('CSO export '),
 				'icon' => 'icon-save'
 			),
 			'cssexport' => array(
-				'text' => $this->module->l('CSS export '),
+				'text' => $this->l('CSS export '),
 				'icon' => 'icon-save'
 			),
 			'waybills' => array(
-				'text' => $this->module->l('Print all waybills'),
+				'text' => $this->l('Print all waybills'),
 				'icon' => 'icon-print'
 			),
 		);
 
-		$this->displayInformation($this->module->l('For an export, select orders, then in the "Bulk Actions" menu, select the type of export wanted.'));
-		$this->displayWarning($this->module->l('Careful, Chrono Relais waybills can\'t be edited in Chronoship Office (CSO) by file importation'));
+		$this->displayInformation($this->l('For an export, select orders, then in the "Bulk Actions" menu, select the type of export wanted.'));
+		$this->displayWarning($this->l('Careful, Chrono Relais waybills can\'t be edited in Chronoship Office (CSO) by file importation'));
 	}
 
 	public function nbWaybillsInput($id_order, $tr)
@@ -119,7 +119,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		if (empty($order_box)) 
 		{
-			$this->displayWarning($this->module->l('You must selected orders for the export'));
+			$this->displayWarning($this->l('You must selected orders for the export'));
 			return;
 		}
 
@@ -134,7 +134,7 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 		if (empty($order_box)) 
 		{
-			$this->displayWarning($this->module->l('You must selected orders for the export'));
+			$this->displayWarning($this->l('You must selected orders for the export'));
 			return;
 		}
 
@@ -149,5 +149,11 @@ class AdminExportChronopostController extends ModuleAdminController {
 		// Remove "Add" button from toolbar
 		unset($this->toolbar_btn['new']);
 		unset($this->toolbar_btn['export']);
+	}
+
+
+	protected function l($string, $class = null, $addslashes = false, $htmlentities = true)
+	{
+		return Translate::getModuleTranslation('chronopost', $string, substr(get_class($this),0,-10), null, false);
 	}
 }

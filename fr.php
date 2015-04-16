@@ -14,10 +14,11 @@ $_MODULE['<{chronopost}prestashop>chronopost_f38f5974cdc23279ffe6d203641a8bdf'] 
 $_MODULE['<{chronopost}prestashop>chronopost_be5c0d17ceab2f9598d373dc19ac1e88'] = 'Fichier PDF';
 $_MODULE['<{chronopost}prestashop>chronopost_4c256cb421d290fce2738924e50823c9'] = 'Imprimante thermique';
 $_MODULE['<{chronopost}prestashop>chronopost_e7475d3f401ab5dcdfd66b0adb49c13c'] = 'Format PDF sans preuve de dépôt';
+$_MODULE['<{chronopost}prestashop>chronopost_051bad17198b571c14a13f82af15b366'] = 'Avec le module officiel Chronopost validé par Prestashop sur les versions 1.5 et 1.6, proposez les services du N°1 de la livraison Express à vos clients ! proposez les services du N°1 de la livraison Express à vos clients ! Avec ce module, proposez à vos clients le choix des principaux modes de livraison en moins de 24h : à domicile, en Relais Pick Up ou encore au bureau !';
 $_MODULE['<{chronopost}prestashop>chronopost_676e46d81c333fd0b321af6323a71eb8'] = 'Vos clients bénéficient également de Predict : ils sont ainsi automatiquement avertis par email et SMS la veille de la livraison et peuvent s\'ils le souhaitent reprogrammer leur livraison ou demander une mise à disposition ultérieure dans le point de retrait de leur choix, parmi plus de 17 000 points (bureaux de poste, relais Pickup ou agences Chronopost).';
 $_MODULE['<{chronopost}prestashop>chronopost_49bf2a92c7c499fbbb8b268944834d58'] = 'Développez votre activité à l\'international en un clin d\'oeil : les services de livraison Express de Chronopost pour l\'international sont également inclus !';
 $_MODULE['<{chronopost}prestashop>chronopost_ea5b511a37ac0d3e45211e6e58e877b1'] = ' Retrouvez tous ces services dans l\'offre MyChrono, l\'offre de Chronopost dédiée au secteur e-commerce.';
-$_MODULE['<{chronopost}prestashop>chronopost_cd9ac6eb5cbc8919676b71e03344aff3'] = 'Pour bénéficier vous aussi de MyChrono et activer le module sur votre site, contactez-nous à l\'adresse';
+$_MODULE['<{chronopost}prestashop>chronopost_cd9ac6eb5cbc8919676b71e03344aff3'] = 'Pour bénéficier vous aussi de MyChrono et activer le module sur votre site, contactez-nous à l\'adresse ';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_b718adec73e04ce3ec720dd11a06a308'] = 'ID';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_ce26601dac0dea138b7295f02b7620a7'] = 'Client';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_c453a4b8e8d98e82f35b67f433e3b4da'] = 'Paiement';
@@ -25,7 +26,7 @@ $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_ec53a8c4f07baed5d8825
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_44749712dbec183e983dcd78a7736c41'] = 'Date';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_d6c5e7240fc05e93ad3f628c47299517'] = 'Edition du bordereau de fin de journée';
 $_MODULE['<{chronopost}prestashop>adminbordereauchronopost_7fef89706f4f42cdbe3551f05659bb67'] = 'N’oubliez pas d\'imprimer le bordereau de remise en deux exemplaires, un doit être remis lors de l\'enlèvement ou du dépôt ; l\'autre est à conserver. Les deux doivent être signés.';
-$_MODULE['<{chronopost}prestashop>adminbordereauchronopost_414b941f6703b5e930e19f79c6d65815'] = 'Vous devez sélectionner des commandes à exporter';
+$_MODULE['<{chronopost}prestashop>adminbordereauchronopost_2f9961dce5e3360445c83ee63a2a25e2'] = 'Vous devez sélectionner des commandes pour effectuer un export.';
 $_MODULE['<{chronopost}prestashop>adminexportchronopost_b718adec73e04ce3ec720dd11a06a308'] = 'ID';
 $_MODULE['<{chronopost}prestashop>adminexportchronopost_ce26601dac0dea138b7295f02b7620a7'] = 'Client';
 $_MODULE['<{chronopost}prestashop>adminexportchronopost_c453a4b8e8d98e82f35b67f433e3b4da'] = 'Paiement';
