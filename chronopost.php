@@ -257,21 +257,21 @@ class Chronopost extends CarrierModule
 		$tab_export->id_parent = Tab::getIdFromClassName('AdminParentShipping');
 		$tab_export->module = 'chronopost';
 		foreach (Language::getLanguages(false) as $language)
-				$tab_export->name[$language['id_lang']] = 'Chronopost Export';
+				$tab_export->name[$language['id_lang']] = $this->l('Chronopost Export');
 
 		$tab_import = new Tab();
 		$tab_import->class_name = 'AdminImportChronopost';
 		$tab_import->id_parent = Tab::getIdFromClassName('AdminParentShipping');
 		$tab_import->module = 'chronopost';
 		foreach (Language::getLanguages(false) as $language)
-				$tab_import->name[$language['id_lang']] = 'Chronopost Import';
+				$tab_import->name[$language['id_lang']] = $this->l('Chronopost Import');
 
 		$tab_bordereau = new Tab();
 		$tab_bordereau->class_name = 'AdminBordereauChronopost';
 		$tab_bordereau->id_parent = Tab::getIdFromClassName('AdminParentShipping');
 		$tab_bordereau->module = 'chronopost';
 		foreach (Language::getLanguages(false) as $language)
-				$tab_bordereau->name[$language['id_lang']] = 'Daily docket';
+				$tab_bordereau->name[$language['id_lang']] = $this->l('Daily docket');
 
 		return $tab_import->add() && $tab_export->add() && $tab_bordereau->add();
 	}

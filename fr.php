@@ -9,6 +9,9 @@ $_MODULE['<{chronopost}prestashop>chronopost_3a5bf3b75ff020368b0ee95b4c906c7c'] 
 $_MODULE['<{chronopost}prestashop>chronopost_483642321a883837d497ecc3a619fa29'] = 'L\'extension SOAP n\'est pas disponible ou configurée sur ce serveur ; le module ne fonctionnera pas sans cette extension ! Rapprochez-vous de votre hébergeur afin d\'activer SOAP sur votre installation PHP.';
 $_MODULE['<{chronopost}prestashop>chronopost_1c2487fff5cd8e0530a6eb995e783de4'] = 'Ce module n\'est pas compatible avec votre installation Prestashop. Vous pouvez vous rendre sur le site Chronopost.fr pour télécharger gratuitement une version compatible.';
 $_MODULE['<{chronopost}prestashop>chronopost_0a295b8c6758f2be56dbd446eefdcd87'] = 'Vous devez configurer le module Chronopost avec vos informations de contrat Chronopost. Veuillez vous connecter à l\'adresse suivante : www.mychrono.chronopost.fr si vous ne disposez pas de contrat Chronopost.';
+$_MODULE['<{chronopost}prestashop>chronopost_64d88f37080c426120d0c446562ef097'] = 'Export Chronopost';
+$_MODULE['<{chronopost}prestashop>chronopost_2170f7d446a51cb328224a9a66a6ae29'] = 'Import Chronopost';
+$_MODULE['<{chronopost}prestashop>chronopost_6c2f86fd465cd88f6719566b0b3a3659'] = 'Bordereau de fin de journée Chronopost';
 $_MODULE['<{chronopost}prestashop>chronopost_fbb7ffd11c21bf0ff1422f1c2a134aea'] = 'Vous ne pouvez pas activer Chronopost avant 13h et Chronopost avant 18h en même temps.';
 $_MODULE['<{chronopost}prestashop>chronopost_f38f5974cdc23279ffe6d203641a8bdf'] = 'Paramètres mis à jour. ';
 $_MODULE['<{chronopost}prestashop>chronopost_be5c0d17ceab2f9598d373dc19ac1e88'] = 'Fichier PDF';

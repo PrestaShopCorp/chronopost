@@ -154,6 +154,6 @@ class AdminExportChronopostController extends ModuleAdminController {
 
 	protected function l($string, $class = null, $addslashes = false, $htmlentities = true)
 	{
-		return Translate::getModuleTranslation('chronopost', $string, substr(get_class($this),0,-10), null, false);
+		return Translate::getModuleTranslation('chronopost', $string, Tools::substr(get_class($this),0,-10), null, false);
 	}
 }
