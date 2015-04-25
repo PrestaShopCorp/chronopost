@@ -12,16 +12,16 @@
 <script type="text/javascript">
     /* VAR INIT */
     // Define ChronoRelais' radio ID
-    var cust_address="{$cust_address|escape:'html'}";
-    var cust_address_clean="{$cust_address_clean|escape:'html'}";
-    var cust_city="{$cust_city|escape:'html'}"; // HERLLO
-    var cust_codePostal="{$cust_codePostal|escape:'html'}";
-    var cust_lastname="{$cust_lastname|escape:'html'}";
-    var cust_firstname="{$cust_firstname|escape:'html'}";
-    var cartID="{$cartID|escape:'html'}";
-    var carrierID="{$carrierID|escape:'html'}";
-    var carrierIntID="{$carrierIntID|escape:'html'}";
-    var path="{$module_uri|escape:'html'}";
+    var cust_address="{$cust_address|escape:'javascript'}";
+    var cust_address_clean="{$cust_address_clean|escape:'javascript'}";
+    var cust_city="{$cust_city|escape:'javascript'}"; 
+    var cust_codePostal="{$cust_codePostal|escape:'javascript'}";
+    var cust_lastname="{$cust_lastname|escape:'javascript'}";
+    var cust_firstname="{$cust_firstname|escape:'javascript'}";
+    var cartID="{$cartID|escape:'javascript'}";
+    var carrierID="{$carrierID|escape:'javascript'}";
+    var carrierIntID="{$carrierIntID|escape:'javascript'}";
+    var path="{$module_uri|escape:'javascript'}";
     var oldCodePostal=null;
     var relais_map=null; // our map
     var latlngbounds= new google.maps.LatLngBounds();

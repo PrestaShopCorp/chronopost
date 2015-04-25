@@ -537,7 +537,7 @@ class Chronopost extends CarrierModule
 		// Are we dealing with Chronorelais here ?
 		if (Configuration::get('CHRONORELAIS_CARRIER_ID') != $params['order']->id_carrier) return;
 
-		$relais = Db::getInstance()->getValue('SELECT id_pr FROM `'._DB_PREFIX_.'chrono_cart_relais` WHERE id_cart = '.$params['cart']->id);
+		$relais = Db::getInstance()->getValue('SELECT id_pr FROM `'._DB_PREFIX_.'chrono_cart_relais` WHERE id_cart = '.(int)$params['cart']->id);
 		if (!$relais) return;
 
 		include_once _PS_MODULE_DIR_.'/chronopost/libraries/PointRelaisServiceWSService.php';
@@ -603,10 +603,10 @@ class Chronopost extends CarrierModule
 		if (!in_array($file, array('order-opc', 'order', 'orderopc'))) return;
 
 		$module_uri = _MODULE_DIR_.$this->name;
-		$this->context->controller->addCSS($module_uri.'/view/css/chronorelais.css', 'all');
+		$this->context->controller->addCSS($module_uri.'/views/css/chronorelais.css', 'all');
 		$this->context->controller->addJS('https://maps.google.com/maps/api/js?sensor=false');
-		$this->context->controller->addJS($module_uri.'/view/js/chronorelais.js');
-		$this->context->controller->addJS($module_uri.'/view/js/scrollTo.min.js');
+		$this->context->controller->addJS($module_uri.'/views/js/chronorelais.js');
+		$this->context->controller->addJS($module_uri.'/views/js/scrollTo.min.js');
 	}
 
 	public function hookExtraCarrier($params)
@@ -710,7 +710,7 @@ class Chronopost extends CarrierModule
 
 		$res = array('chrono10' => false, 'chronoclassic' => false, 'chrono18' => false);
 
-		$cache = Db::getInstance()->executeS('SELECT chrono10, chrono18, chronoclassic, last_updated FROM `'._DB_PREFIX_.'chrono_calculateproducts_cache2` WHERE postcode = "'.$a->postcode.'" && country = "'.$c->iso_code.'"'); 
+		$cache = Db::getInstance()->executeS('SELECT chrono10, chrono18, chronoclassic, last_updated FROM `'._DB_PREFIX_.'chrono_calculateproducts_cache2` WHERE postcode = "'.pSQL($a->postcode).'" && country = "'.pSQL($c->iso_code).'"'); 
 
 		if (empty($cache) || $cache[0]['last_updated'] + 24 * 3600 < time())
 		{
@@ -755,7 +755,7 @@ class Chronopost extends CarrierModule
 			{
 				$sql = 'INSERT INTO `'._DB_PREFIX_.'chrono_calculateproducts_cache2` 
 					(`postcode`,`country`, `chrono10`,`chrono18`, `chronoclassic`,`last_updated`) VALUES
-					("'.$a->postcode.'", "'.$c->iso_code.'", '.($res['chrono10'] == true?1:0).', '.($res['chrono18'] == true?1:0).', 
+					("'.pSQL($a->postcode).'", "'.pSQL($c->iso_code).'", '.($res['chrono10'] == true?1:0).', '.($res['chrono18'] == true?1:0).', 
 					'.($res['chronoclassic'] == true?1:0).', '.time().')';
 				Db::getInstance()->Execute($sql);
 			}
@@ -763,7 +763,7 @@ class Chronopost extends CarrierModule
 				Db::getInstance()->Execute('UPDATE `'._DB_PREFIX_.'chrono_calculateproducts_cache2` 
 					SET `chrono10` = '.($res['chrono10'] == true ? 1 : 0).', `chrono18` = '.($res['chrono18'] == true?1:0).', 
 					 `chronoclassic` = '.($res['chronoclassic'] == true?1:0).',
-					 `last_updated` = '.time().' WHERE postcode = "'.$a->postcode.'" && country = "'.$c->iso_code.'"');
+					 `last_updated` = '.time().' WHERE postcode = "'.pSQL($a->postcode).'" && country = "'.pSQL($c->iso_code).'"');
 		} 
 		else
 		{

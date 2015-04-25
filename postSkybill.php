@@ -333,13 +333,13 @@ function createLT($orderid, $totalnb = 1, $isReturn = false)
 	{
 		// Store LT for history
 		Db::getInstance()->execute('INSERT INTO `'._DB_PREFIX_.'chrono_lt_history` VALUES (
-				'.$o->id.', 
-				"'.$r->skybillNumber.'", 
-				"'.$skybill->productCode.'",
-				"'.$recipient->recipientZipCode.'",
-				"'.$recipient->recipientCountry.'",
-				"'.(isset($skybill->insuredValue) ? $skybill->insuredValue : 0).'",
-				"'.$recipient->recipientCity.'"
+				'.(int)$o->id.', 
+				"'.pSQL($r->skybillNumber).'", 
+				"'.pSQL($skybill->productCode).'",
+				"'.pSQL($recipient->recipientZipCode).'",
+				"'.pSQL($recipient->recipientCountry).'",
+				"'.(isset($skybill->insuredValue) ? (int)$skybill->insuredValue : 0).'",
+				"'.pSQL($recipient->recipientCity).'"
 			)');
 
 		Chronopost::trackingStatus($o->id, $r->skybillNumber);

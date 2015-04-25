@@ -24,6 +24,7 @@ if (Tools::strlen(Configuration::get('CHRONOPOST_GENERAL_ACCOUNT')) < 8)
 
 $orders = Tools::getValue('orders');
 $orders = explode(';', $orders);
+$orders = array_map('intval', $orders); // force cast to int prevent injection
 
 
 if (count($orders) == 0) die('<h1>Aucune commande sélectionnée</h1>');
