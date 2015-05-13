@@ -76,16 +76,16 @@
 
 
 <div id="chronorelais_container" style="{if $opc!=true}display:none;{/if}" class="container-fluid">
-    <h3>{l mod='chronopost' s="Select a pickup point for delivery"}</h3>
+    <h3>{l s="Select a pickup point for delivery" mod='chronopost'}</h3>
     <div class="row">
-        <p class="alert col-lg-9">{l mod='chronopost' s="Select a pickup point here below then confirm by choosing 'Select'"}</p>
+        <p class="alert col-lg-9">{l s="Select a pickup point here below then confirm by choosing 'Select'" mod='chronopost'}</p>
 
         <div class="col-lg-3">
 
         <div class="input-group">
             <input type="text" name="relais_codePostal" class="form-control" value="{$cust_codePostal|escape:'html'}" id="relais_codePostal"/>
               <span class="input-group-btn">
-                <button class="btn btn-info" id="changeCustCP" type="button">{l mod='chronopost' s="Change my postcode"}</button>
+                <button class="btn btn-info" id="changeCustCP" type="button">{l s="Change my postcode" mod='chronopost'}</button>
               </span>
             </div>  
         </div>
@@ -94,7 +94,7 @@
         <div id="chronorelais_map" class="col-xs-12"></div>
     </div>
     <div id="relais_txt_cont">
-            <h4>{l mod='chronopost' s="Closest pickup points"}</h4>
+            <h4>{l s="Closest pickup points" mod='chronopost'}</h4>
             <div id="relais_txt"></div>
     </div>
 </div>
