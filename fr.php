@@ -108,3 +108,7 @@ $_MODULE['<{chronopost}prestashop>adminorder-16_ffda411a44ebbe101a4596271786cef4
 $_MODULE['<{chronopost}prestashop>adminorder-16_d616012b95fc9f7e02d52772617909c4'] = 'Édition de l\'étiquette Chronopost';
 $_MODULE['<{chronopost}prestashop>adminorder-16_51b386afd47b817d9722e06085a80031'] = 'Editer l\'étiquette de retour';
 $_MODULE['<{chronopost}prestashop>chronorelais_69bb27eb2e7072a4182a8d79c52bb187'] = 'Aucun point Pickup sélectionné ! Merci de sélectionner un point Pickup pour continuer. ';
+$_MODULE['<{chronopost}prestashop>chronorelais_38c1b1ad9374538917b29179c7293774'] = 'Sélectionnez un point relais pour la livraison Chrono Relais';
+$_MODULE['<{chronopost}prestashop>chronorelais_0a43a182e9ee571f4d77574ba2249ab8'] = 'Sélectionnez un point relais sur la carte ci-dessous en cliquant sur son icône puis \'Sélectionner\'';
+$_MODULE['<{chronopost}prestashop>chronorelais_0230687bb36c1a0581f58305fa5cfa96'] = 'Changer mon code postal';
+$_MODULE['<{chronopost}prestashop>chronorelais_9f57ef2a5068759069a7ca50993db71e'] = 'Les points relais les plus proches';
