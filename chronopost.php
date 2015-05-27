@@ -888,8 +888,6 @@ class Chronopost extends CarrierModule
 
 		$qc->type = 'M';
 
-		var_dump($qc);
-
 		try {
 			$res = $ws->quickCost($qc);
 
@@ -1073,3 +1071,4 @@ class Chronopost extends CarrierModule
 }
 
 ?>
+
