@@ -736,7 +736,7 @@ class Chronopost extends CarrierModule
 			$cp->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 			$cp->depZipCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
 			$cp->depCountryCode = 'FR';
-			$cp->weight = $cart->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF');
+			$cp->weight = $cart->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') + 0.1;
 			$cp->arrCountryCode = $c->iso_code;
 			$cp->arrZipCode = $a->postcode;
 			$cp->type = 'M';
