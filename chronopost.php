@@ -149,7 +149,11 @@ class Chronopost extends CarrierModule
 	{
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
+<<<<<<< HEAD
 		$this->version = '3.6.4';
+=======
+		$this->version = '3.6.3';
+>>>>>>> 6478a2a93353415dc409250fe03bb95e0f6e9784
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
@@ -896,6 +900,7 @@ class Chronopost extends CarrierModule
 			return $shipping_cost;
 		}
 
+<<<<<<< HEAD
 		if ($res->return->amountTTC != 0)
 		{
 			if(empty($cache))
@@ -915,6 +920,10 @@ class Chronopost extends CarrierModule
 
 			return $res->return->amountTTC;
 		}
+=======
+		if ($res->return->amount != 0)
+			return $res->return->amount;
+>>>>>>> 6478a2a93353415dc409250fe03bb95e0f6e9784
 
 		return $shipping_cost;
 	}
@@ -1071,4 +1080,7 @@ class Chronopost extends CarrierModule
 }
 
 ?>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6478a2a93353415dc409250fe03bb95e0f6e9784
