@@ -23,24 +23,32 @@
     var carrierIntID="{$carrierIntID|escape:'javascript'}";
     var path="{$module_uri|escape:'javascript'}";
     var oldCodePostal=null;
+    var errormessage="{l s='No pickup point has been selected !\nPlease select a pickup point to continue.' mod='chronopost'}";
+    
+    var chronodata=new Array();
     var relais_map=null; // our map
     var latlngbounds= new google.maps.LatLngBounds();
     var infowindow=null; // currently displayed infowindow
     var map_markers=new Array();
-    var data=new Array();
-    var errormessage="{l s='No pickup point has been selected !\nPlease select a pickup point to continue.' mod='chronopost'}";
+
 
     {literal}
         $(function() {
     
         // Listener for selection of the ChronoRelais carrier radio button
-        $('input.delivery_option_radio, input[name=id_carrier]').click(function() {
-            toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
+        $('input.delivery_option_radio, input[name=id_carrier]').click(function(e) {
+            toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city, e);
         });
 
 
-        // move in DOM
-        //$('#extra_carrier').after($('#chronorelais_container')); 
+        // move in DOM to prevent compatibility issues with Common Services' modules
+        if($("#chronorelais_container").length>0)
+        {
+            $('#chronorelais_dummy_container').remove();
+        } else {
+            $('#chronorelais_dummy_container').insertAfter($('#extra_carrier'));
+            $('#chronorelais_dummy_container').attr('id', 'chronorelais_container');
+        }
 
         // toggle on load
         toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
@@ -60,11 +68,11 @@
                    btSelect.call(e.target,e);
             });
 
-            // Listener for cart navigation to next step TODO
+            // Listener for cart navigation to next step
             $('input[name=processCarrier]').click(function() {
                 if ($('input[name=id_carrier]:checked').val()==carrierID && !$("input[name=chronorelaisSelect]:checked").val()) {
                     alert(errormessage);
-                    $.scrollTo($('#relais_txt_cont'));
+                    $.scrollTo($('#relais_txt_cont'), 800);
                     return false;
                 }
             });
@@ -75,7 +83,7 @@
 </script>
 
 
-<div id="chronorelais_container" style="{if $opc!=true}display:none;{/if}" class="container-fluid">
+<div id="chronorelais_dummy_container" style="{if $opc!=true}display:none;{/if}" class="container-fluid chronopost">
     <h3>{l s="Select a pickup point for delivery" mod='chronopost'}</h3>
     <div class="row">
         <p class="alert col-lg-9">{l s="Select a pickup point here below then confirm by choosing 'Select'" mod='chronopost'}</p>

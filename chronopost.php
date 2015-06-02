@@ -620,7 +620,6 @@ class Chronopost extends CarrierModule
 		$this->context->controller->addCSS($module_uri.'/views/css/chronorelais.css', 'all');
 		$this->context->controller->addJS('https://maps.google.com/maps/api/js?sensor=false');
 		$this->context->controller->addJS($module_uri.'/views/js/chronorelais.js');
-		$this->context->controller->addJS($module_uri.'/views/js/scrollTo.min.js');
 	}
 
 	public function hookExtraCarrier($params)
