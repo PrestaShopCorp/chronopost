@@ -125,7 +125,7 @@ function createAllPointRelais(json)
     $('input[name="chronorelaisSelect"]').change(function() {
         var btid=$('input[name="chronorelaisSelect"]:checked').val();
         associateRelais(btid);
-        openBTMarker(btid, chronodata);
+        openBTMarker(btid);
 
     });
 
