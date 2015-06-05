@@ -238,16 +238,7 @@ class Chronopost extends CarrierModule
 			) ENGINE = MyISAM DEFAULT CHARSET = utf8;');
 
 		
-		Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'chrono_quickcost_cache` (
-			`id` int(11) NOT null AUTO_INCREMENT,
-			`product_code` varchar(2) NOT null,
-			`arrcode` varchar(10) NOT null,
-			`weight` decimal(10,2) NOT null,
-			`price` decimal(10,2) NOT null,
-			`last_updated` int(11) NOT null,
-			PRIMARY KEY (`id`)
-			) ENGINE = MyISAM DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1 ;');
-
+		
 
 		// pre install
 		if (!$this->preInstall()) return false;
@@ -261,7 +252,7 @@ class Chronopost extends CarrierModule
 		if (!$this->createChronopostCarriers(self::$_config))
 			return false;
 
-		return true;
+		return $this->upgrade_module_3_6_4();
 	}
 
 	private function _adminInstall()
@@ -290,6 +281,19 @@ class Chronopost extends CarrierModule
 		return $tab_import->add() && $tab_export->add() && $tab_bordereau->add();
 	}
 
+
+	public function upgrade_module_3_6_4($module)
+	{
+		return Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'chrono_quickcost_cache` (
+			`id` int(11) NOT null AUTO_INCREMENT,
+			`product_code` varchar(2) NOT null,
+			`arrcode` varchar(10) NOT null,
+			`weight` decimal(10,2) NOT null,
+			`price` decimal(10,2) NOT null,
+			`last_updated` int(11) NOT null,
+			PRIMARY KEY (`id`)
+			) ENGINE = MyISAM DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1 ;');
+	}
 
 	public static function checkPSVersion()
 	{
