@@ -90,11 +90,6 @@ class Chronopost extends CarrierModule
 		if (!self::checkPSVersion())
 			$this->warning .= $this->l('This module is incompatible with your Prestashop installation. You can visit the <a href = "http://www.chronopost.fr/transport-express/livraison-colis/accueil/produits-tarifs/expertise-sectorielle/e-commerce/plateformes">Chronopost.fr </a>website to download a comptible version.');
  		
-
- 		// TMP TODO ON CARRIER INSTALL
-        Configuration::updateValue('CHRONORDV_CARRIER_ID', 10);
-
-
 		// Check is module is properly configured
 		if (Tools::strlen(Configuration::get('CHRONOPOST_GENERAL_ACCOUNT')) < 8)
 			$this->warning .= $this->l('You have to configure the module with your Chronopost contract number. If you don\'t have one, please sign in to the following address <a href = "http://www.chronopost.fr/transport-express/livraison-colis/accueil/produits-tarifs/expertise-sectorielle/pid/8400" target = "_blank">www.mychrono.chronopost.fr</a>');
@@ -184,11 +179,7 @@ class Chronopost extends CarrierModule
 		if (!Configuration::updateValue('CHRONOPOST_SECRET', sha1(microtime(true).mt_rand(10000, 90000)))
 			|| !Configuration::updateValue('CHRONOPOST_CORSICA_SUPPLEMENT', '19.60'))
 				return false;
-
-		// add carriers in back office
-		if (!$this->createChronopostCarriers(self::$_config))
-			return false;
-
+			
 		return true;
 	}
 
@@ -225,10 +216,12 @@ class Chronopost extends CarrierModule
 	}
 
 
-	public static function createChronopostCarriers($carrierConfig)
+	public static function createCarrier($code)
 	{
 		if (Shop::isFeatureActive())
 				Shop::setContext(Shop::CONTEXT_ALL);
+
+		// TODO MAKE IT ACTUALLY WORK WITH NEW DEFINITIONS
 
 		// Create carriers from config
 		foreach ($carrierConfig as $carrierName => $config)
@@ -936,7 +929,7 @@ class Chronopost extends CarrierModule
 	{
 		$carriers=Carrier::getCarriers($this->context->language->id);
 		$selected = configuration::get(strtoupper($code).'_CARRIER_ID');
-		
+
 		$this->context->smarty->assign(
 			array(
 				'carriers' => $carriers,
