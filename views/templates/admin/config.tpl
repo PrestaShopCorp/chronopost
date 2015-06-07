@@ -18,6 +18,8 @@
 			  <li role="presentation" class="active"><a href="#account">1. {l s='Configure account' mod='chronopost'}</a></li>
 			  <li role="presentation"><a href="#carriers">2. {l s='Configure carriers' mod='chronopost'}</a></li>
 			  <li role="presentation"><a href="#pricing">3. {l s='Configure pricing' mod='chronopost'}</a></li>
+  			  <li role="presentation"><a href="#rdv">4. {l s='Configure Predict' mod='chronopost'}</a></li>
+
 			</ol>
 		</div>
 	</div>
@@ -96,8 +98,27 @@
 				</div>
 			</div>
 
-			
+			<div class="panel" class="shipperInfo">
+				<div class="panel-heading">
+					<i class="icon-truck"></i> {l s='Shipper informations' mod='chronopost'}
+				</div>
 
+			 	{$shipper_form}
+			</div>
+			
+			<div class="panel" class="invoicingInfo">
+				<div class="panel-heading">
+					<i class="icon-euro"></i> {l s='Invoicing informations' mod='chronopost'}
+				</div>
+				<!--<div class="form-group">
+					<label class="control-label col-lg-3" for="copyShipperInfo">{l s='Use the same information as above' mod='chronopost'}</label>
+					<div class="col-lg-9">
+						<input type="checkbox" id="copyShipperInfo"/>
+					</div>
+				</div>-->
+			 	{$customer_form}
+			</div>
+			
 				<label>{l s='Waybill print type' mod='chronopost'}</label>
 				<div class="margin-form">
 					<select name="chronoparams[general][printmode]">
@@ -223,16 +244,7 @@
 			</fieldset>
 			<p class="clear">&nbsp;</p>
 
-			<!--SHIPPER-->
-			<fieldset>
-			 <legend><img src="../img/admin/asterisk.gif" alt="" title="" />{l s='Shipper informations' mod='chronopost'}</legend>
-			 {$shipper_form}
-			</fieldset>
-			<p class="clear">&nbsp;</p>
-			<fieldset>
-			 <legend><img src="../img/admin/asterisk.gif" alt="" title="" />{l s='Invoicing informations' mod='chronopost'}</legend>
-			 {$customer_form}
-			</fieldset>
+			
 
 
 			<p class="clear">&nbsp;</p>
