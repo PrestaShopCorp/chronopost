@@ -15,10 +15,11 @@
 			<h1>{l s='Module Chronopost' mod='chronopost'}</h1>
 
 			<ol class="nav nav-pills nav-stacked" id="chrononav">
-			  <li role="presentation" class="active"><a href="#account">1. {l s='Configure account' mod='chronopost'}</a></li>
+			  <li role="presentation"><a href="#account">1. {l s='Configure account' mod='chronopost'}</a></li>
 			  <li role="presentation"><a href="#carriers">2. {l s='Configure carriers' mod='chronopost'}</a></li>
+  			  <li role="presentation"><a href="#shipping">4. {l s='Configure shipping options' mod='chronopost'}</a></li>
 			  <li role="presentation"><a href="#pricing">3. {l s='Configure pricing' mod='chronopost'}</a></li>
-  			  <li role="presentation"><a href="#rdv">4. {l s='Configure Predict' mod='chronopost'}</a></li>
+  			  <li role="presentation"><a href="#predict">4. {l s='Configure Predict' mod='chronopost'}</a></li>
 
 			</ol>
 		</div>
@@ -41,7 +42,11 @@
 		</div>
 
 		<h2 id="account">{l s='Configure account' mod='chronopost'}</h2>
-		<style>label { width:300px;}</style>
+		<style>
+			body {
+	  			position: relative;
+			}
+		</style>
 		<script>
 			var module_dir="{$module_dir|escape:'htmlall'}";
 			var chronopost_secret="{$chronopost_secret|escape:'htmlall'}";
@@ -117,8 +122,26 @@
 					</div>
 				</div>-->
 			 	{$customer_form}
+			 	<div class="panel-footer">
+					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+				</div>
 			</div>
 			
+			<h2 id="carriers">{l s='Configure carriers' mod='chronopost'}</h2>
+			<div class="panel">
+				<div class="panel-heading">
+					<i class="icon-truck"></i> {l s='Carriers' mod='chronopost'}
+				</div>
+				{foreach from=$carriers_tpl item=tpl}
+					{$tpl}
+				{/foreach}
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+				</div>
+			</div>
+
+
+
 				<label>{l s='Waybill print type' mod='chronopost'}</label>
 				<div class="margin-form">
 					<select name="chronoparams[general][printmode]">

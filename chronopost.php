@@ -24,124 +24,48 @@ class Chronopost extends CarrierModule
 	private $_postErrors = array();
 	public $id_carrier;
 
-	public static $productCodes = array(
-		'CHRONOPOST_CARRIER_ID' => '01',
-		'CHRONORELAIS_CARRIER_ID' =>'86',
-		'CHRONO10_CARRIER_ID' =>'02',
-		'CHRONO18_CARRIER_ID' =>16,
-		'CHRONOEXPRESS_CARRIER_ID' =>17,
-		'CHRONOCLASSIC_CARRIER_ID' =>44);
-
-
-	public static $productCodesBAL = array(
-		'CHRONOPOST_CARRIER_ID' => '01',
-		'CHRONORELAIS_CARRIER_ID' =>86,
-		'CHRONO10_CARRIER_ID' =>'02',
-		'CHRONO18_CARRIER_ID' =>16,
-		'CHRONOEXPRESS_CARRIER_ID' =>17,
-		'CHRONOCLASSIC_CARRIER_ID' =>44);
-
-
-	/* Module config at install-time */
-	private static $_config = array(
-		'chronorelais' =>array(
-			'name' => 'Chronopost - Livraison express en point relais',
-			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
-			'active' => true,
-			'deleted' => 0,
-			'shipping_handling' => false,
-			'range_behavior' => 0,
-			'is_module' => false,
-			/* shown in FO during carrier selection. length limited to 128 char I REPEAT 128 CHARS */
-			'delay' => array('fr' =>'Colis livré le lendemain avant 13 h dans le relais Pickup de votre choix. Vous serez averti par e-mail et SMS.', 'en'=>'Parcels delivered the next day before 1pm in the Pickup relay of your choice. You\'ll be notified by e-mail and SMS.'),
-			'shipping_external' => true,
-			'external_module_name' => 'chronopost',
-			'need_range' => true,
-			/* .jpg file in img directory */
-			'logo_filename' => 'chronorelais',
-			/* name of the config key to contain carrier ID after module init */
-			'configuration_item' => 'CHRONORELAIS_CARRIER_ID'
-		),
-		'chronopost' =>array(
-			'name' => 'Chronopost - Livraison express à domicile',
-			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
-			'active' => true,
-			'deleted' => 0,
-			'shipping_handling' => false,
-			'range_behavior' => 0,
-			'is_module' => false,
-			'delay' => array('fr' =>'Colis livré le lendemain matin avant 13h à votre domicile. La veille de la livraison, vous êtes averti par e-mail et SMS.', 'en'=>'Parcels delivered the next day before 13pm at your home.The day before delivery, You\'ll be notified by e-mail and SMS.'),
-			'shipping_external' => true,
-			'external_module_name' => 'chronopost',
-			'need_range' => true,
-			'logo_filename' => 'chronopost',
-			'configuration_item' => 'CHRONOPOST_CARRIER_ID'
-		),
-		'chrono10' =>array(
-			'name' => 'Chronopost - Livraison express à domicile',
-			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
-			'active' => true,
-			'deleted' => 0,
-			'shipping_handling' => false,
-			'range_behavior' => 0,
-			'is_module' => false,
+	public static $carriers_definitions = array(
+		'CHRONO10' => array(
+			'product_code' => '02',
+			'name' => 'Chronopost - Livraison express à domicile avant 10h',
+			'product_code_bal' => '02',
 			'delay' => array('fr' =>'Colis livré le lendemain matin avant 10h à votre domicile. La veille de la livraison, vous êtes averti par e-mail et SMS.', 'en'=>'Parcels delivered the next day before 10am at your home.The day before delivery, You\'ll be notified by e-mail and SMS.'),
-			'shipping_external' => true,
-			'external_module_name' => 'chronopost',
-			'need_range' => true,
-			'logo_filename' => 'chronopost',
-			'configuration_item' => 'CHRONO10_CARRIER_ID'
 		),
-		'chrono18' =>array(
-			'name' => 'Chronopost - Livraison express à domicile',
-			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
-			'active' => false,
-			'deleted' => 0,
-			'shipping_handling' => false,
-			'range_behavior' => 0,
-			'is_module' => false,
+		'CHRONO13' => array(
+			'product_code' => '01',
+			'name' => 'Chronopost - Livraison express à domicile avant 13h',
+			'product_code_bal' => '01',
+			'delay' => array('fr' =>'Colis livré le lendemain matin avant 13h à votre domicile. La veille de la livraison, vous êtes averti par e-mail et SMS.', 'en'=>'Parcels delivered the next day before 13pm at your home.The day before delivery, You\'ll be notified by e-mail and SMS.'),
+		),
+		'CHRONO18' => array(
+			'product_code' => '16',
+			'name' => 'Chronopost - Livraison express à domicile avant 18h',
+			'product_code_bal' => '16',
 			'delay' => array('fr' =>'Colis livré le lendemain matin avant 18h à votre domicile. La veille de la livraison, vous êtes averti par e-mail et SMS.', 'en'=>'Parcels delivered the next day before 18pm at your home.The day before delivery, You\'ll be notified by e-mail and SMS.'),
-			'shipping_external' => true,
-			'external_module_name' => 'chronopost',
-			'need_range' => true,
-			'logo_filename' => 'chronopost',
-			'configuration_item' => 'CHRONO18_CARRIER_ID'
 		),
-		'chronoexpress' =>array(
-			'name' => 'Chrono Express',
-			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
-			'active' => true,
-			'deleted' => 0,
-			'shipping_handling' => false,
-			'range_behavior' => 0,
-			'is_module' => false,
-			'delay' => array('fr' =>'Colis livré en 1 à 3 jours vers l\'Europe, en 48h vers les DOM et en 2 à 5 jours vers le reste du monde.', 'en'=>'Parcels delivered to Europe in 1 to 3 days, 48 hours to the DOM and 2 to 5 days to the rest of the world.'),
-			'shipping_external' => true,
-			'external_module_name' => 'chronopost',
-			'need_range' => true,
-			'logo_filename' => 'chronoexpress',
-			'configuration_item' => 'CHRONOEXPRESS_CARRIER_ID'
+		'CHRONORELAIS' => array(
+			'product_code' => '86',
+			'name' => 'Chronopost - Livraison express en point relais',
+			'product_code_bal' => '86',
+			'delay' => array('fr' =>'Colis livré le lendemain avant 13 h dans le relais Pickup de votre choix. Vous serez averti par e-mail et SMS.', 'en'=>'Parcels delivered the next day before 1pm in the Pickup relay of your choice. You\'ll be notified by e-mail and SMS.'),
 		),
-		'chronoclassic' =>array(
-			'name' => 'Chrono Classic',
-			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
-			'active' => true,
-			'deleted' => 0,
-			'shipping_handling' => false,
-			'range_behavior' => 0,
-			'is_module' => false,
+		'CHRONORDV' => array(
+			'product_code' => '??',
+			'name' => 'Chronopost - Livraison express sur rendez-vous',
+			'product_code_bal' => '??',
+			'delay' => array('fr' => 'Livraison sur rendez-vous.')
+		),
+		'CHRONOCLASSIC' => array(
+			'product_code' => '44',
+			'name' => 'Chronopost - Livraison express à domicile avant 10h',
+			'product_code_bal' => '44',
 			'delay' => array('fr' =>'Colis livré en 1 à 3 jours vers l\'Europe.', 'Parcels delivered to Europe in 1 to 3 days'),
-			'shipping_external' => true,
-			'external_module_name' => 'chronopost',
-			'need_range' => true,
-			'logo_filename' => 'chronoexpress',
-			'configuration_item' => 'CHRONOCLASSIC_CARRIER_ID'
+		),
+		'CHRONOEXPRESS' => array(
+			'product_code' => '17',
+			'name' => 'Chronopost - Livraison express à domicile avant 10h',
+			'product_code_bal' => '17',
+			'delay' => array('fr' =>'Colis livré en 1 à 3 jours vers l\'Europe, en 48h vers les DOM et en 2 à 5 jours vers le reste du monde.', 'en'=>'Parcels delivered to Europe in 1 to 3 days, 48 hours to the DOM and 2 to 5 days to the rest of the world.'),
 		)
 	);
 
@@ -991,6 +915,7 @@ class Chronopost extends CarrierModule
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/hours.tpl');
 	}
 
+
 	private function _minuteField($fieldName, $default = 0)
 	{
 		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
@@ -1005,6 +930,23 @@ class Chronopost extends CarrierModule
 		);
 
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/minutes.tpl');
+	}
+
+	private function _carrierForm($code)
+	{
+		$carriers=Carrier::getCarriers($this->context->language->id);
+		$selected = configuration::get(strtoupper($code).'_CARRIER_ID');
+		
+		$this->context->smarty->assign(
+			array(
+				'carriers' => $carriers,
+				'selected' => $selected,
+				'code' => $code
+			)
+		);
+
+		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/carrier.tpl');
+
 	}
 
 	private function _postValidation()
@@ -1049,6 +991,11 @@ class Chronopost extends CarrierModule
 			'G' => '0.001'
 		);
 
+		$carriers_tpl=array();
+		foreach(self::$carriers_definitions as $code => $def) {
+			$carriers_tpl[$code] = $this->_carrierForm($code);
+		}
+
 		// smarty-chain !
 		$this->context->smarty->assign(
 			array(
@@ -1070,6 +1017,7 @@ class Chronopost extends CarrierModule
 				'day_end' => $this->_dayField('day_end', 5),
 				'hour_end' => $this->_hourField('hour_end', 16),
 				'minute_end' => $this->_minuteField('minute_end'),
+				'carriers_tpl' => $carriers_tpl,
 				'corsica_supplement' => Configuration::get('CHRONOPOST_CORSICA_SUPPLEMENT'),
 				'quickcost_enabled' => Configuration::get('CHRONOPOST_QUICKCOST_ENABLED'),
 				'advalorem_enabled' => Configuration::get('CHRONOPOST_ADVALOREM_ENABLED'),
