@@ -179,7 +179,7 @@ class Chronopost extends CarrierModule
 		if (!Configuration::updateValue('CHRONOPOST_SECRET', sha1(microtime(true).mt_rand(10000, 90000)))
 			|| !Configuration::updateValue('CHRONOPOST_CORSICA_SUPPLEMENT', '19.60'))
 				return false;
-			
+
 		return true;
 	}
 
@@ -1013,6 +1013,7 @@ class Chronopost extends CarrierModule
 				'carriers_tpl' => $carriers_tpl,
 				'corsica_supplement' => Configuration::get('CHRONOPOST_CORSICA_SUPPLEMENT'),
 				'quickcost_enabled' => Configuration::get('CHRONOPOST_QUICKCOST_ENABLED'),
+				'quickcost_supplement' => Configuration::get('CHRONOPOST_QUICKCOST_SUPPLEMENT'),
 				'advalorem_enabled' => Configuration::get('CHRONOPOST_ADVALOREM_ENABLED'),
 				'advalorem_minvalue' => Configuration::get('CHRONOPOST_ADVALOREM_MINVALUE'),
 				'bal_enabled' => Configuration::get('CHRONOPOST_BAL_ENABLED'),
