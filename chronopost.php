@@ -962,7 +962,7 @@ class Chronopost extends CarrierModule
 	public function getContent()
 	{
 		$html = '';
-		if (Tools::isSubmit('submitchronoRelaisConfig'))
+		if (Tools::isSubmit('submitChronoConfig'))
 		{
 			if ($this->_postValidation() && $this->_postProcess())
 				$html .= Module::displayConfirmation($this->l('Settings updated.'));

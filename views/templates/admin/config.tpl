@@ -124,7 +124,7 @@
 				</div>-->
 			 	{$customer_form}
 			 	<div class="panel-footer">
-					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+					<button type="submit" class="btn btn-default pull-right" name="submitChronoConfig"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
 			
@@ -151,7 +151,7 @@
 					</div>
 				</div>
 				<div class="panel-footer">
-					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+					<button type="submit" class="btn btn-default pull-right" name="submitChronoConfig"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
 
@@ -289,7 +289,7 @@
 					<div class="col-lg-3">{$minute_end}</div>
 				</div>
 				<div class="panel-footer">
-					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+					<button type="submit" class="btn btn-default pull-right" name="submitChronoConfig"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
 			
@@ -343,7 +343,7 @@
 				</div>
 
 				<div class="panel-footer">
-					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+					<button type="submit" class="btn btn-default pull-right" name="submitChronoConfig"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
 
@@ -509,7 +509,7 @@
 				
 			
 				<div class="panel-footer">
-					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+					<button type="submit" class="btn btn-default pull-right" name="submitChronoConfig"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
 
