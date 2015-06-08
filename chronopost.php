@@ -293,25 +293,6 @@ class Chronopost extends CarrierModule
 
 	public function uninstall()
 	{
-		$carriers = array(
-			Configuration::get('CHRONORELAIS_CARRIER_ID'),
-			Configuration::get('CHRONOPOST_CARRIER_ID'),
-			Configuration::get('CHRONOEXPRESS_CARRIER_ID'),
-			Configuration::get('CHRONO10_CARRIER_ID'),
-			Configuration::get('CHRONO18_CARRIER_ID'),
-			Configuration::get('CHRONOCLASSIC_CARRIER_ID')
-		);
-
-		foreach ($carriers as $cid)
-		{
-			$c = new Carrier($cid);
-			if (Validate::isLoadedObject($c))
-			{
-				$c->deleted = true;
-				$c->save();
-			}
-		}
-
 		$tab = new Tab(Tab::getIdFromClassName('AdminExportChronopost'));
 		if (!$tab->delete()) return false;
 
@@ -431,30 +412,34 @@ class Chronopost extends CarrierModule
 			Shop::setContext(Shop::CONTEXT_ALL);
 
 		// Ensures that if our carrier ID changes after a modification, we still have it up-to-date
-		if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONORELAIS_CARRIER_ID')))
-			Configuration::updateValue('CHRONORELAIS_CARRIER_ID', $params['carrier']->id);
+		if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONORELAIS_ID')))
+			Configuration::updateValue('CHRONOPOST_CHRONORELAIS_ID', $params['carrier']->id);
 
-		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CARRIER_ID')))
-			Configuration::updateValue('CHRONOPOST_CARRIER_ID', $params['carrier']->id);
+		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONO13_ID')))
+			Configuration::updateValue('CHRONOPOST_CHRONO13_ID', $params['carrier']->id);
 
-		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOEXPRESS_CARRIER_ID')))
-			Configuration::updateValue('CHRONOEXPRESS_CARRIER_ID', $params['carrier']->id);
+		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONOEXPRESS_ID')))
+			Configuration::updateValue('CHRONOPOST_CHRONOEXPRESS_ID', $params['carrier']->id);
 
-		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONO10_CARRIER_ID')))
-					Configuration::updateValue('CHRONO10_CARRIER_ID', $params['carrier']->id);
+		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONO10_ID')))
+					Configuration::updateValue('CHRONOPOST_CHRONO10_ID', $params['carrier']->id);
 
-		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONO18_CARRIER_ID')))
-					Configuration::updateValue('CHRONO18_CARRIER_ID', $params['carrier']->id);
-		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOCLASSIC_CARRIER_ID')))
-					Configuration::updateValue('CHRONOCLASSIC_CARRIER_ID', $params['carrier']->id);
+		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONO18_ID')))
+					Configuration::updateValue('CHRONOPOST_CHRONO18_ID', $params['carrier']->id);
+
+		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID')))
+					Configuration::updateValue('CHRONOPOST_CHRONOCLASSIC_ID', $params['carrier']->id);
+
+		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CHRONORDV_ID')))
+			Configuration::updateValue('CHRONOPOST_CHRONORDV_ID', $params['carrier']->id);
 
 		// Ensures Chrono18 && Chrono13 not selected at the same time
-		$c18 = new Carrier(Configuration::get('CHRONO18_CARRIER_ID'));
-		$c13 = new Carrier(Configuration::get('CHRONOPOST_CARRIER_ID'));
+		$c18 = new Carrier(Configuration::get('CHRONOPOST_CHRONO18_ID'));
+		$c13 = new Carrier(Configuration::get('CHRONOPOST_CHRONO13_ID'));
 
-		if (($params['carrier']->id == Configuration::get('CHRONOPOST_CARRIER_ID') && (int)$params['carrier']->active == 1
+		if (($params['carrier']->id == Configuration::get('CHRONOPOST_CHRONO13_ID') && (int)$params['carrier']->active == 1
 				&& $c18->active == 1)
-			|| ($params['carrier']->id == Configuration::get('CHRONO18_CARRIER_ID') && (int)$params['carrier']->active == 1
+			|| ($params['carrier']->id == Configuration::get('CHRONOPOST_CHRONO18_ID') && (int)$params['carrier']->active == 1
 				&& $c13->active == 1))
 		{
 			$params['carrier']->active = 0;
@@ -470,7 +455,7 @@ class Chronopost extends CarrierModule
 	public function hookNewOrder($params)
 	{
 		// Are we dealing with Chronorelais here ?
-		if (Configuration::get('CHRONORELAIS_CARRIER_ID') != $params['order']->id_carrier) return;
+		if (Configuration::get('CHRONOPOST_CHRONORELAIS_ID') != $params['order']->id_carrier) return;
 
 		$relais = Db::getInstance()->getValue('SELECT id_pr FROM `'._DB_PREFIX_.'chrono_cart_relais` WHERE id_cart = '.(int)$params['cart']->id);
 		if (!$relais) return;
@@ -556,8 +541,8 @@ class Chronopost extends CarrierModule
 				'cust_lastname' => $address->lastname,
 				'cartID' => $params['cart']->id,
 				'opc' => false,
-				'carrierID' => Configuration::get('CHRONORELAIS_CARRIER_ID'),
-				'carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONORELAIS_CARRIER_ID').','),
+				'carrierID' => Configuration::get('CHRONOPOST_CHRONORELAIS_ID'),
+				'carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONOPOST_CHRONORELAIS_ID').','),
 				'cust_address' => $address->address1.' '.$address->address2.' '
 			.$address->postcode.' '.$address->city,
 				'cust_address_clean' => $address->address1.' '.$address->address2.' ',
@@ -570,8 +555,8 @@ class Chronopost extends CarrierModule
 
 		$this->context->smarty->assign(
 			array(
-				'rdv_carrierID' => Configuration::get('CHRONORDV_CARRIER_ID'),
-				'rdv_carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONORDV_CARRIER_ID').',')
+				'rdv_carrierID' => Configuration::get('CHRONOPOST_CHRONORDV_ID'),
+				'rdv_carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONOPOST_CHRONORDV_ID').',')
 			)
 		);
 
@@ -583,7 +568,7 @@ class Chronopost extends CarrierModule
 		$order = new Order($orderid);
 		include_once _MYDIR_.'/libraries/PointRelaisServiceWSService.php';
 
-		if ($order->id_carrier != Configuration::get('CHRONORELAIS_CARRIER_ID')) return null;
+		if ($order->id_carrier != Configuration::get('CHRONOPOST_CHRONORELAIS_ID')) return null;
 
 
 		$btid = Db::getInstance()->getRow('SELECT id_pr FROM `'._DB_PREFIX_.'chrono_cart_relais` WHERE id_cart = '.$order->id_cart);
@@ -606,7 +591,7 @@ class Chronopost extends CarrierModule
 		$nblt = 1;
 
 
-		if ($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 20 && $order->id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID'))
+		if ($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 20 && $order->id_carrier == Configuration::get('CHRONOPOST_CHRONORELAIS_ID'))
 			$nblt = ceil($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') / 20);
 		if ($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 30)
 			$nblt = ceil($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') / 30);
@@ -616,12 +601,13 @@ class Chronopost extends CarrierModule
 
 	public static function isChrono($id_carrier)
 	{
-		return $id_carrier == Configuration::get('CHRONOPOST_CARRIER_ID')
-			|| $id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID')
-			|| $id_carrier == Configuration::get('CHRONOEXPRESS_CARRIER_ID')
-			|| $id_carrier == Configuration::get('CHRONO10_CARRIER_ID')
-			|| $id_carrier == Configuration::get('CHRONO18_CARRIER_ID')
-			|| $id_carrier == Configuration::get('CHRONOCLASSIC_CARRIER_ID');
+		return $id_carrier == Configuration::get('CHRONOPOST_CHRONO13_ID')
+			|| $id_carrier == Configuration::get('CHRONOPOST_CHRONORELAIS_ID')
+			|| $id_carrier == Configuration::get('CHRONOPOST_CHRONOEXPRESS_ID')
+			|| $id_carrier == Configuration::get('CHRONOPOST_CHRONO10_ID')
+			|| $id_carrier == Configuration::get('CHRONOPOST_CHRONO18_ID')
+			|| $id_carrier == Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID')			
+			|| $id_carrier == Configuration::get('CHRONOPOST_CHRONORDV_ID');
 	}
 
 	public function hookAdminOrder($params)
@@ -635,12 +621,12 @@ class Chronopost extends CarrierModule
 				'module_uri' =>__PS_BASE_URI__.'modules/'.$this->name,
 				'id_order' => $params['id_order'],
 				'chronopost_secret' => Configuration::get('CHRONOPOST_SECRET'),
-				'bal' => Configuration::get('CHRONOPOST_BAL_ENABLED') == 1 && ($order->id_carrier == Configuration::get('CHRONOPOST_CARRIER_ID') || $order->id_carrier == Configuration::get('CHRONO18_CARRIER_ID')) ? 1 : 0,
+				'bal' => Configuration::get('CHRONOPOST_BAL_ENABLED') == 1 && ($order->id_carrier == Configuration::get('CHRONOPOST_CHRONO13_ID') || $order->id_carrier == Configuration::get('CHRONOPOST_CHRONO18_ID')) ? 1 : 0,
 				'saturday' => self::gettingReadyForSaturday() ? 1 : 0,
 				'saturday_ok' => self::isSaturdayOptionApplicable() ? 1 : 0,
 				'to_insure' =>  self::amountToInsure($params['id_order']),
 				'nbwb' => self::minNumberOfPackages($params['id_order']),
-				'return' => $order->id_carrier != Configuration::get('CHRONOEXPRESS_CARRIER_ID') && $order->id_carrier != Configuration::get('CHRONOCLASSIC_CARRIER_ID') ? 1 : 0
+				'return' => $order->id_carrier != Configuration::get('CHRONOPOST_CHRONOEXPRESS_ID') && $order->id_carrier != Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID') ? 1 : 0
 			)
 		);
 		if (version_compare(_PS_VERSION_, 1.6) >= 0)
@@ -728,6 +714,7 @@ class Chronopost extends CarrierModule
 		$productCode = 1;
 		$classicAvailable = true;
 		$relaisAvailable = true;
+
 		if ($cart->id_address_delivery == 0) return $shipping_cost; // CASE NOT LOGGED IN
 
 		$a = new Address($cart->id_address_delivery);
@@ -749,43 +736,45 @@ class Chronopost extends CarrierModule
 		if (!$classicAvailable) return false;
 
 		// CALCULATE PRODUCTS
-		if ($this->id_carrier == Configuration::get('CHRONO10_CARRIER_ID') || $this->id_carrier == Configuration::get('CHRONOCLASSIC_CARRIER_ID') || $this->id_carrier == Configuration::get('CHRONO18_CARRIER_ID'))
+		if ($this->id_carrier == Configuration::get('CHRONOPOST_CHRONO10_ID') || $this->id_carrier == Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID') || $this->id_carrier == Configuration::get('CHRONOPOST_CHRONO18_ID'))
 			$calculatedProducts = self::calculateProducts($cart);
+
 
 		switch ($this->id_carrier)
 		{
-			case Configuration::get('CHRONORELAIS_CARRIER_ID'):
-				$productCode = self::$productCodes['CHRONORELAIS_CARRIER_ID'];
+
+			case Configuration::get('CHRONOPOST_CHRONORELAIS_ID'):
+				$productCode = self::$carriers_definitions['CHRONORELAIS']['product_code'];
 				if ($c->iso_code != 'FR' && $c->iso_code != 'FX')
 					return false;
 
 				if (!$relaisAvailable) return false;
 			break;
 
-			case Configuration::get('CHRONOPOST_CARRIER_ID'):
-				$productCode = self::$productCodes['CHRONOPOST_CARRIER_ID'];
+			case Configuration::get('CHRONOPOST_CHRONO13_ID'):
+				$productCode = self::$carriers_definitions['CHRONO13']['product_code'];
 				if ($c->iso_code != 'FR' && $c->iso_code != 'FX') return false;
 			break;
 
-			case Configuration::get('CHRONO10_CARRIER_ID'):
+			case Configuration::get('CHRONOPOST_CHRONO10_ID'):
 				if ($calculatedProducts['chrono10'] == false) return false;
-				$productCode = self::$productCodes['CHRONO10_CARRIER_ID'];
+				$productCode = self::$carriers_definitions['CHRONO10']['product_code'];
 			break;
 
-			case Configuration::get('CHRONO18_CARRIER_ID'):
+			case Configuration::get('CHRONOPOST_CHRONO18_ID'):
 				if ($c->iso_code != 'FR' && $c->iso_code != 'FX') return false;
 				if ($calculatedProducts['chrono18'] == false) return false;
-				$productCode = self::$productCodes['CHRONO18_CARRIER_ID'];
+				$productCode = self::$carriers_definitions['CHRONO18']['product_code'];
 			break;
 
-			case Configuration::get('CHRONOEXPRESS_CARRIER_ID'):
+			case Configuration::get('CHRONOPOST_CHRONOEXPRESS_ID'):
 				if ($c->iso_code == 'FR' || $c->iso_code == 'FX') return false;
-				$productCode = self::$productCodes['CHRONOEXPRESS_CARRIER_ID'];
+				$productCode = self::$carriers_definitions['CHRONOEXPRESS']['product_code'];
 			break;
 
-			case Configuration::get('CHRONOCLASSIC_CARRIER_ID'):
+			case Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID'):
 				if ($calculatedProducts['chronoclassic'] == false) return false;
-				$productCode = self::$productCodes['CHRONOCLASSIC_CARRIER_ID'];
+				$productCode = self::$carriers_definitions['CHRONOCLASSIC']['product_code'];
 			break;
 		}
 
@@ -829,7 +818,6 @@ class Chronopost extends CarrierModule
 		{
 			return $shipping_cost;
 		}
-
 		if ($res->return->amountTTC != 0)
 		{
 			if(empty($cache))
@@ -928,7 +916,7 @@ class Chronopost extends CarrierModule
 	private function _carrierForm($code)
 	{
 		$carriers=Carrier::getCarriers($this->context->language->id);
-		$selected = configuration::get(strtoupper($code).'_CARRIER_ID');
+		$selected = Configuration::get('CHRONOPOST_'.strtoupper($code).'_ID');
 
 		$this->context->smarty->assign(
 			array(
