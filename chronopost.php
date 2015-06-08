@@ -877,7 +877,7 @@ class Chronopost extends CarrierModule
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/contact.tpl');
 	}
 
-	private function _dayField($fieldName, $default)
+	private function _dayField($fieldName, $default = 0)
 	{
 		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
@@ -892,7 +892,7 @@ class Chronopost extends CarrierModule
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/days.tpl');
 	}
 
-	private function _hourField($fieldName, $default)
+	private function _hourField($fieldName, $default = 0)
 	{
 		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
@@ -1006,17 +1006,32 @@ class Chronopost extends CarrierModule
 				'saturday_checked' => Configuration::get('CHRONOPOST_SATURDAY_CHECKED'),
 				'day_start' => $this->_dayField('day_start', 4),
 				'hour_start' => $this->_hourField('hour_start', 18),
-				'minute_start' => $this->_minuteField('minute_start'),
+				'minute_start' => $this->_minuteField('hour_start'),
+				'day_predict_on' => $this->_dayField('day_predict_on'),
+				'hour_predict_on' => $this->_hourField('hour_predict_on'),
+				'minute_predict_on' => $this->_minuteField('minute_predict_on'),
+				'day_predict_close_start' => $this->_dayField('day_predict_close_start'),
+				'hour_predict_close_start' => $this->_hourField('hour_predict_close_start'),
+				'minute_predict_close_start' => $this->_minuteField('minute_predict_close_start'),
+				'day_predict_close_end' => $this->_dayField('day_predict_close_end'),
+				'hour_predict_close_end' => $this->_hourField('hour_predict_close_end'),
+				'minute_predict_close_end' => $this->_minuteField('minute_predict_close_end'),
 				'day_end' => $this->_dayField('day_end', 5),
 				'hour_end' => $this->_hourField('hour_end', 16),
 				'minute_end' => $this->_minuteField('minute_end'),
 				'carriers_tpl' => $carriers_tpl,
+				'predict_delay' => Configuration::get('CHRONOPOST_PREDICT_DELAY'),
+				'map_enabled' => Configuration::get('CHRONOPOST_MAP_ENABLED'),
 				'corsica_supplement' => Configuration::get('CHRONOPOST_CORSICA_SUPPLEMENT'),
 				'quickcost_enabled' => Configuration::get('CHRONOPOST_QUICKCOST_ENABLED'),
 				'quickcost_supplement' => Configuration::get('CHRONOPOST_QUICKCOST_SUPPLEMENT'),
 				'advalorem_enabled' => Configuration::get('CHRONOPOST_ADVALOREM_ENABLED'),
 				'advalorem_minvalue' => Configuration::get('CHRONOPOST_ADVALOREM_MINVALUE'),
 				'bal_enabled' => Configuration::get('CHRONOPOST_BAL_ENABLED'),
+				'predict_price1' => Configuration::get('CHRONOPOST_PREDICT_PRICE1'),
+				'predict_price2' => Configuration::get('CHRONOPOST_PREDICT_PRICE2'),
+				'predict_price3' => Configuration::get('CHRONOPOST_PREDICT_PRICE3'),
+				'predict_price4' => Configuration::get('CHRONOPOST_PREDICT_PRICE4'),
 				'shipper_form' => $this->_generateChronoForm('shipper'),
 				'customer_form' => $this->_generateChronoForm('customer')
 			)

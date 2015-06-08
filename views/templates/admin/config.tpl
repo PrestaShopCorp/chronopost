@@ -136,10 +136,25 @@
 				{foreach from=$carriers_tpl item=tpl}
 					{$tpl}
 				{/foreach}
+			</div>
+			<div class="panel">
+				<div class="panel-heading">
+					<i class="icon-globe"></i> {l s='Chrono Pickup' mod='chronopost'}
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3">{l s='Display map for pickup' mod='chronopost'}</label>
+					<div class="col-lg-9">
+						<select name="chronoparams[map][enabled]">
+							<option value="1">{l s="Yes" mod='chronopost'}</option>
+							<option value="0"{if $map_enabled==0} selected{/if}>{l s="No" mod='chronopost'}</option>
+						</select>
+					</div>
+				</div>
 				<div class="panel-footer">
 					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
+
 
 			<h2 id="shipping">{l s='Configure shipping options' mod='chronopost'}</h2>
 			<div class="panel">
@@ -331,6 +346,173 @@
 					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
 				</div>
 			</div>
+
+
+			<h2 id="predict">{l s='Configure Predict' mod='chronopost'}</h2>
+			<div class="panel">
+				<div class="panel-heading">
+					<i class="icon-calendar"></i> {l s='Day of package collection' mod='chronopost'}
+				</div>
+				
+				<div class="alert alert-info">
+					{l s='The Chrono Predict calendar displayed to the customer will start from this day.' mod='chronopost'}
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3"><span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{l s='Number of days for you to prepare the order for shipment.' mod='chronopost'}" data-html="true">{l s='Number of days after order' mod='chronopost'}</span></label>
+					<div class="col-lg-9">
+						<div class="input-group">
+							<input name="chronoparams[predict][delay]" type="text" 
+								value="{$predict_delay|escape:'htmlall'}"/>  
+      						<div class="input-group-addon">{l s='days' mod='chronopost'}</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">
+						<strong>{l s='Or' mod='chronopost'}</strong> {l s='day' mod='chronopost'}
+					</label>
+					<div class="col-lg-9">
+						{$day_predict_on}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">
+						{l s='Hour' mod='chronopost'}
+					</label>
+					<div class="col-lg-3">
+						{$hour_predict_on}
+					</div>
+					<div class="col-lg-3">
+						{$minute_predict_on}
+					</div>
+				</div>
+			</div>
+
+			<div class="panel">
+				<div class="panel-heading">
+					<i class="icon-calendar"></i> {l s='Days with no collection' mod='chronopost'}
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">
+						{l s='From:' mod='chronopost'}
+					</label>
+					<div class="col-lg-9">
+						{$day_predict_close_start}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-3 control-label">
+						{l s='Hour' mod='chronopost'}
+					</label>
+					<div class="col-lg-3">
+						{$hour_predict_close_start}
+					</div>
+					<div class="col-lg-3">
+						{$minute_predict_close_start}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-lg-3 control-label">
+						{l s='Until:' mod='chronopost'}
+					</label>
+					<div class="col-lg-9">
+						{$day_predict_close_end}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-lg-3 control-label">
+						{l s='Hour' mod='chronopost'}
+					</label>
+					<div class="col-lg-3">
+						{$hour_predict_close_end}
+					</div>
+					<div class="col-lg-3">
+						{$minute_predict_close_end}
+					</div>
+				</div>
+			</div>
+
+			<div class="panel">
+				<div class="panel-heading">
+					<i class="icon-money"></i> {l s='Predict pricing' mod='chronopost'}
+				</div>
+				<div class="form-group">
+					<div class="col-lg-3"></div>
+					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 1</div>
+					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 2</div>
+					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 3</div>
+					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 4</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-lg-3">{l s='State' mod='chronopost'}</label>
+					<div class="col-lg-2">
+						<select name="chronoparams[predict][state1]">
+							<option value="1">{l s='Open' mod='chronopost'}</option>
+							<option value="0">{l s='Closed' mod='chronopost'}</option>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<select name="chronoparams[predict][state1]">
+							<option value="1">{l s='Open' mod='chronopost'}</option>
+							<option value="0">{l s='Closed' mod='chronopost'}</option>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<select name="chronoparams[predict][state1]">
+							<option value="1">{l s='Open' mod='chronopost'}</option>
+							<option value="0">{l s='Closed' mod='chronopost'}</option>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<select name="chronoparams[predict][state1]">
+							<option value="1">{l s='Open' mod='chronopost'}</option>
+							<option value="0">{l s='Closed' mod='chronopost'}</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-3">{l s='Pricing' mod='chronopost'}</label>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<input type="text" name="chronoparams[predict][price1]" value="{$predict_price1}"/>
+      						<div class="input-group-addon">€</div>
+  						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<input type="text" name="chronoparams[predict][price2]" value="{$predict_price2}"/>
+      						<div class="input-group-addon">€</div>
+  						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<input type="text" name="chronoparams[predict][price3]" value="{$predict_price3}"/>
+      						<div class="input-group-addon">€</div>
+  						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="input-group">
+							<input type="text" name="chronoparams[predict][price4]" value="{$predict_price4}"/>
+      						<div class="input-group-addon">€</div>
+  						</div>
+					</div>
+				</div>				
+				
+			
+				<div class="panel-footer">
+					<button type="submit" class="btn btn-default pull-right" name="submitOptionscountry"><i class="process-icon-save"></i> {l s='Save' mod='chronopost'}</button>
+				</div>
+			</div>
+
 
 				
 		</form>
