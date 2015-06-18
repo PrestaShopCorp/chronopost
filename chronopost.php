@@ -823,16 +823,16 @@ class Chronopost extends CarrierModule
 			if(empty($cache))
 			{
 				DB::getInstance()->query('INSERT INTO '._DB_PREFIX_.'chrono_quickcost_cache (product_code, arrcode, weight, price, last_updated) VALUES (
-						"'.$productCode.'",
-						"'.$arrcode.'",
-						"'.$cart->getTotalWeight().'",
-						"'.$res->return->amountTTC.'",
+						"'.pSQL($productCode).'",
+						"'.pSQL($arrcode).'",
+						"'.(float)$cart->getTotalWeight().'",
+						"'.(float)$res->return->amountTTC.'",
 						"'.time().'")
 				');
 			}
 			else 
-				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.$res->return->amount.'", last_updated="'.time().'
-					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.$productCode.'" && weight="'.$cart->getTotalWeight().'"
+				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated="'.time().'
+					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.pSQL($productCode).'" && weight="'.(float)$cart->getTotalWeight().'"
 				');
 
 			return $res->return->amountTTC;
