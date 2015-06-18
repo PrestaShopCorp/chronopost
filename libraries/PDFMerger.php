@@ -1,16 +1,5 @@
 <?php
 /**
-  * MODULE PRESTASHOP OFFICIEL CHRONOPOST
-  * 
-  * LICENSE : All rights reserved - COPY AND REDISTRIBUTION FORBIDDEN WITHOUT PRIOR CONSENT FROM OXILEO
-  * LICENCE : Tous droits réservés, le droit d'auteur s'applique - COPIE ET REDISTRIBUTION INTERDITES SANS ACCORD EXPRES D'OXILEO
-  *
-  * @author    Oxileo SAS <contact@oxileo.eu>
-  * @copyright 2001-2014 Oxileo SAS
-  * @license   Proprietary - no redistribution without authorization
-  */
-
-/**
  *  PDFMerger created by Jarrod Nettles December 2009
  *  jarrod@squarecrow.com
  *  
@@ -83,6 +72,8 @@ class PDFMerger
 		if(!isset($this->_files) || !is_array($this->_files)): throw new exception("No PDFs to merge."); endif;
 		
 		$fpdi = new FPDI;
+        //$fpdi->setPrintHeader(FALSE);
+        //$fpdi->setPrintFooter(FALSE);
 		
 		//merger operations
 		foreach($this->_files as $file)
@@ -99,9 +90,9 @@ class PDFMerger
 				{
 					$template 	= $fpdi->importPage($i);
 					$size 		= $fpdi->getTemplateSize($template);
-					
-//					$fpdi->AddPage('P', array($size['w'], $size['h']));
-					$fpdi->AddPage('L');
+					 $orientation = ($size['w'] <= $size['h']) ? 'P' : 'L' ;
+                    
+                    $fpdi->AddPage($orientation, array($size['w'], $size['h']));
 					$fpdi->useTemplate($template);
 				}
 			}
@@ -111,9 +102,9 @@ class PDFMerger
 				{
 					if(!$template = $fpdi->importPage($page)): throw new exception("Could not load page '$page' in PDF '$filename'. Check that the page exists."); endif;
 					$size = $fpdi->getTemplateSize($template);
-					
-//					$fpdi->AddPage('P', array($size['w'], $size['h']));
-					$fpdi->AddPage('L');
+					$orientation = ($size['w'] <= $size['h']) ? 'P' : 'L' ;
+                    
+                    $fpdi->AddPage($orientation, array($size['w'], $size['h']));
 					$fpdi->useTemplate($template);
 				}
 			}	
@@ -128,7 +119,7 @@ class PDFMerger
 		}
 		else
 		{
-			if($fpdi->Output($outputpath, $mode))
+			if($fpdi->Output($outputpath, $mode) == '')
 			{
 				return true;
 			}
@@ -183,7 +174,6 @@ class PDFMerger
 		foreach($part as $i)
 		{
 			$ind = explode('-', $i);
-
 			if(count($ind) == 2)
 			{
 				$x = $ind[0]; //start page
@@ -204,3 +194,4 @@ class PDFMerger
 	}
 	
 }
+
