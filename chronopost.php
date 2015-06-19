@@ -149,7 +149,9 @@ class Chronopost extends CarrierModule
 	{
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
-		$this->version = '3.6.3';
+
+		$this->version = '3.6.4';
+
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
@@ -234,6 +236,18 @@ class Chronopost extends CarrierModule
 				`city` varchar(32) NOT null,
 				PRIMARY KEY (`id_order`, `lt`)
 			) ENGINE = MyISAM DEFAULT CHARSET = utf8;');
+
+		
+		Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'chrono_quickcost_cache` (
+			`id` int(11) NOT null AUTO_INCREMENT,
+			`product_code` varchar(2) NOT null,
+			`arrcode` varchar(10) NOT null,
+			`weight` decimal(10,2) NOT null,
+			`price` decimal(10,2) NOT null,
+			`last_updated` int(11) NOT null,
+			PRIMARY KEY (`id`)
+			) ENGINE = MyISAM DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1 ;');
+
 
 		// pre install
 		if (!$this->preInstall()) return false;
@@ -606,7 +620,6 @@ class Chronopost extends CarrierModule
 		$this->context->controller->addCSS($module_uri.'/views/css/chronorelais.css', 'all');
 		$this->context->controller->addJS('https://maps.google.com/maps/api/js?sensor=false');
 		$this->context->controller->addJS($module_uri.'/views/js/chronorelais.js');
-		$this->context->controller->addJS($module_uri.'/views/js/scrollTo.min.js');
 	}
 
 	public function hookExtraCarrier($params)
@@ -724,7 +737,7 @@ class Chronopost extends CarrierModule
 			$cp->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 			$cp->depZipCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
 			$cp->depCountryCode = 'FR';
-			$cp->weight = $cart->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF');
+			$cp->weight = $cart->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') + 0.1;
 			$cp->arrCountryCode = $c->iso_code;
 			$cp->arrZipCode = $a->postcode;
 			$cp->type = 'M';
@@ -853,13 +866,22 @@ class Chronopost extends CarrierModule
 			return $shipping_cost;
 		}
 
+		$arrcode = (($c->iso_code == 'FR' || $c->iso_code == 'FX')?$a->postcode:$c->iso_code);
+		$cache = Db::getInstance()->executeS('SELECT price, last_updated FROM `'._DB_PREFIX_.'chrono_quickcost_cache` WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.$productCode.'" && weight="'.$cart->getTotalWeight().'"');
+
+		if (!empty($cache) && $cache[0]['last_updated'] + 24 * 3600 > time())
+		{
+			// return from cache
+			return $cache[0]['price'];
+		}
+
 		include_once(_MYDIR_.'/libraries/QuickcostServiceWSService.php');
 		$ws = new QuickcostServiceWSService();
 		$qc = new quickCost();
 		$qc->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
 		$qc->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 		$qc->depCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
-		$qc->arrCode = (($c->iso_code == 'FR' || $c->iso_code == 'FX')?$a->postcode:$c->iso_code);
+		$qc->arrCode = $arrcode;
 		$qc->weight = $cart->getTotalWeight();
 		if ($qc->weight == 0) $qc->weight = 0.1; // 0 yeilds an error
 
@@ -875,8 +897,28 @@ class Chronopost extends CarrierModule
 			return $shipping_cost;
 		}
 
+		if ($res->return->amountTTC != 0)
+		{
+			if(empty($cache))
+			{
+				DB::getInstance()->query('INSERT INTO '._DB_PREFIX_.'chrono_quickcost_cache (product_code, arrcode, weight, price, last_updated) VALUES (
+						"'.pSQL($productCode).'",
+						"'.pSQL($arrcode).'",
+						"'.(float)$cart->getTotalWeight().'",
+						"'.(float)$res->return->amountTTC.'",
+						"'.time().'")
+				');
+			}
+			else 
+				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated="'.time().'
+					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.pSQL($productCode).'" && weight="'.(float)$cart->getTotalWeight().'"
+				');
+
+			return $res->return->amountTTC;
+		}
 		if ($res->return->amount != 0)
 			return $res->return->amount;
+
 
 		return $shipping_cost;
 	}
