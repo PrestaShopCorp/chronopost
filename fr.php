@@ -112,3 +112,8 @@ $_MODULE['<{chronopost}prestashop>chronorelais_38c1b1ad9374538917b29179c7293774'
 $_MODULE['<{chronopost}prestashop>chronorelais_0a43a182e9ee571f4d77574ba2249ab8'] = 'Sélectionnez un point relais sur la carte ci-dessous en cliquant sur son icône puis \'Sélectionner\'';
 $_MODULE['<{chronopost}prestashop>chronorelais_0230687bb36c1a0581f58305fa5cfa96'] = 'Changer mon code postal';
 $_MODULE['<{chronopost}prestashop>chronorelais_9f57ef2a5068759069a7ca50993db71e'] = 'Les points relais les plus proches';
+$_MODULE['<{chronopost}prestashop>chronorelais_38c1b1ad9374538917b29179c7293774'] = 'Sélectionnez un point relais';
+$_MODULE['<{chronopost}prestashop>chronorelais_0a43a182e9ee571f4d77574ba2249ab8'] = 'Sélectionnez un point relais ci-dessous puis confirmez avec le bouton «Sélectionner»';
+$_MODULE['<{chronopost}prestashop>chronorelais_0230687bb36c1a0581f58305fa5cfa96'] = 'Changer mon code postal';
+$_MODULE['<{chronopost}prestashop>chronorelais_9f57ef2a5068759069a7ca50993db71e'] = 'Points relais les plus proches';
+
