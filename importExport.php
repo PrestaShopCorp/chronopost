@@ -34,10 +34,12 @@ if ($cible)
 			$address = new Address($o->id_address_delivery);
 			$country = new Country($address->id_country);
 			$customer = new Customer($o->id_customer); /* for email address */
+			
 			$bt = '';
-
+			if ($o->id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID')) 
+				$bt = $address->other; /* strlen(Depot [...])=20 */
 			/*
-			if ($o->id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID'))
+			
 			{
 
 				$row = Db::getInstance()->getRow('SELECT id_pr FROM '._DB_PREFIX_.'chrono_cart_relais WHERE id_cart='.$o->id_cart);
@@ -96,9 +98,6 @@ if ($cible)
 			$address = new Address($o->id_address_delivery);
 			$country = new Country($address->id_country);
 			$customer = new Customer($o->id_customer); /* for email address */
-
-			if (strpos($address->alias, 'Depot Chrono Relais ') === false) $bt = '';
-			else $bt = Tools::substr($address->alias, 20); /* strlen(Depot [...])=20 */
 
 			/* Stir everything together */
 			echo ';'; /* "code destinataire" left empty */
