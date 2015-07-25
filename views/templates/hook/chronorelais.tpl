@@ -35,33 +35,36 @@
 
     {literal}
         $(function() {
-    
-        // Listener for selection of the ChronoRelais carrier radio button
-        $('input.delivery_option_radio, input[name=id_carrier]').click(function(e) {
-            toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city, e);
-        });
+        
+            // Listener for selection of the ChronoRelais carrier radio button
+            $('input.delivery_option_radio, input[name=id_carrier]').click(function(e) {
+                toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city, e);
+            });
 
 
-        // move in DOM to prevent compatibility issues with Common Services' modules
-        if($("#chronorelais_container").length>0)
-        {
-            $('#chronorelais_dummy_container').remove();
-        } else {
-            $('#chronorelais_dummy_container').insertAfter($('#extra_carrier'));
-            $('#chronorelais_dummy_container').attr('id', 'chronorelais_container');
-        }
+            // move in DOM to prevent compatibility issues with Common Services' modules
+            if($("#chronorelais_container").length>0)
+            {
+                $('#chronorelais_dummy_container').remove();
+            } else {
+                $('#chronorelais_dummy_container').insertAfter($('#extra_carrier'));
+                $('#chronorelais_dummy_container').attr('id', 'chronorelais_container');
+            }
 
-        // toggle on load
-        toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
+            // toggle on load
+            toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
         
             // Listener for CP change
-            $('#changeCustCP').on('click', function(e) {
-                cust_address=$('#relais_codePostal').val()+", France";
-                oldCodePostal=cust_codePostal;
-                cust_codePostal=$('#relais_codePostal').val();
-
-                initRelaisMap(cust_address, cust_codePostal);
+            $('#changeCustCP').on('click', postcodeChangeEvent);
+            $("#relais_codePostal").on('keypress keydown keyup', function(e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    postcodeChangeEvent();
+                    return false;
+                }
             });
+
 
             // Listener for BT select in InfoWindow
             $('#chronorelais_map').click(function(e) {
