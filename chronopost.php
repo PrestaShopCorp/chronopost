@@ -132,6 +132,12 @@ class Chronopost extends CarrierModule
 		if (Shop::isFeatureActive())
 			Shop::setContext(Shop::CONTEXT_ALL);
 
+		// new in 4.0.0
+		Configuration::updateValue('CHRONOPOST_SATURDAY_DAY_START', -1);
+		Configuration::updateValue('CHRONOPOST_RDV_DAY_ON', -1);
+		Configuration::updateValue('CHRONOPOST_RDV_CLOSE_START', -1);
+		Configuration::updateValue('CHRONOPOST_RDV_CLOSE_END', -1);
+
 		DB::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'chrono_calculateproducts_cache2` (
 			 `id` int(11) NOT null AUTO_INCREMENT,
 			 `postcode` varchar(10) NOT null,
@@ -531,7 +537,6 @@ class Chronopost extends CarrierModule
 
 	public function hookExtraCarrier($params)
 	{
-		// TODO handle activation of either RDV or Relais independalty
 		$address = new Address($params['cart']->id_address_delivery);
 		$this->context->smarty->assign(
 			array(
@@ -550,9 +555,27 @@ class Chronopost extends CarrierModule
 				'map_enabled' => Configuration::get('CHRONOPOST_MAP_ENABLED')
 			)
 		);
-
-        // TODO allow for either one to be activated (currently chronordv needs chronorelais's JS)
 		$r = $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/hook/chronorelais.tpl');
+
+		if(Configuration::get(CHRONOPOST_CHRONORDV_ID) == -1) 
+			return $r;
+
+        // TODO allow for either one to be activated
+        // Currently chronordv needs chronorelais's JS, hence ChronoRelais is always included
+
+		// call WS !
+		include_once(_MYDIR_.'libraries/CreneauServiceWSService.php');
+		$query = new searchDeliverySlot();
+		$query->callerTool = RDVPRE;
+		$query->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
+		$query->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
+		$query->productType = 'RDV'; // normal product
+		$query->customerZipCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
+		$query->recipientZipCode = $address->postcode;
+		$query->dateBegin = 0; // TODO
+		$query->customerDeliverySlotClosed = 0; //TODO 
+		// TODO CALL
+
 
 		$this->context->smarty->assign(
 			array(
@@ -866,31 +889,33 @@ class Chronopost extends CarrierModule
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/contact.tpl');
 	}
 
-	private function _dayField($fieldName, $default = 0)
+	private function _dayField($fieldName, $default = 0, $group_name = 'saturday')
 	{
-		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
+		$selected = Configuration::get('CHRONOPOST_'.Tools::strtoupper($group_name).'_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
 
 		$this->context->smarty->assign(
 			array(
 				'selected' => $selected,
-				'field_name' => $fieldName
+				'field_name' => $fieldName,
+				'group_name' => $group_name
 			)
 		);
 
 		return $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/admin/days.tpl');
 	}
 
-	private function _hourField($fieldName, $default = 0)
+	private function _hourField($fieldName, $default = 0, $group_name = 'saturday')
 	{
-		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
+		$selected = Configuration::get('CHRONOPOST_'.Tools::strtoupper($group_name).'_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
 
 		// Smarty is so painful
 		$this->context->smarty->assign(
 			array(
 				'selected' => $selected,
-				'field_name' => $fieldName
+				'field_name' => $fieldName,
+				'group_name' => $group_name
 			)
 		);
 
@@ -898,16 +923,17 @@ class Chronopost extends CarrierModule
 	}
 
 
-	private function _minuteField($fieldName, $default = 0)
+	private function _minuteField($fieldName, $default = 0, $group_name = 'saturday')
 	{
-		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
+		$selected = Configuration::get('CHRONOPOST_'.Tools::strtoupper($group_name).'_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
 
 		// Can't stop the pain
 		$this->context->smarty->assign(
 			array(
 				'selected' => $selected,
-				'field_name' => $fieldName
+				'field_name' => $fieldName,
+				'group_name' => $group_name
 			)
 		);
 
@@ -996,15 +1022,15 @@ class Chronopost extends CarrierModule
 				'day_start' => $this->_dayField('day_start', 4),
 				'hour_start' => $this->_hourField('hour_start', 18),
 				'minute_start' => $this->_minuteField('hour_start'),
-				'day_rdv_on' => $this->_dayField('day_rdv_on'),
-				'hour_rdv_on' => $this->_hourField('hour_rdv_on'),
-				'minute_rdv_on' => $this->_minuteField('minute_rdv_on'),
-				'day_rdv_close_start' => $this->_dayField('day_rdv_close_start'),
-				'hour_rdv_close_start' => $this->_hourField('hour_rdv_close_start'),
-				'minute_rdv_close_start' => $this->_minuteField('minute_rdv_close_start'),
-				'day_rdv_close_end' => $this->_dayField('day_rdv_close_end'),
-				'hour_rdv_close_end' => $this->_hourField('hour_rdv_close_end'),
-				'minute_rdv_close_end' => $this->_minuteField('minute_rdv_close_end'),
+				'day_rdv_on' => $this->_dayField('day_on', 0, 'rdv'),
+				'hour_rdv_on' => $this->_hourField('hour_on', 0, 'rdv'),
+				'minute_rdv_on' => $this->_minuteField('minute_on', 0, 'rdv'),
+				'day_rdv_close_start' => $this->_dayField('day_close_start', 0, 'rdv'),
+				'hour_rdv_close_start' => $this->_hourField('hour_close_start', 0, 'rdv'),
+				'minute_rdv_close_start' => $this->_minuteField('minute_close_start', 0, 'rdv'),
+				'day_rdv_close_end' => $this->_dayField('day_close_end', 0, 'rdv'),
+				'hour_rdv_close_end' => $this->_hourField('hour_close_end', 0, 'rdv'),
+				'minute_rdv_close_end' => $this->_minuteField('minute_close_end', 0, 'rdv'),
 				'day_end' => $this->_dayField('day_end', 5),
 				'hour_end' => $this->_hourField('hour_end', 16),
 				'minute_end' => $this->_minuteField('minute_end'),

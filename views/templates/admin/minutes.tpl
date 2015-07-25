@@ -8,7 +8,7 @@
   * @copyright 2001-2015 Oxileo SAS
   * @license   Proprietary - no redistribution without authorization
   *}
- <select name="chronoparams[saturday][{$field_name|escape:'htmlall'}]">
+ <select name="chronoparams[{$group_name|escape:'htmlall'}][{$field_name|escape:'htmlall'}]">
 	{for $i=0 to 59}
 		<option value="{$i|escape:'htmlall'}"{if $i==$selected} selected{/if}>{$i|string_format:'%02d'}</option>
 	{/for}

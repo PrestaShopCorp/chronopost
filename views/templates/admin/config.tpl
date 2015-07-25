@@ -355,7 +355,7 @@
 				</div>
 				
 				<div class="alert alert-info">
-					{l s='The Chrono rdv calendar displayed to the customer will start from this day.' mod='chronopost'}
+					{l s='The Chrono rdv calendar displayed to the customer will start from this day. If you define a starting day it will take precedence on the number of days.' mod='chronopost'}
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-3"><span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{l s='Number of days for you to prepare the order for shipment.' mod='chronopost'}" data-html="true">{l s='Number of days after order' mod='chronopost'}</span></label>
