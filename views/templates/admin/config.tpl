@@ -19,7 +19,7 @@
 			  <li role="presentation"><a href="#carriers">2. {l s='Configure carriers' mod='chronopost'}</a></li>
   			  <li role="presentation"><a href="#shipping">4. {l s='Configure shipping options' mod='chronopost'}</a></li>
 			  <li role="presentation"><a href="#pricing">3. {l s='Configure pricing' mod='chronopost'}</a></li>
-  			  <li role="presentation"><a href="#predict">4. {l s='Configure Predict' mod='chronopost'}</a></li>
+  			  <li role="presentation"><a href="#rdv">4. {l s='Configure rdv' mod='chronopost'}</a></li>
 
 			</ol>
 		</div>
@@ -32,7 +32,7 @@
 			<p>
 				<strong>{l s='Offer to your customers the first Express delivery service with the offical Chronopost module for Prestashop 1.5 and 1.6. With Chronopost, your customer will have the choice of the main delivery modes within 24h : at home,  at a Pickup point or at the office !' mod='chronopost'}</strong>
 			</p><p>
-					{l s='Your customers will also have the Predict service :  They are notified by email or SMS the day before the delivery and can reschedule the delivery or ask to be delivered at a pickup point among more than 17 000 points (post offices, Pickup relay or Chronopost agencies).' mod='chronopost'}
+					{l s='Your customers will also have the rdv service :  They are notified by email or SMS the day before the delivery and can reschedule the delivery or ask to be delivered at a pickup point among more than 17 000 points (post offices, Pickup relay or Chronopost agencies).' mod='chronopost'}
 			</p><p>
 				{l s='Expand your business internationally with Chronopost international delivery service which is included in this module.' mod='chronopost'}
 			</p><p><strong>
@@ -348,21 +348,21 @@
 			</div>
 
 
-			<h2 id="predict">{l s='Configure Predict' mod='chronopost'}</h2>
+			<h2 id="rdv">{l s='Configure rdv' mod='chronopost'}</h2>
 			<div class="panel">
 				<div class="panel-heading">
 					<i class="icon-calendar"></i> {l s='Day of package collection' mod='chronopost'}
 				</div>
 				
 				<div class="alert alert-info">
-					{l s='The Chrono Predict calendar displayed to the customer will start from this day.' mod='chronopost'}
+					{l s='The Chrono rdv calendar displayed to the customer will start from this day.' mod='chronopost'}
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-3"><span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{l s='Number of days for you to prepare the order for shipment.' mod='chronopost'}" data-html="true">{l s='Number of days after order' mod='chronopost'}</span></label>
 					<div class="col-lg-9">
 						<div class="input-group">
-							<input name="chronoparams[predict][delay]" type="text" 
-								value="{$predict_delay|escape:'htmlall'}"/>  
+							<input name="chronoparams[rdv][delay]" type="text" 
+								value="{$rdv_delay|escape:'htmlall'}"/>  
       						<div class="input-group-addon">{l s='days' mod='chronopost'}</div>
 						</div>
 					</div>
@@ -374,7 +374,7 @@
 						<strong>{l s='Or' mod='chronopost'}</strong> {l s='day' mod='chronopost'}
 					</label>
 					<div class="col-lg-9">
-						{$day_predict_on}
+						{$day_rdv_on}
 					</div>
 				</div>
 
@@ -383,10 +383,10 @@
 						{l s='Hour' mod='chronopost'}
 					</label>
 					<div class="col-lg-3">
-						{$hour_predict_on}
+						{$hour_rdv_on}
 					</div>
 					<div class="col-lg-3">
-						{$minute_predict_on}
+						{$minute_rdv_on}
 					</div>
 				</div>
 			</div>
@@ -402,7 +402,7 @@
 						{l s='From:' mod='chronopost'}
 					</label>
 					<div class="col-lg-9">
-						{$day_predict_close_start}
+						{$day_rdv_close_start}
 					</div>
 				</div>
 				
@@ -411,10 +411,10 @@
 						{l s='Hour' mod='chronopost'}
 					</label>
 					<div class="col-lg-3">
-						{$hour_predict_close_start}
+						{$hour_rdv_close_start}
 					</div>
 					<div class="col-lg-3">
-						{$minute_predict_close_start}
+						{$minute_rdv_close_start}
 					</div>
 				</div>
 
@@ -423,7 +423,7 @@
 						{l s='Until:' mod='chronopost'}
 					</label>
 					<div class="col-lg-9">
-						{$day_predict_close_end}
+						{$day_rdv_close_end}
 					</div>
 				</div>
 				
@@ -432,47 +432,47 @@
 						{l s='Hour' mod='chronopost'}
 					</label>
 					<div class="col-lg-3">
-						{$hour_predict_close_end}
+						{$hour_rdv_close_end}
 					</div>
 					<div class="col-lg-3">
-						{$minute_predict_close_end}
+						{$minute_rdv_close_end}
 					</div>
 				</div>
 			</div>
 
 			<div class="panel">
 				<div class="panel-heading">
-					<i class="icon-money"></i> {l s='Predict pricing' mod='chronopost'}
+					<i class="icon-money"></i> {l s='rdv pricing' mod='chronopost'}
 				</div>
 				<div class="form-group">
 					<div class="col-lg-3"></div>
-					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 1</div>
-					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 2</div>
-					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 3</div>
-					<div class="col-lg-2">{l s='Predict' mod='chronopost'} 4</div>
+					<div class="col-lg-2">{l s='rdv' mod='chronopost'} 1</div>
+					<div class="col-lg-2">{l s='rdv' mod='chronopost'} 2</div>
+					<div class="col-lg-2">{l s='rdv' mod='chronopost'} 3</div>
+					<div class="col-lg-2">{l s='rdv' mod='chronopost'} 4</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-3">{l s='State' mod='chronopost'}</label>
 					<div class="col-lg-2">
-						<select name="chronoparams[predict][state1]">
+						<select name="chronoparams[rdv][state1]">
 							<option value="1">{l s='Open' mod='chronopost'}</option>
 							<option value="0">{l s='Closed' mod='chronopost'}</option>
 						</select>
 					</div>
 					<div class="col-lg-2">
-						<select name="chronoparams[predict][state1]">
+						<select name="chronoparams[rdv][state1]">
 							<option value="1">{l s='Open' mod='chronopost'}</option>
 							<option value="0">{l s='Closed' mod='chronopost'}</option>
 						</select>
 					</div>
 					<div class="col-lg-2">
-						<select name="chronoparams[predict][state1]">
+						<select name="chronoparams[rdv][state1]">
 							<option value="1">{l s='Open' mod='chronopost'}</option>
 							<option value="0">{l s='Closed' mod='chronopost'}</option>
 						</select>
 					</div>
 					<div class="col-lg-2">
-						<select name="chronoparams[predict][state1]">
+						<select name="chronoparams[rdv][state1]">
 							<option value="1">{l s='Open' mod='chronopost'}</option>
 							<option value="0">{l s='Closed' mod='chronopost'}</option>
 						</select>
@@ -483,25 +483,25 @@
 					<label class="control-label col-lg-3">{l s='Pricing' mod='chronopost'}</label>
 					<div class="col-lg-2">
 						<div class="input-group">
-							<input type="text" name="chronoparams[predict][price1]" value="{$predict_price1}"/>
+							<input type="text" name="chronoparams[rdv][price1]" value="{$rdv_price1}"/>
       						<div class="input-group-addon">€</div>
   						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
-							<input type="text" name="chronoparams[predict][price2]" value="{$predict_price2}"/>
+							<input type="text" name="chronoparams[rdv][price2]" value="{$rdv_price2}"/>
       						<div class="input-group-addon">€</div>
   						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
-							<input type="text" name="chronoparams[predict][price3]" value="{$predict_price3}"/>
+							<input type="text" name="chronoparams[rdv][price3]" value="{$rdv_price3}"/>
       						<div class="input-group-addon">€</div>
   						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="input-group">
-							<input type="text" name="chronoparams[predict][price4]" value="{$predict_price4}"/>
+							<input type="text" name="chronoparams[rdv][price4]" value="{$rdv_price4}"/>
       						<div class="input-group-addon">€</div>
   						</div>
 					</div>

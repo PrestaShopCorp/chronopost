@@ -74,7 +74,7 @@ class Chronopost extends CarrierModule
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
 		$this->bootstrap = true;
-		$this->version = '3.6.4';
+		$this->version = '4.0.0';
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
@@ -546,11 +546,12 @@ class Chronopost extends CarrierModule
 				'cust_address' => $address->address1.' '.$address->address2.' '
 			.$address->postcode.' '.$address->city,
 				'cust_address_clean' => $address->address1.' '.$address->address2.' ',
-				'cust_city' => $address->city
+				'cust_city' => $address->city,
+				'map_enabled' => Configuration::get('CHRONOPOST_MAP_ENABLED')
 			)
 		);
 
-        // TODO allow for either one to be activated
+        // TODO allow for either one to be activated (currently chronordv needs chronorelais's JS)
 		$r = $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/hook/chronorelais.tpl');
 
 		$this->context->smarty->assign(
@@ -995,20 +996,20 @@ class Chronopost extends CarrierModule
 				'day_start' => $this->_dayField('day_start', 4),
 				'hour_start' => $this->_hourField('hour_start', 18),
 				'minute_start' => $this->_minuteField('hour_start'),
-				'day_predict_on' => $this->_dayField('day_predict_on'),
-				'hour_predict_on' => $this->_hourField('hour_predict_on'),
-				'minute_predict_on' => $this->_minuteField('minute_predict_on'),
-				'day_predict_close_start' => $this->_dayField('day_predict_close_start'),
-				'hour_predict_close_start' => $this->_hourField('hour_predict_close_start'),
-				'minute_predict_close_start' => $this->_minuteField('minute_predict_close_start'),
-				'day_predict_close_end' => $this->_dayField('day_predict_close_end'),
-				'hour_predict_close_end' => $this->_hourField('hour_predict_close_end'),
-				'minute_predict_close_end' => $this->_minuteField('minute_predict_close_end'),
+				'day_rdv_on' => $this->_dayField('day_rdv_on'),
+				'hour_rdv_on' => $this->_hourField('hour_rdv_on'),
+				'minute_rdv_on' => $this->_minuteField('minute_rdv_on'),
+				'day_rdv_close_start' => $this->_dayField('day_rdv_close_start'),
+				'hour_rdv_close_start' => $this->_hourField('hour_rdv_close_start'),
+				'minute_rdv_close_start' => $this->_minuteField('minute_rdv_close_start'),
+				'day_rdv_close_end' => $this->_dayField('day_rdv_close_end'),
+				'hour_rdv_close_end' => $this->_hourField('hour_rdv_close_end'),
+				'minute_rdv_close_end' => $this->_minuteField('minute_rdv_close_end'),
 				'day_end' => $this->_dayField('day_end', 5),
 				'hour_end' => $this->_hourField('hour_end', 16),
 				'minute_end' => $this->_minuteField('minute_end'),
 				'carriers_tpl' => $carriers_tpl,
-				'predict_delay' => Configuration::get('CHRONOPOST_PREDICT_DELAY'),
+				'rdv_delay' => Configuration::get('CHRONOPOST_RDV_DELAY'),
 				'map_enabled' => Configuration::get('CHRONOPOST_MAP_ENABLED'),
 				'corsica_supplement' => Configuration::get('CHRONOPOST_CORSICA_SUPPLEMENT'),
 				'quickcost_enabled' => Configuration::get('CHRONOPOST_QUICKCOST_ENABLED'),
@@ -1016,10 +1017,10 @@ class Chronopost extends CarrierModule
 				'advalorem_enabled' => Configuration::get('CHRONOPOST_ADVALOREM_ENABLED'),
 				'advalorem_minvalue' => Configuration::get('CHRONOPOST_ADVALOREM_MINVALUE'),
 				'bal_enabled' => Configuration::get('CHRONOPOST_BAL_ENABLED'),
-				'predict_price1' => Configuration::get('CHRONOPOST_PREDICT_PRICE1'),
-				'predict_price2' => Configuration::get('CHRONOPOST_PREDICT_PRICE2'),
-				'predict_price3' => Configuration::get('CHRONOPOST_PREDICT_PRICE3'),
-				'predict_price4' => Configuration::get('CHRONOPOST_PREDICT_PRICE4'),
+				'rdv_price1' => Configuration::get('CHRONOPOST_RDV_PRICE1'),
+				'rdv_price2' => Configuration::get('CHRONOPOST_RDV_PRICE2'),
+				'rdv_price3' => Configuration::get('CHRONOPOST_RDV_PRICE3'),
+				'rdv_price4' => Configuration::get('CHRONOPOST_RDV_PRICE4'),
 				'shipper_form' => $this->_generateChronoForm('shipper'),
 				'customer_form' => $this->_generateChronoForm('customer')
 			)

@@ -24,7 +24,8 @@
     var path="{$module_uri|escape:'javascript'}";
     var oldCodePostal=null;
     var errormessage="{l s='No pickup point has been selected !\nPlease select a pickup point to continue.' mod='chronopost'}";
-    
+    var map_enabled="{$map_enabled}";
+
     var chronodata=new Array();
     var relais_map=null; // our map
     var latlngbounds= new google.maps.LatLngBounds();
@@ -99,7 +100,7 @@
         </div>
     </div>
     <div class="row">
-        <div id="chronorelais_map" class="col-xs-12"></div>
+        <div id="chronorelais_map" class="col-xs-12" {if $map_enabled==0}style="display:none"{/if}></div>
     </div>
     <div id="relais_txt_cont">
             <h4>{l s="Closest pickup points" mod='chronopost'}</h4>
