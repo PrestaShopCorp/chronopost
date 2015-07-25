@@ -795,7 +795,7 @@ class Chronopost extends CarrierModule
 		if (!empty($cache) && $cache[0]['last_updated'] + 24 * 3600 > time())
 		{
 			// return from cache
-			return $cache[0]['price'];
+			return $cache[0]['price'] * (1 + Configuration::get('CHRONOPOST_QUICKCOST_SUPPLEMENT') / 100);
 		}
 
 		include_once(_MYDIR_.'/libraries/QuickcostServiceWSService.php');
@@ -836,10 +836,10 @@ class Chronopost extends CarrierModule
 					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.pSQL($productCode).'" && weight="'.(float)$cart->getTotalWeight().'"
 				');
 
-			return $res->return->amountTTC;
+			return $res->return->amountTTC * (1 + Configuration::get('CHRONOPOST_QUICKCOST_SUPPLEMENT') / 100);
 		}
 		if ($res->return->amount != 0)
-			return $res->return->amount;
+			return $res->return->amount * (1 + Configuration::get('CHRONOPOST_QUICKCOST_SUPPLEMENT') / 100);
 
 
 		return $shipping_cost;
