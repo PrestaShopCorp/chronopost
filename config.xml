@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>chronopost</name>
+	<displayName><![CDATA[Chronopost and ChronoRelais]]></displayName>
+	<version><![CDATA[3.6.3]]></version>
+	<description><![CDATA[Manage Chronopost and Chronopost Pickup relay]]></description>
+	<author><![CDATA[Oxileo for Chronopost]]></author>
+	<tab><![CDATA[shipping_logistics]]></tab>
+	<confirmUninstall><![CDATA[Remember, once this module is uninstalled , you won't be able to edit Chronopost waybills or propose Pickup delivery point to your customers. Are you sure you wish to proceed?]]></confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>
