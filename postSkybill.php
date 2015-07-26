@@ -65,17 +65,20 @@ foreach ($orders as $orderid)
 
 	while ($nb > 0)
 	{
-		$file = tempnam('temp', 'CHR');
+		
+		$lt = @createLT($orderid, $totalnb, $return);
+
+		$file = 'skybills/'.$lt->skybillNumber.'.pdf';
 		$fp = fopen($file, 'w');
 
-		$lt = @createLT($orderid, $totalnb, $return);
-		if ($lt === null) 
+		if ($lt->skybill === null) 
 		{ 
 			/* error, skip it */
 			$nb--;
 			continue;
 		}
-		fwrite($fp, $lt);
+
+		fwrite($fp, $lt->skybill);
 		fclose($fp);
 
 		if (file_exists('custom_pdf/config.json'))
@@ -351,5 +354,5 @@ header('Content-Disposition: attachment; filename="downloaded.pdf"');
 
 	echo $r->skybill; 
 	die();*/
-	return $r->skybill;
+	return $r;
 }

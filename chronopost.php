@@ -689,9 +689,10 @@ class Chronopost extends CarrierModule
 	public function hookAdminOrder($params)
 	{
 		$order = new Order((int)$params['id_order']);
+		
 		if (!Validate::isLoadedObject($order)) return '';
-
 		if (!self::isChrono($order->id_carrier)) return '';
+
 		$this->context->smarty->assign(
 			array(
 				'module_uri' =>__PS_BASE_URI__.'modules/'.$this->name,
