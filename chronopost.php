@@ -703,7 +703,8 @@ class Chronopost extends CarrierModule
 				'saturday_ok' => self::isSaturdayOptionApplicable() ? 1 : 0,
 				'to_insure' =>  self::amountToInsure($params['id_order']),
 				'nbwb' => self::minNumberOfPackages($params['id_order']),
-				'return' => $order->id_carrier != Configuration::get('CHRONOPOST_CHRONOEXPRESS_ID') && $order->id_carrier != Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID') ? 1 : 0
+				'return' => $order->id_carrier != Configuration::get('CHRONOPOST_CHRONOEXPRESS_ID') && $order->id_carrier != Configuration::get('CHRONOPOST_CHRONOCLASSIC_ID') ? 1 : 0,
+				'lt' => $order->getWsShippingNumber()
 			)
 		);
 		if (version_compare(_PS_VERSION_, 1.6) >= 0)

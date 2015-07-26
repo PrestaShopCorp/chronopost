@@ -8,9 +8,17 @@
   * @copyright 2001-2015 Oxileo SAS
   * @license   Proprietary - no redistribution without authorization
   *}
+<script>
+	var lt="{$lt}";
+	var path="{$module_uri}";
+	var id_order="{$id_order}";
+	var chronopost_secret="{$chronopost_secret}";
+</script>
+<script src="{$module_uri}/views/js/adminOrder.js"></script>
+
 <br /><fieldset style = "width:400px;"><legend><img src="../img/admin/delivery.gif"/>
 {l s='Print the Chronopost waybills' mod='chronopost'}
-</legend><form method="POST" action="{$module_uri|escape:'htmlall'}/postSkybill.php">
+</legend><form method="POST" action="{$module_uri|escape:'htmlall'}/postSkybill.php" id="chrono_form">
 {if $bal==1}
 	<p style = "text-align:center;width:400px"><b>Option BAL activée.</b></p>
 {/if}
@@ -31,6 +39,6 @@
 	</div>
 {/if}
 <input type="hidden" name="orderid" value="{$id_order|escape:'htmlall'}"/><p style = "text-align:center">
-<input type="hidden" name="shared_secret" value="{$chronopost_secret|escape:'htmlall'}"/><input type="submit" value="{l s='Print waybill' mod='chronopost'}" class="button" style = "margin:10px;"/>
+<input type="hidden" name="shared_secret" value="{$chronopost_secret|escape:'htmlall'}"/><input type="submit" value="{l s='Print waybill' mod='chronopost'}" class="button" style = "margin:10px;" id="chronoSubmitButton"/>
 {if $return==1}<input style = "margin:10px;" type="submit" name="return" value="{l s='Print the return waybill' mod='chronopost'}" class="button"/>{/if}
 </form></fieldset>
