@@ -135,8 +135,8 @@ class Chronopost extends CarrierModule
 		// new in 4.0.0
 		Configuration::updateValue('CHRONOPOST_SATURDAY_DAY_START', -1);
 		Configuration::updateValue('CHRONOPOST_RDV_DAY_ON', -1);
-		Configuration::updateValue('CHRONOPOST_RDV_CLOSE_START', -1);
-		Configuration::updateValue('CHRONOPOST_RDV_CLOSE_END', -1);
+		Configuration::updateValue('CHRONOPOST_RDV_DAY_CLOSE_START', -1);
+		Configuration::updateValue('CHRONOPOST_RDV_DAY_CLOSE_END', -1);
 
 		DB::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'chrono_calculateproducts_cache2` (
 			 `id` int(11) NOT null AUTO_INCREMENT,
@@ -557,25 +557,45 @@ class Chronopost extends CarrierModule
 		);
 		$r = $this->context->smarty->fetch(dirname(__FILE__).'/views/templates/hook/chronorelais.tpl');
 
-		if(Configuration::get(CHRONOPOST_CHRONORDV_ID) == -1) 
+		if(Configuration::get('CHRONOPOST_CHRONORDV_ID') == -1) 
 			return $r;
 
         // TODO allow for either one to be activated
         // Currently chronordv needs chronorelais's JS, hence ChronoRelais is always included
 
 		// call WS !
-		include_once(_MYDIR_.'libraries/CreneauServiceWSService.php');
+		include_once(_MYDIR_.'/libraries/CreneauServiceWSService.php');
 		$query = new searchDeliverySlot();
-		$query->callerTool = RDVPRE;
+		$query->callerTool = 'RDVPRE';
 		$query->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
 		$query->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 		$query->productType = 'RDV'; // normal product
 		$query->customerZipCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
 		$query->recipientZipCode = $address->postcode;
-		$query->dateBegin = 0; // TODO
-		$query->customerDeliverySlotClosed = 0; //TODO 
-		// TODO CALL
 
+		// Calculate earliest possible shipping date
+		$date = $this->_getNextDay(Configuration::get('CHRONOPOST_RDV_DAY_ON'), Configuration::get('CHRONOPOST_RDV_HOUR_ON'),
+			Configuration::get('CHRONOPOST_RDV_MINUTE_ON'));
+
+		if($date == null) {
+			$date = new DateTime();
+			$date->modify('+ '.(int)Configuration::get('CHRONOPOST_RDV_DELAY').' days');
+		}
+		
+		$query->dateBegin = $date->format('Y-m-d\TH:i:s\Z'); 
+
+		// Calculate next closing period
+		$close_start = $this->_getNextDay(Configuration::get('CHRONOPOST_RDV_DAY_CLOSE_START'), Configuration::get('CHRONOPOST_RDV_HOUR_CLOSE_START'), 
+			Configuration::get('CHRONOPOST_RDV_MINUTE_CLOSE_START'));
+		$close_end = $this->_getNextDay(Configuration::get('CHRONOPOST_RDV_DAY_CLOSE_END'), Configuration::get('CHRONOPOST_RDV_HOUR_CLOSE_END'), 
+			Configuration::get('CHRONOPOST_RDV_MINUTE_CLOSE_END'));
+
+		if($close_start != null && $close_end != null)
+			$query->customerDeliverySlotClosed = $close_start->format('Y-m-d\TH:i:s\Z').'/'.$close_end->format('Y-m-d\TH:i:s\Z');
+		
+		// must pass WSDL
+		//$ws = new CreneauServiceWSService(_MYDIR_.'/libraries/CreneauServiceWSService.xml');
+		//$res = $ws->searchDeliverySlot($query);
 
 		$this->context->smarty->assign(
 			array(
@@ -585,6 +605,38 @@ class Chronopost extends CarrierModule
 		);
 
 		return $r.$this->context->smarty->fetch(dirname(__FILE__).'/views/templates/hook/chronordv.tpl');
+	}
+
+	private function _getNextDay($day, $hour=0, $minute=0) {
+		if($day == -1) return null;
+		$date = new DateTime();
+
+		switch($day) {
+			case 0:
+				$date->modify('next Sunday');
+				break;
+			case 1:
+				$date->modify('next Monday');
+				break;
+			case 2:
+				$date->modify('next Tuesday');
+				break;
+			case 3:
+				$date->modify('next Wednesday');
+				break;
+			case 4:
+				$date->modify('next Thursday');
+				break;
+			case 5:
+				$date->modify('next Friday');
+				break;
+			case 6:
+				$date->modify('next Saturday');
+				break;
+		}
+		
+		$date->modify('+ '.Configuration::get('CHRONOPOST_RDV_HOUR_ON').' hours '.Configuration::get('CHRONOPOST_RDV_MINUTE_ON').' minutes');
+		return $date;
 	}
 
 	public static function getPointRelaisAddress($orderid)

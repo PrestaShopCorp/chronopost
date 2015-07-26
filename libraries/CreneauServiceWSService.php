@@ -82,7 +82,7 @@ class serviceProduit {
  */
 class CreneauServiceWSService extends \SoapClient {
 
-	const WSDL_FILE = "../untitled.xml";
+	const WSDL_FILE = "CreneauServiceWSService.xml";
 	private $classmap = array(
 			'searchDeliverySlot' => 'searchDeliverySlot',
 			'searchDeliverySlotResponse' => 'searchDeliverySlotResponse',
