@@ -47,7 +47,7 @@ class Chronopost extends CarrierModule
 		'chronorelais' =>array(
 			'name' => 'Chronopost - Livraison express en point relais',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -66,7 +66,7 @@ class Chronopost extends CarrierModule
 		'chronopost' =>array(
 			'name' => 'Chronopost - Livraison express à domicile',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -82,7 +82,7 @@ class Chronopost extends CarrierModule
 		'chrono10' =>array(
 			'name' => 'Chronopost - Livraison express à domicile',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -98,7 +98,7 @@ class Chronopost extends CarrierModule
 		'chrono18' =>array(
 			'name' => 'Chronopost - Livraison express à domicile',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => false,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -114,7 +114,7 @@ class Chronopost extends CarrierModule
 		'chronoexpress' =>array(
 			'name' => 'Chrono Express',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -130,7 +130,7 @@ class Chronopost extends CarrierModule
 		'chronoclassic' =>array(
 			'name' => 'Chrono Classic',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -150,7 +150,7 @@ class Chronopost extends CarrierModule
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
 
-		$this->version = '3.6.4';
+		$this->version = '3.6.5';
 
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
