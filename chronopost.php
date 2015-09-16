@@ -632,7 +632,6 @@ class Chronopost extends CarrierModule
 				'cust_firstname' => $address->firstname,
 				'cust_lastname' => $address->lastname,
 				'cartID' => $params['cart']->id,
-				'opc' => false,
 				'carrierID' => Configuration::get('CHRONORELAIS_CARRIER_ID'),
 				'carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONORELAIS_CARRIER_ID').','),
 				'cust_address' => $address->address1.' '.$address->address2.' '
