@@ -1,7 +1,7 @@
 <?php
 /**
 * MODULE PRESTASHOP OFFICIEL CHRONOPOST
-* 
+*
 * LICENSE : All rights reserved - COPY && REDISTRIBUTION FORBIDDEN WITHOUT PRIOR CONSENT FROM OXILEO
 * LICENCE : Tous droits réservés, le droit d'auteur s'applique - COPIE ET REDISTRIBUTION INTERDITES SANS ACCORD EXPRES D'OXILEO
 *
@@ -44,10 +44,10 @@ class Chronopost extends CarrierModule
 
 	/* Module config at install-time */
 	private static $_config = array(
-		'chronorelais' =>array( 
+		'chronorelais' =>array(
 			'name' => 'Chronopost - Livraison express en point relais',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -61,12 +61,12 @@ class Chronopost extends CarrierModule
 			/* .jpg file in img directory */
 			'logo_filename' => 'chronorelais',
 			/* name of the config key to contain carrier ID after module init */
-			'configuration_item' => 'CHRONORELAIS_CARRIER_ID' 
+			'configuration_item' => 'CHRONORELAIS_CARRIER_ID'
 		),
 		'chronopost' =>array(
 			'name' => 'Chronopost - Livraison express à domicile',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -77,12 +77,12 @@ class Chronopost extends CarrierModule
 			'external_module_name' => 'chronopost',
 			'need_range' => true,
 			'logo_filename' => 'chronopost',
-			'configuration_item' => 'CHRONOPOST_CARRIER_ID' 
+			'configuration_item' => 'CHRONOPOST_CARRIER_ID'
 		),
 		'chrono10' =>array(
 			'name' => 'Chronopost - Livraison express à domicile',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -93,12 +93,12 @@ class Chronopost extends CarrierModule
 			'external_module_name' => 'chronopost',
 			'need_range' => true,
 			'logo_filename' => 'chronopost',
-			'configuration_item' => 'CHRONO10_CARRIER_ID' 
+			'configuration_item' => 'CHRONO10_CARRIER_ID'
 		),
 		'chrono18' =>array(
 			'name' => 'Chronopost - Livraison express à domicile',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => false,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -109,12 +109,12 @@ class Chronopost extends CarrierModule
 			'external_module_name' => 'chronopost',
 			'need_range' => true,
 			'logo_filename' => 'chronopost',
-			'configuration_item' => 'CHRONO18_CARRIER_ID' 
+			'configuration_item' => 'CHRONO18_CARRIER_ID'
 		),
 		'chronoexpress' =>array(
 			'name' => 'Chrono Express',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -125,12 +125,12 @@ class Chronopost extends CarrierModule
 			'external_module_name' => 'chronopost',
 			'need_range' => true,
 			'logo_filename' => 'chronoexpress',
-			'configuration_item' => 'CHRONOEXPRESS_CARRIER_ID' 
+			'configuration_item' => 'CHRONOEXPRESS_CARRIER_ID'
 		),
 		'chronoclassic' =>array(
 			'name' => 'Chrono Classic',
 			'id_tax_rules_group' => 1,
-			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang = fr_FR&listeNumeros = @',
+			'url' => 'http://www.chronopost.fr/expedier/inputLTNumbersNoJahia.do?lang=fr_FR&listeNumeros=@',
 			'active' => true,
 			'deleted' => 0,
 			'shipping_handling' => false,
@@ -141,7 +141,7 @@ class Chronopost extends CarrierModule
 			'external_module_name' => 'chronopost',
 			'need_range' => true,
 			'logo_filename' => 'chronoexpress',
-			'configuration_item' => 'CHRONOCLASSIC_CARRIER_ID' 
+			'configuration_item' => 'CHRONOCLASSIC_CARRIER_ID'
 		)
 	);
 
@@ -149,7 +149,9 @@ class Chronopost extends CarrierModule
 	{
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
-		$this->version = '3.6.1';
+
+		$this->version = '3.6.6';
+
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
@@ -162,7 +164,7 @@ class Chronopost extends CarrierModule
 
 		// Check is SOAP is available
 		if (!extension_loaded('soap')) $this->warning .= $this->l('The SOAP extension is not available or configured on the server ; The module will not work without this extension ! Please contact your host to activate it in your PHP installation.');
-		if (!self::checkPSVersion()) 
+		if (!self::checkPSVersion())
 			$this->warning .= $this->l('This module is incompatible with your Prestashop installation. You can visit the <a href = "http://www.chronopost.fr/transport-express/livraison-colis/accueil/produits-tarifs/expertise-sectorielle/e-commerce/plateformes">Chronopost.fr </a>website to download a comptible version.');
 
 		// Check is module is properly configured
@@ -179,7 +181,7 @@ class Chronopost extends CarrierModule
 		}
 
 		// Check for SOAP
-		if (!extension_loaded('soap')) 
+		if (!extension_loaded('soap'))
 		{
 			$this->context->controller->errors[] = $this->l('The SOAP extension is not available or configured on the server ; The module will not work without this extension ! Please contact your host to activate it in your PHP installation.');
 			return false;
@@ -191,11 +193,11 @@ class Chronopost extends CarrierModule
 		if (!$this->_adminInstall()) return false;
 
 		// register hooks
-		if (!$this->registerHook('extraCarrier') || // For point relais GMap 
+		if (!$this->registerHook('extraCarrier') || // For point relais GMap
 			!$this->registerHook('updateCarrier') || // For update of carrier IDs
 			!$this->registerHook('newOrder') || // Processing of selected BT, NOTE : processCarrier apparently not what we want
-			!$this->registerHook('header') || // 
-			!$this->registerHook('backOfficeHeader') || // 
+			!$this->registerHook('header') || //
+			!$this->registerHook('backOfficeHeader') || //
 			!$this->registerHook('adminOrder'))
 				return false;
 		return true;
@@ -235,12 +237,24 @@ class Chronopost extends CarrierModule
 				PRIMARY KEY (`id_order`, `lt`)
 			) ENGINE = MyISAM DEFAULT CHARSET = utf8;');
 
+		
+		Db::getInstance()->execute('CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'chrono_quickcost_cache` (
+			`id` int(11) NOT null AUTO_INCREMENT,
+			`product_code` varchar(2) NOT null,
+			`arrcode` varchar(10) NOT null,
+			`weight` decimal(10,2) NOT null,
+			`price` decimal(10,2) NOT null,
+			`last_updated` int(11) NOT null,
+			PRIMARY KEY (`id`)
+			) ENGINE = MyISAM DEFAULT CHARSET = utf8 AUTO_INCREMENT = 1 ;');
+
+
 		// pre install
 		if (!$this->preInstall()) return false;
 
 		// init config
 		if (!Configuration::updateValue('CHRONOPOST_SECRET', sha1(microtime(true).mt_rand(10000, 90000)))
-			|| !Configuration::updateValue('CHRONOPOST_CORSICA_SUPPLEMENT', '19.60')) 
+			|| !Configuration::updateValue('CHRONOPOST_CORSICA_SUPPLEMENT', '19.60'))
 				return false;
 
 		// add carriers in back office
@@ -304,10 +318,10 @@ class Chronopost extends CarrierModule
 			$carrier->shipping_external = $config['shipping_external'];
 			$carrier->external_module_name = $config['external_module_name'];
 			$carrier->need_range = $config['need_range'];
-			
+
 			$languages = Language::getLanguages(true);
 
-			foreach ($languages as $language) 
+			foreach ($languages as $language)
 			{
 				if (array_key_exists($language['iso_code'], $config['delay']))
 					$carrier->delay[$language['id_lang']] = $config['delay'][$language['iso_code']];
@@ -346,7 +360,7 @@ class Chronopost extends CarrierModule
 					$rangeWeight->delimiter2 = $line[1];
 					$rangeWeight->price_to_affect = $line[2];
 					$rangeWeight->add();
-				} 
+				}
 
 				//copy logo
 				if (!copy(dirname(__FILE__).'/views/img/'.$config['logo_filename'].'.jpg', _PS_SHIP_IMG_DIR_.'/'.$carrier->id.'.jpg'))
@@ -355,7 +369,7 @@ class Chronopost extends CarrierModule
 		}
 		return true;
 	}
-		
+
 	public function uninstall()
 	{
 		$carriers = array(
@@ -408,7 +422,7 @@ class Chronopost extends CarrierModule
 		if ($end < $start) $end->modify('+1 week');
 		$now = new DateTime();
 
-		if ($start <= $now && $now <= $end) 
+		if ($start <= $now && $now <= $end)
 			return true;
 
 		return false;
@@ -422,13 +436,13 @@ class Chronopost extends CarrierModule
 
 	public static function trackingStatus($id_order, $shipping_number)
 	{
-		// MAIL::SEND is bugged in 1.5 ! 
+		// MAIL::SEND is bugged in 1.5 !
 		// http://forge.prestashop.com/browse/PNM-754 (Unresolved as of 2013-04-15)
 		// Context fix (it's that easy)
-		Context::getContext()->link = new Link(); 
+		Context::getContext()->link = new Link();
 		// Fix context by adding employee
 		$cookie = new Cookie('psAdmin');
-		Context::getContext()->employee = new Employee($cookie->id_employee); 
+		Context::getContext()->employee = new Employee($cookie->id_employee);
 
 		$o = new Order($id_order);
 		$o->shipping_number = $shipping_number;
@@ -445,7 +459,7 @@ class Chronopost extends CarrierModule
 		$order_carrier->id_order = $id_order;
 		$order_carrier->id_carrier = $o->id_carrier;
 		$order_carrier->update();
-		// No, there is no method in Order to retrieve the orderCarrier object(s) 
+		// No, there is no method in Order to retrieve the orderCarrier object(s)
 
 		$history = new OrderHistory();
 		$history->id_order = (int)($o->id);
@@ -456,14 +470,14 @@ class Chronopost extends CarrierModule
 		$customer = new Customer($o->id_customer);
 		$carrier = new Carrier($o->id_carrier);
 		$tracking_url = str_replace('@', $o->shipping_number, $carrier->url);
-		
+
 		$templateVars = array(
 			'{tracking_link}' => '<a href = "'.$tracking_url.'">'.$o->shipping_number.'</a>',
 			'{tracking_code}' => $o->shipping_number,
 			'{firstname}' => $customer->firstname,
 			'{lastname}' => $customer->lastname,
 			'{id_order}' => (int)($o->id)
-		); 
+		);
 
 		Mail::Send($o->id_lang, 'tracking', 'Tracking number for your order', $templateVars, $customer->email,
 			$customer->firstname.' '.$customer->lastname, null, null, null, null, _MYDIR_.'/mails/', true);
@@ -472,7 +486,7 @@ class Chronopost extends CarrierModule
 	public static function errorStatus($id_order)
 	{
 		/*
-		Must be kept as a placeholder for customized deployments. 
+		Must be kept as a placeholder for customized deployments.
 
 		$history = new OrderHistory();
 		$history->id_order = (int)($id_order);
@@ -498,7 +512,7 @@ class Chronopost extends CarrierModule
 		// Ensures that if our carrier ID changes after a modification, we still have it up-to-date
 		if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONORELAIS_CARRIER_ID')))
 			Configuration::updateValue('CHRONORELAIS_CARRIER_ID', $params['carrier']->id);
-		
+
 		else if ((int)($params['id_carrier']) == (int)(Configuration::get('CHRONOPOST_CARRIER_ID')))
 			Configuration::updateValue('CHRONOPOST_CARRIER_ID', $params['carrier']->id);
 
@@ -517,16 +531,16 @@ class Chronopost extends CarrierModule
 		$c18 = new Carrier(Configuration::get('CHRONO18_CARRIER_ID'));
 		$c13 = new Carrier(Configuration::get('CHRONOPOST_CARRIER_ID'));
 
-		if (($params['carrier']->id == Configuration::get('CHRONOPOST_CARRIER_ID') && (int)$params['carrier']->active == 1 
+		if (($params['carrier']->id == Configuration::get('CHRONOPOST_CARRIER_ID') && (int)$params['carrier']->active == 1
 				&& $c18->active == 1)
-			|| ($params['carrier']->id == Configuration::get('CHRONO18_CARRIER_ID') && (int)$params['carrier']->active == 1 
+			|| ($params['carrier']->id == Configuration::get('CHRONO18_CARRIER_ID') && (int)$params['carrier']->active == 1
 				&& $c13->active == 1))
 		{
 			$params['carrier']->active = 0;
 			$params['carrier']->save();
 
 			echo '<script>alert("'.$this->l('You can\'t activate simultaneously Chronopost before 13h and before 18h.').'");
-				history.back(); 
+				history.back();
 			</script>';
 			exit();
 		}
@@ -543,15 +557,15 @@ class Chronopost extends CarrierModule
 		include_once _PS_MODULE_DIR_.'/chronopost/libraries/PointRelaisServiceWSService.php';
 
 		// Update order delivery address to PR address (new in 2.8.4 per support #300)
-		
+
 		// Data
 		$cart = $params['cart'];
 		if (!Validate::isLoadedObject($cart)) return;
 
 		$current_address = new Address($cart->id_address_delivery);
-		
+
 		// Getting relais details
-		// We have to use PointRelaisService so we are in Chronopost's most up-to-date environnement 
+		// We have to use PointRelaisService so we are in Chronopost's most up-to-date environnement
 		$ws = new PointRelaisServiceWSService();
 		$paramsw = new rechercheDetailPointChronopost ();
 		$paramsw->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
@@ -606,7 +620,6 @@ class Chronopost extends CarrierModule
 		$this->context->controller->addCSS($module_uri.'/views/css/chronorelais.css', 'all');
 		$this->context->controller->addJS('https://maps.google.com/maps/api/js?sensor=false');
 		$this->context->controller->addJS($module_uri.'/views/js/chronorelais.js');
-		$this->context->controller->addJS($module_uri.'/views/js/scrollTo.min.js');
 	}
 
 	public function hookExtraCarrier($params)
@@ -619,7 +632,6 @@ class Chronopost extends CarrierModule
 				'cust_firstname' => $address->firstname,
 				'cust_lastname' => $address->lastname,
 				'cartID' => $params['cart']->id,
-				'opc' => false,
 				'carrierID' => Configuration::get('CHRONORELAIS_CARRIER_ID'),
 				'carrierIntID' => (string)Cart::intifier(Configuration::get('CHRONORELAIS_CARRIER_ID').','),
 				'cust_address' => $address->address1.' '.$address->address2.' '
@@ -670,7 +682,7 @@ class Chronopost extends CarrierModule
 
 	public static function isChrono($id_carrier)
 	{
-		return $id_carrier == Configuration::get('CHRONOPOST_CARRIER_ID') 
+		return $id_carrier == Configuration::get('CHRONOPOST_CARRIER_ID')
 			|| $id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID')
 			|| $id_carrier == Configuration::get('CHRONOEXPRESS_CARRIER_ID')
 			|| $id_carrier == Configuration::get('CHRONO10_CARRIER_ID')
@@ -710,7 +722,7 @@ class Chronopost extends CarrierModule
 
 		$res = array('chrono10' => false, 'chronoclassic' => false, 'chrono18' => false);
 
-		$cache = Db::getInstance()->executeS('SELECT chrono10, chrono18, chronoclassic, last_updated FROM `'._DB_PREFIX_.'chrono_calculateproducts_cache2` WHERE postcode = "'.pSQL($a->postcode).'" && country = "'.pSQL($c->iso_code).'"'); 
+		$cache = Db::getInstance()->executeS('SELECT chrono10, chrono18, chronoclassic, last_updated FROM `'._DB_PREFIX_.'chrono_calculateproducts_cache2` WHERE postcode = "'.pSQL($a->postcode).'" && country = "'.pSQL($c->iso_code).'"');
 
 		if (empty($cache) || $cache[0]['last_updated'] + 24 * 3600 < time())
 		{
@@ -719,12 +731,12 @@ class Chronopost extends CarrierModule
 
 			$ws = new QuickcostServiceWSService();
 			$cp = new calculateProducts();
-			
+
 			$cp->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
 			$cp->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 			$cp->depZipCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
 			$cp->depCountryCode = 'FR';
-			$cp->weight = $cart->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF');
+			$cp->weight = $cart->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') + 0.1;
 			$cp->arrCountryCode = $c->iso_code;
 			$cp->arrZipCode = $a->postcode;
 			$cp->type = 'M';
@@ -753,18 +765,18 @@ class Chronopost extends CarrierModule
 			// INSERT cache
 			if (empty($cache))
 			{
-				$sql = 'INSERT INTO `'._DB_PREFIX_.'chrono_calculateproducts_cache2` 
+				$sql = 'INSERT INTO `'._DB_PREFIX_.'chrono_calculateproducts_cache2`
 					(`postcode`,`country`, `chrono10`,`chrono18`, `chronoclassic`,`last_updated`) VALUES
-					("'.pSQL($a->postcode).'", "'.pSQL($c->iso_code).'", '.($res['chrono10'] == true?1:0).', '.($res['chrono18'] == true?1:0).', 
+					("'.pSQL($a->postcode).'", "'.pSQL($c->iso_code).'", '.($res['chrono10'] == true?1:0).', '.($res['chrono18'] == true?1:0).',
 					'.($res['chronoclassic'] == true?1:0).', '.time().')';
 				Db::getInstance()->Execute($sql);
 			}
 			else // UPDATE cache
-				Db::getInstance()->Execute('UPDATE `'._DB_PREFIX_.'chrono_calculateproducts_cache2` 
-					SET `chrono10` = '.($res['chrono10'] == true ? 1 : 0).', `chrono18` = '.($res['chrono18'] == true?1:0).', 
+				Db::getInstance()->Execute('UPDATE `'._DB_PREFIX_.'chrono_calculateproducts_cache2`
+					SET `chrono10` = '.($res['chrono10'] == true ? 1 : 0).', `chrono18` = '.($res['chrono18'] == true?1:0).',
 					 `chronoclassic` = '.($res['chronoclassic'] == true?1:0).',
 					 `last_updated` = '.time().' WHERE postcode = "'.pSQL($a->postcode).'" && country = "'.pSQL($c->iso_code).'"');
-		} 
+		}
 		else
 		{
 			$res['chrono10'] = $cache[0]['chrono10'];
@@ -787,16 +799,16 @@ class Chronopost extends CarrierModule
 		$a = new Address($cart->id_address_delivery);
 		$c = new Country($a->id_country);
 
-		foreach ($cart->getProducts() as $p) 
+		foreach ($cart->getProducts() as $p)
 		{
 			// check if no product > 20 kg
-			if ($p['weight'] * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 20) 
+			if ($p['weight'] * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 20)
 				$relaisAvailable = false;
 
 			if ($p['weight'] * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 30)
-			{ 
-				$classicAvailable = false; 
-				break; 
+			{
+				$classicAvailable = false;
+				break;
 			}
 		}
 
@@ -815,8 +827,8 @@ class Chronopost extends CarrierModule
 
 				if (!$relaisAvailable) return false;
 			break;
-			
-			case Configuration::get('CHRONOPOST_CARRIER_ID'): 
+
+			case Configuration::get('CHRONOPOST_CARRIER_ID'):
 				$productCode = self::$productCodes['CHRONOPOST_CARRIER_ID'];
 				if ($c->iso_code != 'FR' && $c->iso_code != 'FX') return false;
 			break;
@@ -828,7 +840,7 @@ class Chronopost extends CarrierModule
 
 			case Configuration::get('CHRONO18_CARRIER_ID'):
 				if ($c->iso_code != 'FR' && $c->iso_code != 'FX') return false;
-				if ($calculatedProducts['chrono18'] == false) return false; 
+				if ($calculatedProducts['chrono18'] == false) return false;
 				$productCode = self::$productCodes['CHRONO18_CARRIER_ID'];
 			break;
 
@@ -853,13 +865,22 @@ class Chronopost extends CarrierModule
 			return $shipping_cost;
 		}
 
+		$arrcode = (($c->iso_code == 'FR' || $c->iso_code == 'FX')?$a->postcode:$c->iso_code);
+		$cache = Db::getInstance()->executeS('SELECT price, last_updated FROM `'._DB_PREFIX_.'chrono_quickcost_cache` WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.$productCode.'" && weight="'.$cart->getTotalWeight().'"');
+
+		if (!empty($cache) && $cache[0]['last_updated'] + 24 * 3600 > time())
+		{
+			// return from cache
+			return $cache[0]['price'];
+		}
+
 		include_once(_MYDIR_.'/libraries/QuickcostServiceWSService.php');
 		$ws = new QuickcostServiceWSService();
 		$qc = new quickCost();
 		$qc->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
 		$qc->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 		$qc->depCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
-		$qc->arrCode = (($c->iso_code == 'FR' || $c->iso_code == 'FX')?$a->postcode:$c->iso_code);
+		$qc->arrCode = $arrcode;
 		$qc->weight = $cart->getTotalWeight();
 		if ($qc->weight == 0) $qc->weight = 0.1; // 0 yeilds an error
 
@@ -875,12 +896,32 @@ class Chronopost extends CarrierModule
 			return $shipping_cost;
 		}
 
-		if ($res->return->amount != 0) 
+		if ($res->return->amountTTC != 0)
+		{
+			if(empty($cache))
+			{
+				DB::getInstance()->query('INSERT INTO '._DB_PREFIX_.'chrono_quickcost_cache (product_code, arrcode, weight, price, last_updated) VALUES (
+						"'.pSQL($productCode).'",
+						"'.pSQL($arrcode).'",
+						"'.(float)$cart->getTotalWeight().'",
+						"'.(float)$res->return->amountTTC.'",
+						"'.time().'")
+				');
+			}
+			else 
+				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated="'.time().'
+					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.pSQL($productCode).'" && weight="'.(float)$cart->getTotalWeight().'"
+				');
+
+			return $res->return->amountTTC;
+		}
+		if ($res->return->amount != 0)
 			return $res->return->amount;
+
 
 		return $shipping_cost;
 	}
-			
+
 	public function getOrderShippingCostExternal($params)
 	{
 		return $this->getOrderShippingCost($params, 0);
@@ -894,7 +935,7 @@ class Chronopost extends CarrierModule
 		$vars = array('civility', 'name', 'name2', 'address', 'address2', 'zipcode', 'city', 'contactname', 'email', 'phone', 'mobile');
 		$smarty = array();
 		$smarty['prefix'] = $prefix;
-		
+
 		foreach ($vars as $var)
 			$smarty[$var] = Configuration::get('CHRONOPOST_'.$var_name.'_'.Tools::strtoupper($var));
 
@@ -906,7 +947,7 @@ class Chronopost extends CarrierModule
 	{
 		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
-		
+
 		$this->context->smarty->assign(
 			array(
 				'selected' => $selected,
@@ -922,7 +963,7 @@ class Chronopost extends CarrierModule
 		$selected = Configuration::get('CHRONOPOST_SATURDAY_'.Tools::strtoupper($fieldName));
 		if ($selected === false) $selected = $default;
 
-		// Smarty is so painful 
+		// Smarty is so painful
 		$this->context->smarty->assign(
 			array(
 				'selected' => $selected,
@@ -965,7 +1006,7 @@ class Chronopost extends CarrierModule
 
 		return true;
 	}
-	
+
 	public function getContent()
 	{
 		$html = '';

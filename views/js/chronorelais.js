@@ -14,18 +14,23 @@ String.prototype.capitalize = function() {
 }
 
 
-function toggleRelaisMap(cust_address, codePostal, city)
+function toggleRelaisMap(cust_address, codePostal, city, e)
 {
     if($("input.delivery_option_radio:checked").val()==carrierID+"," || $("input[name=id_carrier]:checked").val()==carrierIntID) 
     {
+        if(typeof e != "undefined") {
+            e.stopPropagation();
+        }
         // Show Chronorelais controls
         $('#chronorelais_container').show();
         initRelaisMap(cust_address, codePostal, city);
-
-    } else {
-        // Hide Chronorelais controls
-        $('#chronorelais_container').hide();
+        $.scrollTo($('#chronorelais_container'), 800);
+        return false;
     }
+
+    // Hide Chronorelais controls
+    $('#chronorelais_container').hide();
+
 };
 
 
@@ -49,20 +54,9 @@ function mapInit() {
 
 function associateRelais(relaisID)
 {
-/*    $("#HOOK_PAYMENT a").each(function() {
-        url=$(this).attr("href");
-//        console.log(url);
-        if(url.search("&relaisID")>0)
-        {
-            url=url.substr(0, url.search("&relaisID"));
-        }
-        $(this).attr("href", url+"&relaisID="+relaisID);
-    });*/
-
     $.ajax({
         url: path+'/async/storePointRelais.php?relaisID='+relaisID+'&cartID='+cartID+'&customerFirstname='+cust_firstname+'&customerLastname='+cust_lastname
-    });
-    
+    });    
 }
 
 function createHomeMarker(address)
@@ -111,7 +105,7 @@ function createAllPointRelais(json)
     for(var i=0;i<ldata.length;i++)
     {
         createRelaisMarker(ldata[i]);
-        data[ldata[i].identifiantChronopostPointA2PAS]=ldata[i];
+        chronodata[ldata[i].identifiantChronopostPointA2PAS]=ldata[i];
 
         htmlForTxtSection+='<div class="checkbox"><label><input type="radio" name="chronorelaisSelect" id="bt'
             +ldata[i].identifiantChronopostPointA2PAS+'" value="'
@@ -124,16 +118,15 @@ function createAllPointRelais(json)
             +' - '+ldata[i].adresse1+' - '+ldata[i].codePostal+' '+ldata[i].localite+'</label></div>';
     }
 
-
     $('#relais_txt').html(htmlForTxtSection);
     associateRelais(ldata[0].identifiantChronopostPointA2PAS);
-
 
     // Listener for BT select in radio list
     $('input[name="chronorelaisSelect"]').change(function() {
         var btid=$('input[name="chronorelaisSelect"]:checked').val();
         associateRelais(btid);
         openBTMarker(btid);
+
     });
 
 
@@ -170,11 +163,9 @@ function createAllPointRelais2(json)
         ldata[i].coordGeoLatitude=ldata[i].coordGeolocalisationLatitude;
         ldata[i].coordGeoLongitude=ldata[i].coordGeolocalisationLongitude;
 
-
         createRelaisMarker(ldata[i]);
 
-        data[ldata[i].identifiant]=ldata[i];
-
+        chronodata[ldata[i].identifiant]=ldata[i];
 
         htmlForTxtSection+='<div class="checkbox"><label><input type="radio" name="chronorelaisSelect" id="bt'
             +ldata[i].identifiant+'" value="'
@@ -191,14 +182,12 @@ function createAllPointRelais2(json)
     $('#relais_txt').html(htmlForTxtSection);
     associateRelais(ldata[0].identifiantChronopostPointA2PAS);
 
-
     // Listener for BT select in radio list
     $('input[name="chronorelaisSelect"]').change(function() {
         var btid=$('input[name="chronorelaisSelect"]:checked').val();
         associateRelais(btid);
         openBTMarker(btid);
     });
-
 
     relais_map.fitBounds(latlngbounds);
 };
@@ -207,8 +196,6 @@ function createAllPointRelais2(json)
 
 function initRelaisMarkers(address, cp, city)
 {
-
-
 
     // as well as home marker
     latlngbounds= new google.maps.LatLngBounds();
@@ -229,70 +216,71 @@ function initRelaisMarkers(address, cp, city)
 
         createHomeMarker(address+" "+cp+" "+city);
     }
-
 };
 
 
 
-function createRelaisMarker(data)
+function createRelaisMarker(chronodata)
 {
-    var pos=new google.maps.LatLng(data.coordGeoLatitude, data.coordGeoLongitude);
+    var pos=new google.maps.LatLng(chronodata.coordGeoLatitude, chronodata.coordGeoLongitude);
     latlngbounds.extend(pos);
-    map_markers[data.identifiantChronopostPointA2PAS]=new google.maps.Marker({
+    map_markers[chronodata.identifiantChronopostPointA2PAS]=new google.maps.Marker({
         map: relais_map,
         position: pos,
         icon:path+'/views/img/postal.png'
     });
 
     // link infowindow to marker
-    google.maps.event.addListener(map_markers[data.identifiantChronopostPointA2PAS], 'click',
-        function() {openBTMarker(data.identifiantChronopostPointA2PAS);});
+    google.maps.event.addListener(map_markers[chronodata.identifiantChronopostPointA2PAS], 'click',
+        function() {openBTMarker(chronodata.identifiantChronopostPointA2PAS);});
 };
 
 function openBTMarker(btID) {
+    console.log("Hello");
+
     if (infowindow) infowindow.close();
     var iwcontent='';
 
     // create infowindow
 
-    if(typeof(data[btID].horairesOuvertureLundi)==='undefined')
+    if(typeof(chronodata[btID].horairesOuvertureLundi)==='undefined')
     {
         iwcontent='<div class="pointRelais"><h4>'
-            +data[btID].nomEnseigne+'</h4><class="address">'+data[btID].adresse1+'<br/ >'+data[btID].codePostal
-            +' '+data[btID].localite+'</p><h5>Horaires d\'ouverture</h5><table><tbody>';
+            +chronodata[btID].nomEnseigne+'</h4><class="address">'+chronodata[btID].adresse1+'<br/ >'+chronodata[btID].codePostal
+            +' '+chronodata[btID].localite+'</p><h5>Horaires d\'ouverture</h5><table><tbody>';
 
-        for(var i=0; i<data[btID].listeHoraireOuverture.length;i++)
+        for(var i=0; i<chronodata[btID].listeHoraireOuverture.length;i++)
         {
-            var day=data[btID].listeHoraireOuverture[i];
+            var day=chronodata[btID].listeHoraireOuverture[i];
             iwcontent+='<tr class="first_item item"><td>'+days[day.jour].capitalize()+'</td><td>'
             +day.horairesAsString+'</td></tr>';
 
         }
 
         iwcontent+='</tbody></table>'
-        +'<p class="text-right"><input type="hidden" name="btID" value="'+data[btID].identifiantChronopostPointA2PAS
+        +'<p class="text-right"><input type="hidden" name="btID" value="'+chronodata[btID].identifiantChronopostPointA2PAS
         +'"/><a class="button_large btselect" href="javascript:;" class="pull-right">Sélectionner »</a></p>'
         +'</div>';
     } else {
         iwcontent='<div class="pointRelais"><h4>'
-            +data[btID].nomEnseigne+'</h4><class="address">'+data[btID].adresse1+'<br/ >'+data[btID].codePostal
-            +' '+data[btID].localite+'</p><h5>Horaires d\'ouverture</h5><table><tbody>'
+            +chronodata[btID].nomEnseigne+'</h4><class="address">'+chronodata[btID].adresse1+'<br/ >'+chronodata[btID].codePostal
+            +' '+chronodata[btID].localite+'</p><h5>Horaires d\'ouverture</h5><table><tbody>'
             +'<tr class="first_item item"><td>Lundi</td><td>'
-            +(data[btID].horairesOuvertureLundi=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureLundi)
+            +(chronodata[btID].horairesOuvertureLundi=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureLundi)
             +'</td></tr><tr class="alternate_item"><td>Mardi</td><td>'
-            +(data[btID].horairesOuvertureMardi=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureMardi)
+            +(chronodata[btID].horairesOuvertureMardi=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureMardi)
             +'</td></tr><tr class="item"><td>Mercredi</td><td>'
-            +(data[btID].horairesOuvertureMercredi=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureMercredi)
+            +(chronodata[btID].horairesOuvertureMercredi=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureMercredi)
             +'</td></tr><tr class="alternate_item"><td>Jeudi</td><td>'
-            +(data[btID].horairesOuvertureJeudi=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureJeudi)
+            +(chronodata[btID].horairesOuvertureJeudi=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureJeudi)
             +'</td></tr><tr class="item"><td>Vendredi</td><td>'
-            +(data[btID].horairesOuvertureVendredi=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureVendredi)
+            +(chronodata[btID].horairesOuvertureVendredi=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureVendredi)
             +'</td></tr><tr class="alternate_item"><td>Samedi</td><td>'
-            +(data[btID].horairesOuvertureSamedi=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureSamedi)
+            +(chronodata[btID].horairesOuvertureSamedi=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureSamedi)
             +'</td></tr><tr class="last_item item"><td>Dimanche</td><td>'
-            +(data[btID].horairesOuvertureDimanche=='00:00-00:00 00:00-00:00'?'Fermé':data[btID].horairesOuvertureDimanche)
+            +(chronodata[btID].horairesOuvertureDimanche=='00:00-00:00 00:00-00:00'?'Fermé':chronodata[btID].horairesOuvertureDimanche)
             +'</td></tr></tbody></table>'
-            +'<p class="text-right"><input type="hidden" name="btID" value="'+data[btID].identifiantChronopostPointA2PAS
+            +'<p class="text-right"><input type="hidden" name="btID" value="'+chronodata[btID].identifiantChronopostPointA2PAS
             +'"/><a class="button_large btselect" href="javascript:;" class="pull-right">Sélectionner »</a></p>'
             +'</div>';
     }
@@ -311,7 +299,3 @@ function btSelect(target, e) {
     associateRelais(btID);
     $.scrollTo(mObj);
 };
-
-var current=null;
-
-

@@ -11,7 +11,7 @@ $_MODULE['<{chronopost}prestashop>chronopost_1c2487fff5cd8e0530a6eb995e783de4'] 
 $_MODULE['<{chronopost}prestashop>chronopost_0a295b8c6758f2be56dbd446eefdcd87'] = 'Vous devez configurer le module Chronopost avec vos informations de contrat Chronopost. Veuillez vous connecter à l\'adresse suivante : www.mychrono.chronopost.fr si vous ne disposez pas de contrat Chronopost.';
 $_MODULE['<{chronopost}prestashop>chronopost_64d88f37080c426120d0c446562ef097'] = 'Export Chronopost';
 $_MODULE['<{chronopost}prestashop>chronopost_2170f7d446a51cb328224a9a66a6ae29'] = 'Import Chronopost';
-$_MODULE['<{chronopost}prestashop>chronopost_6c2f86fd465cd88f6719566b0b3a3659'] = 'Bordereau de fin de journée Chronopost';
+$_MODULE['<{chronopost}prestashop>chronopost_6c2f86fd465cd88f6719566b0b3a3659'] = 'Bordereau de fin de journée';
 $_MODULE['<{chronopost}prestashop>chronopost_fbb7ffd11c21bf0ff1422f1c2a134aea'] = 'Vous ne pouvez pas activer Chronopost avant 13h et Chronopost avant 18h en même temps.';
 $_MODULE['<{chronopost}prestashop>chronopost_f38f5974cdc23279ffe6d203641a8bdf'] = 'Paramètres mis à jour. ';
 $_MODULE['<{chronopost}prestashop>chronopost_be5c0d17ceab2f9598d373dc19ac1e88'] = 'Fichier PDF';
@@ -108,3 +108,12 @@ $_MODULE['<{chronopost}prestashop>adminorder-16_ffda411a44ebbe101a4596271786cef4
 $_MODULE['<{chronopost}prestashop>adminorder-16_d616012b95fc9f7e02d52772617909c4'] = 'Édition de l\'étiquette Chronopost';
 $_MODULE['<{chronopost}prestashop>adminorder-16_51b386afd47b817d9722e06085a80031'] = 'Editer l\'étiquette de retour';
 $_MODULE['<{chronopost}prestashop>chronorelais_69bb27eb2e7072a4182a8d79c52bb187'] = 'Aucun point Pickup sélectionné ! Merci de sélectionner un point Pickup pour continuer. ';
+$_MODULE['<{chronopost}prestashop>chronorelais_38c1b1ad9374538917b29179c7293774'] = 'Sélectionnez un point relais pour la livraison Chrono Relais';
+$_MODULE['<{chronopost}prestashop>chronorelais_0a43a182e9ee571f4d77574ba2249ab8'] = 'Sélectionnez un point relais sur la carte ci-dessous en cliquant sur son icône puis \'Sélectionner\'';
+$_MODULE['<{chronopost}prestashop>chronorelais_0230687bb36c1a0581f58305fa5cfa96'] = 'Changer mon code postal';
+$_MODULE['<{chronopost}prestashop>chronorelais_9f57ef2a5068759069a7ca50993db71e'] = 'Les points relais les plus proches';
+$_MODULE['<{chronopost}prestashop>chronorelais_38c1b1ad9374538917b29179c7293774'] = 'Sélectionnez un point relais';
+$_MODULE['<{chronopost}prestashop>chronorelais_0a43a182e9ee571f4d77574ba2249ab8'] = 'Sélectionnez un point relais ci-dessous puis confirmez avec le bouton «Sélectionner»';
+$_MODULE['<{chronopost}prestashop>chronorelais_0230687bb36c1a0581f58305fa5cfa96'] = 'Changer mon code postal';
+$_MODULE['<{chronopost}prestashop>chronorelais_9f57ef2a5068759069a7ca50993db71e'] = 'Points relais les plus proches';
+
