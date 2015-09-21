@@ -150,19 +150,14 @@ class Chronopost extends CarrierModule
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
 
-<<<<<<< HEAD
-		$this->version = '3.6.5';
-=======
-		$this->version = '3.6.6';
->>>>>>> a18ac8fe5275abf1277b4b7394677f79879915fa
-
+		$this->version = '3.7.6';
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
 
 		parent::__construct();
 
-		$this->displayName = $this->l('Chronopost and ChronoRelais');
+		$this->displayName = $this->l('Chronopost');
 		$this->description = $this->l('Manage Chronopost and Chronopost Pickup relay');
 		$this->confirmUninstall = $this->l('Remember, once this module is uninstalled , you won\'t be able to edit Chronopost waybills or propose Pickup delivery point to your customers. Are you sure you wish to proceed?');
 
