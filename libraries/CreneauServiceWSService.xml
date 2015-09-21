@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CreneauServiceWSService" targetNamespace="http://cxf.soap.ws.creneau.chronopost.fr/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://cxf.soap.ws.creneau.chronopost.fr/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://cxf.soap.ws.creneau.chronopost.fr/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://cxf.soap.ws.creneau.chronopost.fr/">
+  <xs:element name="confirmDeliverySlot" type="tns:confirmDeliverySlot"/>
+  <xs:element name="confirmDeliverySlotResponse" type="tns:confirmDeliverySlotResponse"/>
+  <xs:element name="searchDeliverySlot" type="tns:searchDeliverySlot"/>
+  <xs:element name="searchDeliverySlotResponse" type="tns:searchDeliverySlotResponse"/>
+  <xs:complexType name="searchDeliverySlot">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="callerTool" type="xs:string"/>
+      <xs:element minOccurs="0" name="productType" type="xs:string"/>
+      <xs:element minOccurs="0" name="customerAdress1" type="xs:string"/>
+      <xs:element minOccurs="0" name="customerAdress2" type="xs:string"/>
+      <xs:element minOccurs="0" name="customerZipCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="customerCity" type="xs:string"/>
+      <xs:element minOccurs="0" name="customerCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="recipientAdress1" type="xs:string"/>
+      <xs:element minOccurs="0" name="recipientAdress2" type="xs:string"/>
+      <xs:element minOccurs="0" name="recipientZipCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="recipientCity" type="xs:string"/>
+      <xs:element minOccurs="0" name="recipientCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="injectionSite" type="xs:string"/>
+      <xs:element minOccurs="0" name="weight" type="xs:int"/>
+      <xs:element minOccurs="0" name="dateBegin" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="dateEnd" type="xs:dateTime"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="customerDeliverySlotClosed" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchDeliverySlotResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:deliverySlotResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deliverySlotResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:wsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="codeTuile" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="rdvCreneauList" nillable="true" type="tns:rdvCreneau"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="wsResponse">
+    <xs:sequence>
+      <xs:element name="code" type="xs:int"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="rdvCreneau">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deliverySlotCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deliveryDate" type="xs:string"/>
+      <xs:element name="dayOfWeek" type="xs:int"/>
+      <xs:element name="startHour" type="xs:int"/>
+      <xs:element name="startMinutes" type="xs:int"/>
+      <xs:element name="endHour" type="xs:int"/>
+      <xs:element name="endMinutes" type="xs:int"/>
+      <xs:element minOccurs="0" name="tariffLevel" type="xs:string"/>
+      <xs:element minOccurs="0" name="status" type="xs:string"/>
+      <xs:element minOccurs="0" name="codeStatus" type="xs:string"/>
+      <xs:element name="note" type="xs:int"/>
+      <xs:element name="incitementFlag" type="xs:boolean"/>
+      <xs:element name="rank" type="xs:int"/>
+      <xs:element name="position" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="confirmDeliverySlot">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="callerTool" type="xs:string"/>
+      <xs:element minOccurs="0" name="productType" type="xs:string"/>
+      <xs:element minOccurs="0" name="codeSlot" type="xs:string"/>
+      <xs:element minOccurs="0" name="codeTuile" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="confirmDeliverySlotResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:serviceResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="serviceResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:wsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="serviceProduit" type="tns:serviceProduit"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="serviceProduit">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codeProduit" type="xs:string"/>
+      <xs:element minOccurs="0" name="codeService" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="accountNumber" nillable="true" type="xs:string"/>
+  <xs:element name="password" nillable="true" type="xs:string"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="searchDeliverySlot">
+    <wsdl:part name="parameters" element="tns:searchDeliverySlot">
+    </wsdl:part>
+    <wsdl:part name="accountNumber" element="tns:accountNumber">
+    </wsdl:part>
+    <wsdl:part name="password" element="tns:password">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confirmDeliverySlotResponse">
+    <wsdl:part name="parameters" element="tns:confirmDeliverySlotResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="confirmDeliverySlot">
+    <wsdl:part name="parameters" element="tns:confirmDeliverySlot">
+    </wsdl:part>
+    <wsdl:part name="accountNumber" element="tns:accountNumber">
+    </wsdl:part>
+    <wsdl:part name="password" element="tns:password">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchDeliverySlotResponse">
+    <wsdl:part name="parameters" element="tns:searchDeliverySlotResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CreneauServiceWS">
+    <wsdl:operation name="searchDeliverySlot">
+      <wsdl:input name="searchDeliverySlot" message="tns:searchDeliverySlot">
+    </wsdl:input>
+      <wsdl:output name="searchDeliverySlotResponse" message="tns:searchDeliverySlotResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmDeliverySlot">
+      <wsdl:input name="confirmDeliverySlot" message="tns:confirmDeliverySlot">
+    </wsdl:input>
+      <wsdl:output name="confirmDeliverySlotResponse" message="tns:confirmDeliverySlotResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CreneauServiceWSServiceSoapBinding" type="tns:CreneauServiceWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="searchDeliverySlot">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="searchDeliverySlot">
+        <soap:header message="tns:searchDeliverySlot" part="accountNumber" use="literal">
+        </soap:header>
+        <soap:header message="tns:searchDeliverySlot" part="password" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchDeliverySlotResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirmDeliverySlot">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="confirmDeliverySlot">
+        <soap:header message="tns:confirmDeliverySlot" part="accountNumber" use="literal">
+        </soap:header>
+        <soap:header message="tns:confirmDeliverySlot" part="password" use="literal">
+        </soap:header>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="confirmDeliverySlotResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CreneauServiceWSService">
+    <wsdl:port name="CreneauServiceWSPort" binding="tns:CreneauServiceWSServiceSoapBinding">
+      <soap:address location="http://localhost:9090/CreneauServiceWSPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

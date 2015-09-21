@@ -24,7 +24,8 @@
     var path="{$module_uri|escape:'javascript'}";
     var oldCodePostal=null;
     var errormessage="{l s='No pickup point has been selected !\nPlease select a pickup point to continue.' mod='chronopost'}";
-    
+    var map_enabled="{$map_enabled}";
+
     var chronodata=new Array();
     var relais_map=null; // our map
     var latlngbounds= new google.maps.LatLngBounds();
@@ -34,33 +35,36 @@
 
     {literal}
         $(function() {
-    
-        // Listener for selection of the ChronoRelais carrier radio button
-        $('input.delivery_option_radio, input[name=id_carrier]').click(function(e) {
-            toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city, e);
-        });
+        
+            // Listener for selection of the ChronoRelais carrier radio button
+            $('input.delivery_option_radio, input[name=id_carrier]').click(function(e) {
+                toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city, e);
+            });
 
 
-        // move in DOM to prevent compatibility issues with Common Services' modules
-        if($("#chronorelais_container").length>0)
-        {
-            $('#chronorelais_dummy_container').remove();
-        } else {
-            $('#chronorelais_dummy_container').insertAfter($('#extra_carrier'));
-            $('#chronorelais_dummy_container').attr('id', 'chronorelais_container');
-        }
+            // move in DOM to prevent compatibility issues with Common Services' modules
+            if($("#chronorelais_container").length>0)
+            {
+                $('#chronorelais_dummy_container').remove();
+            } else {
+                $('#chronorelais_dummy_container').insertAfter($('#extra_carrier'));
+                $('#chronorelais_dummy_container').attr('id', 'chronorelais_container');
+            }
 
-        // toggle on load
-        toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
+            // toggle on load
+            toggleRelaisMap(cust_address_clean, cust_codePostal, cust_city);
         
             // Listener for CP change
-            $('#changeCustCP').on('click', function(e) {
-                cust_address=$('#relais_codePostal').val()+", France";
-                oldCodePostal=cust_codePostal;
-                cust_codePostal=$('#relais_codePostal').val();
-
-                initRelaisMap(cust_address, cust_codePostal);
+            $('#changeCustCP').on('click', postcodeChangeEvent);
+            $("#relais_codePostal").on('keypress keydown keyup', function(e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    postcodeChangeEvent();
+                    return false;
+                }
             });
+
 
             // Listener for BT select in InfoWindow
             $('#chronorelais_map').click(function(e) {
@@ -99,7 +103,7 @@
         </div>
     </div>
     <div class="row">
-        <div id="chronorelais_map" class="col-xs-12"></div>
+        <div id="chronorelais_map" class="col-xs-12" {if $map_enabled==0}style="display:none"{/if}></div>
     </div>
     <div id="relais_txt_cont">
             <h4>{l s='Closest pickup points' mod='chronopost'}</h4>

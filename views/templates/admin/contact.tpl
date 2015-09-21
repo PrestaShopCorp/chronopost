@@ -8,58 +8,134 @@
   * @copyright 2001-2015 Oxileo SAS
   * @license   Proprietary - no redistribution without authorization
   *}
-<label>{l s='Title' mod='chronopost'}</label>
-<div class="margin-form"><select name="chronoparams[{$prefix|escape:'htmlall'}][civility]">
-	<option value="M"{if $civility=='M'} selected{/if}>{l s='Mr.' mod='chronopost'}</option>
-	<option value="E"{if $civility=='E'} selected{/if}>{l s='Mrs.' mod='chronopost'}</option>
-	<option value="L"{if $civility=='L'} selected{/if}>{l s='Ms.' mod='chronopost'}</option>
-</option></select></div>
-<label>{l s='Company name' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][name]" 
+
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Title' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<select name="chronoparams[{$prefix|escape:'htmlall'}][civility]">
+			<option value="M"{if $civility=='M'} selected{/if}>{l s='Mr.' mod='chronopost'}</option>
+			<option value="E"{if $civility=='E'} selected{/if}>{l s='Mrs.' mod='chronopost'}</option>
+			<option value="L"{if $civility=='L'} selected{/if}>{l s='Ms.' mod='chronopost'}</option>
+		</select>
+	</div>
+</div>
+
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Company name' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][name]" 
 		value="{$name|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Company name 2' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][name2]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Company name 2' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][name2]" 
 		value="{$name2|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Address' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][address]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Address' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][address]" 
 		value="{$address|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Address 2' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][address2]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Address 2' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][address2]" 
 		value="{$address2|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Zipcode' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "5" name="chronoparams[{$prefix|escape:'htmlall'}][zipcode]" 
+
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Zipcode' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "5" name="chronoparams[{$prefix|escape:'htmlall'}][zipcode]" 
 		value="{$zipcode|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='City' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][city]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='City' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][city]" 
 		value="{$city|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Contact name' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][contactname]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Country' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<select name="chronoparams[{$prefix|escape:'htmlall'}][country]">
+			<option value="FR">{l s='Metropolitan France' mod='chronopost'}</option>
+			<option value="GP">{l s='Guadeloupe' mod='chronopost'}</option>
+			<option value="GF">{l s='French Guyana' mod='chronopost'}</option>
+			<option value="MQ">{l s='Martinique' mod='chronopost'}</option>
+			<option value="YT">{l s='Mayotte' mod='chronopost'}</option>
+			<option value="RE">{l s='Réunion' mod='chronopost'}</option>
+			<option value="MF">{l s='Saint-Martin' mod='chronopost'}</option>
+		</select>
+	</div>
+</div>
+
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Contact name' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][contactname]" 
 		value="{$contactname|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Email' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][email]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Email' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "35" name="chronoparams[{$prefix|escape:'htmlall'}][email]" 
 		value="{$email|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Phone number' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "10" name="chronoparams[{$prefix|escape:'htmlall'}][phone]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Phone number' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "10" name="chronoparams[{$prefix|escape:'htmlall'}][phone]" 
 		value="{$phone|escape:'htmlall'}"/>
+	</div>
 </div>
 
-<label>{l s='Mobile phone number' mod='chronopost'}</label><div class="margin-form">
-	<input type="text" maxlength = "10" name="chronoparams[{$prefix|escape:'htmlall'}][mobile]" 
+<div class="form-group">													
+	<label class="control-label col-lg-3">
+		{l s='Mobile phone number' mod='chronopost'}
+	</label>				
+	<div class="col-lg-9 ">
+		<input type="text" maxlength = "10" name="chronoparams[{$prefix|escape:'htmlall'}][mobile]" 
 		value="{$mobile|escape:'htmlall'}"/>
+	</div>
 </div>
