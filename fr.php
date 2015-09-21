@@ -12,6 +12,7 @@ $_MODULE['<{chronopost}prestashop>chronopost_0a295b8c6758f2be56dbd446eefdcd87'] 
 $_MODULE['<{chronopost}prestashop>chronopost_64d88f37080c426120d0c446562ef097'] = 'Export Chronopost';
 $_MODULE['<{chronopost}prestashop>chronopost_2170f7d446a51cb328224a9a66a6ae29'] = 'Import Chronopost';
 $_MODULE['<{chronopost}prestashop>chronopost_6c2f86fd465cd88f6719566b0b3a3659'] = 'Bordereau de fin de journée';
+$_MODULE['<{chronopost}prestashop>chronopost_4c822fcf0a671bea5e73c3683f8f75e9'] = 'Numéro de suivi de votre commande';
 $_MODULE['<{chronopost}prestashop>chronopost_fbb7ffd11c21bf0ff1422f1c2a134aea'] = 'Vous ne pouvez pas activer Chronopost avant 13h et Chronopost avant 18h en même temps.';
 $_MODULE['<{chronopost}prestashop>chronopost_f38f5974cdc23279ffe6d203641a8bdf'] = 'Paramètres mis à jour. ';
 $_MODULE['<{chronopost}prestashop>chronopost_be5c0d17ceab2f9598d373dc19ac1e88'] = 'Fichier PDF';
