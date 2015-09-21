@@ -8,7 +8,8 @@
   * @copyright 2001-2015 Oxileo SAS
   * @license   Proprietary - no redistribution without authorization
   *}
- <select name="chronoparams[saturday][{$field_name|escape:'htmlall'}]">
+ <select name="chronoparams[{$group_name|escape:'htmlall'}][{$field_name|escape:'htmlall'}]">
+  <option value="-1"{if $selected == -1} selected{/if}></option>
 	<option value="1"{if $selected == 1} selected{/if}>{l s="Monday" mod="chronopost"}</option>
 	<option value="2"{if $selected == 2} selected{/if}>{l s="Tuesday" mod="chronopost"}</option>
 	<option value="3"{if $selected == 3} selected{/if}>{l s="Wednesday" mod="chronopost"}</option>

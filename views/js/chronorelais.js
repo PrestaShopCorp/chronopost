@@ -13,6 +13,13 @@ String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
+function postcodeChangeEvent() {
+    cust_address=$('#relais_codePostal').val()+", France";
+    oldCodePostal=cust_codePostal;
+    cust_codePostal=$('#relais_codePostal').val();
+
+    initRelaisMap(cust_address, cust_codePostal);
+}
 
 function toggleRelaisMap(cust_address, codePostal, city, e)
 {
@@ -24,7 +31,6 @@ function toggleRelaisMap(cust_address, codePostal, city, e)
         // Show Chronorelais controls
         $('#chronorelais_container').show();
         initRelaisMap(cust_address, codePostal, city);
-        $.scrollTo($('#chronorelais_container'), 800);
         return false;
     }
 
