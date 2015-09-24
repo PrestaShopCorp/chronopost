@@ -150,7 +150,7 @@ class Chronopost extends CarrierModule
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
 
-		$this->version = '3.6.6';
+		$this->version = '3.6.7';
 
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
