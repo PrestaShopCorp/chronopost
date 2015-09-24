@@ -470,7 +470,8 @@ class Chronopost extends CarrierModule
 		$customer = new Customer($o->id_customer);
 		$carrier = new Carrier($o->id_carrier);
 		$tracking_url = str_replace('@', $o->shipping_number, $carrier->url);
-
+		$mail_subject = $this->l('Tracking number for your order');
+		
 		$templateVars = array(
 			'{tracking_link}' => '<a href = "'.$tracking_url.'">'.$o->shipping_number.'</a>',
 			'{tracking_code}' => $o->shipping_number,
@@ -479,7 +480,7 @@ class Chronopost extends CarrierModule
 			'{id_order}' => (int)($o->id)
 		);
 
-		Mail::Send($o->id_lang, 'tracking', 'Tracking number for your order', $templateVars, $customer->email,
+		Mail::Send($o->id_lang, 'tracking', $mail_subject, $templateVars, $customer->email,
 			$customer->firstname.' '.$customer->lastname, null, null, null, null, _MYDIR_.'/mails/', true);
 	}
 
