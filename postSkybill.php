@@ -181,6 +181,9 @@ function createLT($orderid, $totalnb = 1, $isReturn = false)
 	$shipper->shipperName = Configuration::get('CHRONOPOST_SHIPPER_NAME');
 	$shipper->shipperName2 = Configuration::get('CHRONOPOST_SHIPPER_NAME2');
 	$shipper->shipperZipCode = Configuration::get('CHRONOPOST_SHIPPER_ZIPCODE');
+	$shipper->shipperPhone = Configuration::get('CHRONOPOST_SHIPPER_PHONE');
+	$shipper->shipperMobilePhone = Configuration::get('CHRONOPOST_SHIPPER_MOBILE');
+
 
 	if ($isReturn)
 	{
@@ -194,6 +197,8 @@ function createLT($orderid, $totalnb = 1, $isReturn = false)
 		$shipper->shipperName = Tools::substr($a->company, 0, 35);
 		$shipper->shipperName2 = Tools::substr($a->firstname.' '.$a->lastname, 0, 35);
 		$shipper->shipperZipCode = $a->postcode;
+		$shipper->shipperPhone = $a->phone;
+		$shipper->shipperMobilePhone = $a->phone_mobile;
 	}
 
 	$customer = new customerValue();
