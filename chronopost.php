@@ -909,8 +909,8 @@ class Chronopost extends CarrierModule
 				');
 			}
 			else 
-				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated="'.time().'
-					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.pSQL($productCode).'" && weight="'.(float)$cart->getTotalWeight().'"
+				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated='.time().'
+					WHERE arrcode = "'.pSQL($arrcode).'" and product_code="'.pSQL($productCode).'" and weight="'.(float)$cart->getTotalWeight().'"
 				');
 
 			return $res->return->amountTTC;
