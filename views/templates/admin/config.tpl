@@ -80,14 +80,14 @@
 		<div class="margin-form">
 			<select name="chronoparams[saturday][active]">
 				<option value="yes"{if $saturday_active=='yes'} selected{/if}>{l s="Yes" mod='chronopost'}</option>
-				<option value="yes"{if $saturday_active!='yes'} selected{/if}>{l s="No" mod='chronopost'}</option>
+				<option value="no"{if $saturday_active!='yes'} selected{/if}>{l s="No" mod='chronopost'}</option>
 			</select>
 		</div>
 		<label>{l s='Option checked by default' mod='chronopost'}</label>
 		<div class="margin-form">
 			<select name="chronoparams[saturday][checked]">
 				<option value="yes"{if $saturday_checked=='yes'} selected{/if}>{l s="Yes" mod='chronopost'}</option>
-				<option value="yes"{if $saturday_checked!='yes'} selected{/if}>{l s="No" mod='chronopost'}</option>
+				<option value="no"{if $saturday_checked!='yes'} selected{/if}>{l s="No" mod='chronopost'}</option>
 			</select>
 		</div>
 		<div class="path_bar">{l s='Display the Saturday delivery option from:' mod='chronopost'}</div>
