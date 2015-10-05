@@ -36,26 +36,9 @@ if ($cible)
 			$customer = new Customer($o->id_customer); /* for email address */
 			$bt = '';
 
-			/*
+			
 			if ($o->id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID'))
-			{
-
-				$row = Db::getInstance()->getRow('SELECT id_pr FROM '._DB_PREFIX_.'chrono_cart_relais WHERE id_cart='.$o->id_cart);
-				$bt = $row['id_pr'];
-				$ws = new PointRelaisServiceWSService();
-				$p = new rechercheBtAvecPFParIdChronopostA2Pas();
-				$p->id = $row['id_pr'];
-
-				// TODO USE PUDO
-				$prdata = $ws->rechercheBtAvecPFParIdChronopostA2Pas($p)->return;
-				$address->company = $prdata->nomEnseigne;
-				$address->address1 = $prdata->adresse1;
-				$address->address2 = @$prdata->adresse2;
-				$address->city = $prdata->localite;
-				$address->postcode = $prdata->codePostal;
-			}
-			OBSOLETE : hoookNewOrder completes the address already
-			*/ 
+				$bt = $address->other;
 
 			/* Stir everything together */
 			echo $o->id.';';
