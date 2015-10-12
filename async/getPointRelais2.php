@@ -20,7 +20,10 @@ $params->zipCode = Tools::getValue('codePostal');
 $params->accountNumber = Configuration::get('CHRONOPOST_GENERAL_ACCOUNT');
 $params->password = Configuration::get('CHRONOPOST_GENERAL_PASSWORD');
 $params->address = Tools::getValue('address');
-$params->city = Tools::getValue('city');
+
+if (Tools::getIsset('city') && Tools::getValue('city') != 'unknown')
+	$params->city = Tools::getValue('city');
+
 $params->countryCode = 'FR';
 $params->type = 'P';
 $params->service = 'L';
