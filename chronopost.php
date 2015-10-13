@@ -464,7 +464,7 @@ class Chronopost extends CarrierModule
 		$history = new OrderHistory();
 		$history->id_order = (int)($o->id);
 		$history->id_order_state = _PS_OS_SHIPPING_;
-		$history->changeIdOrderState(_PS_OS_SHIPPING_);
+		$history->changeIdOrderState(_PS_OS_SHIPPING_, $id_order);
 		$history->save();
 
 		$customer = new Customer($o->id_customer);

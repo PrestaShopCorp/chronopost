@@ -68,7 +68,7 @@ foreach ($orders as $orderid)
 		$file = tempnam('temp', 'CHR');
 		$fp = fopen($file, 'w');
 
-		$lt = @createLT($orderid, $totalnb, $return);
+		$lt = createLT($orderid, $totalnb, $return);
 		if ($lt === null) 
 		{ 
 			/* error, skip it */
@@ -86,7 +86,7 @@ foreach ($orders as $orderid)
 			$cust->generate();
 		}
 
-		@$pdf->addPDF($file, 'all');
+		$pdf->addPDF($file, 'all');
 		$nb--;
 	}
 }
