@@ -143,6 +143,22 @@ class AdminExportChronopostController extends ModuleAdminController {
 							.'&multi='.addslashes(Tools::jsonEncode(Tools::getValue('multi'))));
 	}
 
+
+	public function processBulkwaybills()
+	{
+		$order_box = Tools::getValue('orderBox');
+
+		if (empty($order_box)) 
+		{
+			$this->displayWarning($this->l('You must selected orders for the export'));
+			return;
+		}
+
+		Tools::redirectAdmin('../modules/chronopost/postSkybill.php?shared_secret='.Configuration::get('CHRONOPOST_SECRET')
+							.'&orders='.implode(';', Tools::getValue('orderBox'))
+							.'&multi='.addslashes(Tools::jsonEncode(Tools::getValue('multi'))));
+	}
+
 	public function initToolbar()
 	{
 		parent::initToolbar();

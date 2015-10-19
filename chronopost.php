@@ -150,7 +150,7 @@ class Chronopost extends CarrierModule
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
 
-		$this->version = '3.6.6';
+		$this->version = '3.6.7';
 
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
@@ -464,13 +464,12 @@ class Chronopost extends CarrierModule
 		$history = new OrderHistory();
 		$history->id_order = (int)($o->id);
 		$history->id_order_state = _PS_OS_SHIPPING_;
-		$history->changeIdOrderState(_PS_OS_SHIPPING_);
+		$history->changeIdOrderState(_PS_OS_SHIPPING_, $id_order);
 		$history->save();
 
 		$customer = new Customer($o->id_customer);
 		$carrier = new Carrier($o->id_carrier);
 		$tracking_url = str_replace('@', $o->shipping_number, $carrier->url);
-		$mail_subject = $this->l('Tracking number for your order');
 		
 		$templateVars = array(
 			'{tracking_link}' => '<a href = "'.$tracking_url.'">'.$o->shipping_number.'</a>',
@@ -480,7 +479,7 @@ class Chronopost extends CarrierModule
 			'{id_order}' => (int)($o->id)
 		);
 
-		Mail::Send($o->id_lang, 'tracking', $mail_subject, $templateVars, $customer->email,
+		Mail::Send($o->id_lang, 'tracking', 'Tracking number for your order', $templateVars, $customer->email,
 			$customer->firstname.' '.$customer->lastname, null, null, null, null, _MYDIR_.'/mails/', true);
 	}
 
@@ -910,8 +909,8 @@ class Chronopost extends CarrierModule
 				');
 			}
 			else 
-				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated="'.time().'
-					WHERE arrcode = "'.pSQL($arrcode).'" && product_code="'.pSQL($productCode).'" && weight="'.(float)$cart->getTotalWeight().'"
+				DB::getInstance()->query('UPDATE '._DB_PREFIX_.'chrono_quickcost_cache SET price="'.(float)$res->return->amount.'", last_updated='.time().'
+					WHERE arrcode = "'.pSQL($arrcode).'" and product_code="'.pSQL($productCode).'" and weight="'.(float)$cart->getTotalWeight().'"
 				');
 
 			return $res->return->amountTTC;

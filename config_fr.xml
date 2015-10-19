@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+	<name>chronopost</name>
+	<displayName><![CDATA[Chronopost et ChronoRelais]]></displayName>
+	<version><![CDATA[3.6.7]]></version>
+	<description><![CDATA[Prise en charge du transporteur Chronopost et des points relais Chrono Relais]]></description>
+	<author><![CDATA[Oxileo pour Chronopost]]></author>
+	<tab><![CDATA[shipping_logistics]]></tab>
+	<confirmUninstall><![CDATA[Attention, une fois ce module désinstallé, vous ne pourrez plus éditer d'étiquettes de transport Chronopost ni proposer la livraison en point relais à vos clients. Etes-vous sûr de vouloir continuer ?]]></confirmUninstall>
+	<is_configurable>1</is_configurable>
+	<need_instance>1</need_instance>
+	<limited_countries></limited_countries>
+</module>
