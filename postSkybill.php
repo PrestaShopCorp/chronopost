@@ -77,6 +77,7 @@ foreach ($orders as $orderid)
 		}
 		fwrite($fp, $lt);
 		fclose($fp);
+		chmod($file, 0644);
 
 		if (file_exists('custom_pdf/config.json'))
 		{
