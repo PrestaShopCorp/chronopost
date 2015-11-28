@@ -441,8 +441,11 @@ class Chronopost extends CarrierModule
 		// Context fix (it's that easy)
 		Context::getContext()->link = new Link();
 		// Fix context by adding employee
-		$cookie = new Cookie('psAdmin');
-		Context::getContext()->employee = new Employee($cookie->id_employee);
+		if(!Context::getContext()->cookie->exists())
+		{
+			$cookie = new Cookie('psAdmin');
+			Context::getContext()->employee = new Employee($cookie->id_employee);
+		}
 
 		$o = new Order($id_order);
 		$o->shipping_number = $shipping_number;
