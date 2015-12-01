@@ -2,7 +2,7 @@
 <module>
 	<name>chronopost</name>
 	<displayName><![CDATA[Chronopost]]></displayName>
-	<version><![CDATA[3.6.8]]></version>
+	<version><![CDATA[3.6.9]]></version>
 	<description><![CDATA[Manage Chronopost and Chronopost Pickup relay]]></description>
 	<author><![CDATA[Oxileo for Chronopost]]></author>
 	<tab><![CDATA[shipping_logistics]]></tab>
