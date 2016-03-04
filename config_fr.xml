@@ -2,7 +2,7 @@
 <module>
 	<name>chronopost</name>
 	<displayName><![CDATA[Chronopost et ChronoRelais]]></displayName>
-	<version><![CDATA[3.6.7]]></version>
+	<version><![CDATA[3.6.10]]></version>
 	<description><![CDATA[Prise en charge du transporteur Chronopost et des points relais Chrono Relais]]></description>
 	<author><![CDATA[Oxileo pour Chronopost]]></author>
 	<tab><![CDATA[shipping_logistics]]></tab>

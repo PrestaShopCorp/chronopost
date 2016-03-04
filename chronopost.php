@@ -150,7 +150,7 @@ class Chronopost extends CarrierModule
 		$this->name = 'chronopost';
 		$this->tab = 'shipping_logistics';
 
-		$this->version = '3.6.9';
+		$this->version = '3.6.10';
 
 		$this->author = $this->l('Oxileo for Chronopost');
 		$this->module_key = '16ae9609f724c8d72cf3de62c060210c';
@@ -1039,7 +1039,7 @@ class Chronopost extends CarrierModule
 			.'<br/>'.$this->l('Your customers will also have the Predict service :  They are notified by email or SMS the day before the delivery and can reschedule the delivery or ask to be delivered at a pickup point among more than 17 000 points (post offices, Pickup relay or Chronopost agencies).').'<br/><br/>'.
 			$this->l('Expand your business internationally with Chronopost international delivery service which is included in this module.').'<br/>'.
 			$this->l('Find all these services in the Chronopost e-commerce pack : MyChrono.').'<br/>'.
-			$this->l('To activate the module on your site, contact us at ').'<a href="mailto:demandez-a-chronopost@chronopost.fr">demandez-a-chronopost@chronopost.fr</a>');
+			$this->l('To activate the module on your site, contact us at ').'<a href="mailto:contact.prestashop@chronopost.fr">contact.prestashop@chronopost.fr</a>');
 
 		// smarty-chain !
 		$this->context->smarty->assign(
