@@ -11,7 +11,7 @@
 */
 
 if (!defined('_MYDIR_')) define('_MYDIR_', dirname(__FILE__));
-require($_SERVER['DOCUMENT_ROOT'].'/config/config.inc.php');
+require('../../config/config.inc.php');
 
 if (!Tools::getIsset('orderid') && !Tools::getIsset('orders') && !Tools::getIsset('orderid')) die('<h1>Informations de commande non transmises</h1>');
 
