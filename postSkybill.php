@@ -11,7 +11,7 @@
 */
 
 if (!defined('_MYDIR_')) define('_MYDIR_', dirname(__FILE__));
-require('../../config/config.inc.php');
+require($_SERVER['DOCUMENT_ROOT'].'/config/config.inc.php');
 
 if (!Tools::getIsset('orderid') && !Tools::getIsset('orders') && !Tools::getIsset('orderid')) die('<h1>Informations de commande non transmises</h1>');
 
@@ -108,8 +108,7 @@ function createLT($orderid, $totalnb = 1, $isReturn = false)
 	$cust = new Customer($o->id_customer);
 
 	// at least 2 skybills for orders >= 30kg
-	$o = new Order($orderid);
-	if ($o->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') >= 30 && $totalnb == 1)
+	if (Chronopost::getOrderCarrierWeight($o->id) * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') >= 30 && $totalnb == 1)
 	{
 		echo '<script>alert(\'Vous devez générer au moins 2 étiquettes pour les commandes de plus de 30kg\');history.back();</script>';
 		exit();
@@ -290,7 +289,7 @@ function createLT($orderid, $totalnb = 1, $isReturn = false)
 	// weight 0 when multishipping
 	$skybill->weight = 0;
 	// Only 1 skybill, put real weight. 
-	if ($totalnb == 1) $skybill->weight = $o->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF');
+	if ($totalnb == 1) $skybill->weight = Chronopost::getOrderCarrierWeight($o->id) * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF');
 
 	$skybill->weightUnit = 'KGM';
 

@@ -669,16 +669,25 @@ class Chronopost extends CarrierModule
 
 	}
 
+	public static function getOrderCarrierWeight($id_order)
+	{
+		$result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue('
+				SELECT `weight`
+				FROM `'._DB_PREFIX_.'order_carrier`
+				WHERE `id_order` = '.(int)$id_order);
+		return (float)($result);
+	}
+
 	public static function minNumberOfPackages($orderid)
 	{
 		$order = new Order($orderid);
 		$nblt = 1;
 
-
-		if ($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 20 && $order->id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID'))
-			$nblt = ceil($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') / 20);
-		if ($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 30)
-			$nblt = ceil($order->getTotalWeight() * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') / 30);
+		$w = Chronopost::getOrderCarrierWeight($orderid);
+		if ($w * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 20 && $order->id_carrier == Configuration::get('CHRONORELAIS_CARRIER_ID'))
+			$nblt = ceil($w * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') / 20);
+		if ($w * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') > 30)
+			$nblt = ceil($w * Configuration::get('CHRONOPOST_GENERAL_WEIGHTCOEF') / 30);
 
 		return $nblt;
 	}
